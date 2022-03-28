@@ -1,11 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('../utils/dbMongoUtil');
 
 const objectSchema = {
-    id: { 
-        type: Number, 
-        required: true,
-        unique: true
-    },
     title: { 
         type: String, 
         required: true 
@@ -28,12 +23,13 @@ const objectSchema = {
     },
     image:{
         type: String,
-        validate: {
+        required: true
+        /* validate: {
             validator: function(url){
                 return url.indexOf('.jpg') != -1;
             }, 
             message: "Porfa, sólo imágenes JPG"
-        }
+        } */
     }
 };
 // Crear el esquema
