@@ -1,6 +1,9 @@
 include ../head.pug
 
-input(type="search")
 
-section 
-    h3 ¡Busca una peli! 
+h3 ¡Busca una peli! 
+form(action="/api/search/", method="post") 
+        label(for="films") Introduce el título de la película
+        br
+        br
+        input(type="text" name="films" placeholder="Título...")
