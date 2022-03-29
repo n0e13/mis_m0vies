@@ -3,7 +3,10 @@ const express = require('express');
 
 // Rutas
 const searchRouter = require('./routes/searchRoute');
-const movieRouter = require('./routes/moviesRoute');
+const userRouter = require('./routes/userAPIRoute');
+
+// Middlewares
+const notFound = require('./middlewares/notFound');
 
 const app = express();
 const port = 3000;
@@ -15,8 +18,8 @@ app.set('views', './views');
 app.use(express.json());
 
 // Rutas
-app.use("/", searchRouter);
-app.use("/", movieRouter);
+app.use("/api", searchRouter);
+app.use("/api", userRouter);
 
 // Middleware de rutas inexistentes
 app.use(notFound);
