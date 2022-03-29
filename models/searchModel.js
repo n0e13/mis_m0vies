@@ -1,1 +1,0 @@
-// TODO: Todas las llamadas a las BBDD para la búsqueda de las películas

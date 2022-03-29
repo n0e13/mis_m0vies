@@ -1,7 +1,7 @@
-const search = require('../utils/searchUtils');
+const movies = require('../models/moviesAPIModel');
+const search = require('../utils/moviesAPIUtils')
 
-
-
+// TODO: lógica de negocio
 
 const searchFilms = (req,res) =>{
     res.render("user/search.pug")
@@ -20,10 +20,28 @@ const inputFilms = (req,res) =>{
     res.redirect(`https://localhost:3000/api/search/${films}`)
 }
 
-const films = {
+const createMovie = async (req, res) => {
+
+}
+
+const updateMovie = async (req, res) => {
+
+}
+
+const deleteMovie = async (req, res) => {
+
+}
+
+
+const movie = {
+    // getMovieByTitle,
+    // getAllMovies,
+    // createMovie,
+    // updateMovie,
+    // deleteMovie,
     searchFilms,
     getFilms,
     inputFilms
 }
 
-module.exports = films;
+module.exports = movie;
