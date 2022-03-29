@@ -15,8 +15,8 @@ app.set('views', './views');
 app.use(express.json());
 
 // Rutas
-app.use("/api", searchRouter);
-app.use("/api", movieRouter);
+app.use("/", searchRouter);
+app.use("/", movieRouter);
 
 // Middleware de rutas inexistentes
 app.use(notFound);
