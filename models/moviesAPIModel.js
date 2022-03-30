@@ -37,11 +37,11 @@ const deleteMovie = async (email) => {
 
 
 const movieAPI = {
-    getMovieByTitle,
-    getAllMovies,
-    createMovie,
-    updateMovie,
-    deleteMovie
+    // getMovieByTitle,
+    // getAllMovies,
+    // createMovie,
+    // updateMovie,
+    // deleteMovie
 }
 
-module.exports = movieAPI; */
+module.exports = movieAPI;
