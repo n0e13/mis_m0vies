@@ -11,6 +11,6 @@ const routes = require('express').Router();
 // routes.get();
 routes.get('/search',movieAPI.searchFilms);
 routes.get('/search/:title?',movieAPI.getFilms);
-routes.post('/search',movieAPI.inputFilms)
+routes.post('/search',movieAPI.inputFilms);
 
 module.exports = routes;

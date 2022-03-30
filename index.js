@@ -15,10 +15,12 @@ const port = 3000;
 app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(express.static('public'));
+app.use(express.urlencoded());
 app.use(express.json());
 
 // Rutas
-app.use("/api", moviesRouter);
+// app.use("/api", moviesRouter);
+app.use("/",moviesRouter);
 // app.use("/api", userRouter);
 
 // Middleware de rutas inexistentes
