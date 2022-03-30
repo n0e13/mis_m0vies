@@ -1,10 +1,8 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const regex = require('../utils/regex');
-const jwt_secret = process.env.ULTRA_SECRET_KEY;
+/* const jwt = require('jsonwebtoken');
+
+const jwt_secret = process.env.ULTRA_SECRET_KEY; */
 
 const db = require('../models/userAPIModel');
-const sqldb = require('../utils/dbconfig-pg.js') // postgresSQL
 
 
 
@@ -18,30 +16,11 @@ const signUpUser = async (req, res) => {
     try {
 
         const newUser = req.body; // {} nuevo user a guardar
-        const hashPassword = await bcrypt.hash(password, 10);
-        if(regex.validateEmail(email) && regex.validatePassword(password)){
-            const response = await db.signUpUser(newUser);
-            res.status(201).json({"user_created":response});
-        }else{
-            res.status(400).json({msg: 'Invalid email or password'});
-        }
+        const response = await db.signUpUser(newUser);
+        res.status(201).json({"user_created":response});
     } catch (error) {
         console.log('Error:', error);
     }  
-/* 
-    let data;
-    try {
-        const { email, password, username } = req.body;
-        const hashPassword = await bcrypt.hash(password, saltRounds);
-        if (regex.validateEmail(email) && regex.validatePassword(password)) {
-            data = await User.create({ 'email': email, 'password': hashPassword, 'username': username, 'logged': false });
-            res.status(201).json(data);
-        } else {
-            res.status(400).json({ msg: 'Invalid email or password' });
-        }
-    } catch (error) {
-        console.log('Error:', error);
-    } */
 }
 
 

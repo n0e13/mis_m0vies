@@ -13,3 +13,5 @@ const regex = {
     validateEmail,
     validatePassword
 };
+
+module.exports = regex;
