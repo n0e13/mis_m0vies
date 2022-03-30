@@ -23,6 +23,7 @@ app.use(express.json());
 app.use("/",moviesRouter);
 // app.use("/api", userRouter);
 
+
 // Middleware de rutas inexistentes
 // app.use(notFound);
 

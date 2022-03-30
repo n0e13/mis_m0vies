@@ -9,8 +9,11 @@ const routes = require('express').Router();
 // routes.delete();
 // routes.get();
 // routes.get();
+// router.post('/movie',movieAPI.createMovie);
+
 routes.get('/search',movieAPI.searchFilms);
 routes.get('/search/:title?',movieAPI.getFilms);
 routes.post('/search',movieAPI.inputFilms);
+
 
 module.exports = routes;
