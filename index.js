@@ -19,7 +19,7 @@ app.use(express.json());
 
 // Rutas
 app.use("/api", moviesRouter);
-// app.use("/api", userRouter);
+app.use("/api", userRouter);
 
 // Middleware de rutas inexistentes
 // app.use(notFound);
