@@ -17,7 +17,8 @@ const getFilms = async (req,res) => {
 
 const inputFilms = (req,res) =>{
     const films =  req.body.films;
-    res.redirect(`https://localhost:3000/api/search/${films}`)
+    console.log(req.body.films);
+    res.redirect(`http://localhost:3000/search/${films}`)
 }
 
 const createMovie = async (req, res) => {
