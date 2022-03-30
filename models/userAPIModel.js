@@ -5,10 +5,10 @@ const sqldb = require('../utils/dbconfig-pg.js')
 const bcrypt = require('bcrypt'); //bcrypt --> encript password
 
 
-const loginUser = async (email) => {
+/* const loginUser = async (email) => {
     // TODO: login
 
-     const {email, password} = user; // entry = req.body
+    const {email, password} = user; // entry = req.body
     let client,result;
     try{
         client = await pool.connect(); // Espera a abrir conexion
@@ -23,12 +23,12 @@ const loginUser = async (email) => {
     return result
 
 }
-
+ */
 const signUpUser = async (user) => {
 
     // TODO: registro
 
-    const {name,surname,email,password} = user; // entry = req.body
+    const {name,surname,email,password} = user; 
     let client,result;
     try{
         client = await pool.connect(); // Espera a abrir conexion

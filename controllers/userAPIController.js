@@ -1,5 +1,11 @@
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const regex = require('../utils/regex');
+const jwt_secret = process.env.ULTRA_SECRET_KEY;
+
 const db = require('../models/userAPIModel');
-const sqldb = require('../utils/dbconfig-pg.js')
+const sqldb = require('../utils/dbconfig-pg.js') // postgresSQL
+
 
 
 // TODO: aquí la lógica de negocio
@@ -22,7 +28,20 @@ const signUpUser = async (req, res) => {
     } catch (error) {
         console.log('Error:', error);
     }  
-
+/* 
+    let data;
+    try {
+        const { email, password, username } = req.body;
+        const hashPassword = await bcrypt.hash(password, saltRounds);
+        if (regex.validateEmail(email) && regex.validatePassword(password)) {
+            data = await User.create({ 'email': email, 'password': hashPassword, 'username': username, 'logged': false });
+            res.status(201).json(data);
+        } else {
+            res.status(400).json({ msg: 'Invalid email or password' });
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    } */
 }
 
 
@@ -41,11 +60,11 @@ const logoutUser = async (req, res) => {
 
 
 const user = {
-  /*   loginUser, */
+    /*   loginUser, */
     signUpUser,
-/*     recoverPassword,
-    resetPassword,
-    logoutUser */
+    /*     recoverPassword,
+        resetPassword,
+        logoutUser */
 }
 
 module.exports = user;
