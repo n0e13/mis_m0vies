@@ -9,14 +9,23 @@ const sqldb = require('../utils/dbconfig-pg.js')
 } */
 
 const signUpUser = async (req, res) => {
+    try {
 
-    console.log(req.body); // Objeto recibido de user nuevo
-    const newUser = req.body; // {} nuevo user a guardar
-
-    const response = await db.signUpUser(newUser);
-    res.status(201).json({"user_created":response});
+        const newUser = req.body; // {} nuevo user a guardar
+        const hashPassword = await bcrypt.hash(password, 10);
+        if(regex.validateEmail(email) && regex.validatePassword(password)){
+            const response = await db.signUpUser(newUser);
+            res.status(201).json({"user_created":response});
+        }else{
+            res.status(400).json({msg: 'Invalid email or password'});
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }  
 
 }
+
+
 
 /* const recoverPassword = async (req, res) => {
 

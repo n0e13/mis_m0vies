@@ -1,20 +1,18 @@
-require('dotenv').config();
-const queries = require('../utils/queries.js');
+require('dotenv').config(); //dotenv
+const queries = require('../utils/queries.js'); 
 const sqldb = require('../utils/dbconfig-pg.js')
 
-/* const loginUser = async (email) => {
+const bcrypt = require('bcrypt'); //bcrypt --> encript password
+
+
+const loginUser = async (email) => {
     // TODO: login
-} */
 
-const signUpUser = async (user) => {
-
-    // TODO: registro
-
-    const {name,surname,email} = user; // entry = req.body
+     const {email, password} = user; // entry = req.body
     let client,result;
     try{
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query((queries.signUpUserInsert),[name,surname,email])
+        const data = await client.query((queries.loginUser),[email, password])
         result = data.rowCount
     }catch(err){
         console.log(err);
@@ -24,6 +22,25 @@ const signUpUser = async (user) => {
     } 
     return result
 
+}
+
+const signUpUser = async (user) => {
+
+    // TODO: registro
+
+    const {name,surname,email,password} = user; // entry = req.body
+    let client,result;
+    try{
+        client = await pool.connect(); // Espera a abrir conexion
+        const data = await client.query((queries.signUpUserQuery),[name,surname,email,password])
+        result = data.rowCount
+    }catch(err){
+        console.log(err);
+        throw err;
+    }finally{
+        client.release();
+    } 
+    return result
 }
 /* 
 const recoverPassword = async (email) => {
