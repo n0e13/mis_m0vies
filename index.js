@@ -12,6 +12,7 @@ const app = express();
 const port = 3000;
 
 // Motor de vistas PUG
+
 app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(express.static('public'));
@@ -21,7 +22,9 @@ app.use(express.json());
 // Rutas
 // app.use("/api", moviesRouter);
 app.use("/", moviesRouter);
+app.use("/", userRouter);
 app.use("/api", userRouter);
+
 
 
 // Middleware de rutas inexistentes

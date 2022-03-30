@@ -9,5 +9,10 @@ const routes = require('express').Router();
 // routes.put('/resetpassword/:recoverToken', userAPI.resetPassword);
 
 
+//-------Estas dos rutas son del token-------------//
+routes.post("/autenticar",userAPI.authUser);
+routes.get("/datos", userAPI.dataUser)
+
+
 
 module.exports = routes;

@@ -32,18 +32,19 @@ const signUpUser = async (user) => {
     return result
 
 }
-/* 
-const recoverPassword = async (email) => {
-    // TODO: recoverpass
-}
 
-const resetPassword = async (email) => {
-    // TODO: resetpass
-}
+// const recoverPassword = async (email) => {
+//     // TODO: recoverpass
+// }
 
-const logoutUser = async (email) => {
-    // TODO: logout
-} */
+// const resetPassword = async (email) => {
+//     // TODO: resetpass
+// }
+
+// const logoutUser = async (email) => {
+//     // TODO: logout
+
+// } 
 
 
 const userAPI = {

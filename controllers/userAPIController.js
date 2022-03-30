@@ -2,11 +2,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const regex = require('../utils/regex');
 const jwt_secret = process.env.ULTRA_SECRET_KEY;
+const config = require('../configs/config');
+const express = require('express');
 
 const db = require('../models/userAPIModel');
 
 
 // TODO: aquí la lógica de negocio
+const app = express();
+app.set('llave', config.llave);
 
 /* const loginUser = async (req, res) => {
 
@@ -48,6 +52,33 @@ const logoutUser = async (req, res) => {
 
 } */
 
+const authUser = async(req,res)=> {
+    if(req.body.usuario === "hola" && req.body.contrasena === "holamundo") {
+        const payload = {
+         check:  true
+        };
+        const token = jwt.sign(payload, app.get('llave'), {
+         expiresIn: 1440
+        });
+        res.json({
+         mensaje: 'Autenticación correcta',
+         token: token
+        });
+          } else {
+              res.json({ mensaje: "Usuario o contraseña incorrectos"})
+          }
+}
+
+const dataUser = async(req,res)=>{
+    const datos = [
+        { id: 1, nombre: "Pepe el de los palotes" },
+        { id: 2, nombre: "Michel de Motril"}
+       ];
+       
+       res.json(datos);
+      ;
+}
+
 
 const user = {
     /*   loginUser, */
@@ -55,6 +86,8 @@ const user = {
     /*     recoverPassword,
         resetPassword,
         logoutUser */
+    authUser,
+    dataUser
 }
 
 module.exports = user;
