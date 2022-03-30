@@ -1,13 +1,6 @@
 require('dotenv').config();
 const queries = require('../utils/queries.js');
-
-const { Pool } = require('pg')
-const pool = new Pool({
-    host: process.env.HOST,
-    user: process.env.USER_DB,
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD
-})
+const sqldb = require('../utils/dbconfig-pg.js')
 
 /* const loginUser = async (email) => {
     // TODO: login

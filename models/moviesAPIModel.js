@@ -1,4 +1,4 @@
-/* require('dotenv').config();
+require('dotenv').config();
 
 const getMovieByTitle = async (email) => {
     // TODO: getMovieByTitle muestra la vista detallada de una peli
@@ -44,4 +44,4 @@ const movieAPI = {
     deleteMovie
 }
 
-module.exports = movieAPI; */
+module.exports = movieAPI;
