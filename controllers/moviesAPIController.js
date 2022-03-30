@@ -21,6 +21,16 @@ const inputFilms = (req,res) =>{
     res.redirect(`http://localhost:3000/search/${films}`)
 }
 
+const showFilm = async (req,res) =>{
+    if(req.params.title){
+        const films = await search.getFilmsByTitle(req.params.title);//Devuelve 1
+        const film = films.results;
+        film.forEach(f => {
+            res.render("user/searchMovieTitle.pug", {"film":f[0]});
+        });
+    };
+};
+
 const createMovie = async (req, res) => {
     console.log(req.body); // Objeto recibido de entry nueva
     const newEntry = req.body; // {} nuevo producto a guardar
@@ -47,7 +57,8 @@ const movie = {
     // deleteMovie,
     searchFilms,
     getFilms,
-    inputFilms
+    inputFilms,
+    showFilm
 }
 
 module.exports = movie;
