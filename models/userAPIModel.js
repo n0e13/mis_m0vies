@@ -1,27 +1,20 @@
-require('dotenv').config();
-const queries = require('../utils/queries.js');
+require('dotenv').config(); //dotenv
+const queries = require('../utils/queries.js'); 
+const pool = require('../utils/dbconfig-pg.js')
+const regex = require('../utils/regex');
 
-const { Pool } = require('pg')
-const pool = new Pool({
-    host: process.env.HOST,
-    user: process.env.USER_DB,
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD
-})
+const bcrypt = require('bcrypt'); //bcrypt --> encript password
+
+
 
 /* const loginUser = async (email) => {
     // TODO: login
-} */
 
-const signUpUser = async (user) => {
-
-    // TODO: registro
-
-    const {name,surname,email} = user; // entry = req.body
+    const {email, password} = user; // entry = req.body
     let client,result;
     try{
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query((queries.signUpUserInsert),[name,surname,email])
+        const data = await client.query((queries.loginUser),[email, password])
         result = data.rowCount
     }catch(err){
         console.log(err);
@@ -31,6 +24,33 @@ const signUpUser = async (user) => {
     } 
     return result
 
+}
+ */
+const signUpUser = async (user, res) => {
+
+    // TODO: registro
+
+    const {name,surname,email,password} = user; 
+    const hashPassword = await bcrypt.hash(password, 10);
+    let client,result;
+    try{
+        client = await pool.connect(); // Espera a abrir conexion
+
+        if(regex.validateEmail(email) && regex.validatePassword(password)){
+        const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
+        result = data.rowCount
+        }else{
+            console.log("hola");
+       res.status(400).json({msg: 'Invalid email or password'}); 
+        }
+    }catch(err){
+        console.log(err);
+        throw err;
+    }finally{
+        client.release();
+    } 
+    return result
+   
 }
 /* 
 const recoverPassword = async (email) => {

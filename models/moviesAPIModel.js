@@ -1,6 +1,6 @@
-/* require('dotenv').config();
+require('dotenv').config();
 
-const getMovieByTitle = async (email) => {
+/* const getMovieByTitle = async (email) => {
     // TODO: getMovieByTitle muestra la vista detallada de una peli
 }
 
@@ -21,21 +21,21 @@ const createMovie = async (movie) => {
         image: newImage
     };
     await Movie.create(movie)
-}
+} */
 /* 
 const movie = { newTitle: "asd", newYear: 1998,newDirector: "juanito", newGenre: "miedo", newDuration: "143", newImage: "http...." }
 createMovie(movie);
 */
-
+/* 
 const updateMovie = async (email) => {
     // TODO: updateMovie solo admin
 }
 
 const deleteMovie = async (email) => {
     // TODO: deleteMovie solo admin
-}
+} */
 
-
+/* 
 const movieAPI = {
     // getMovieByTitle,
     // getAllMovies,
@@ -44,4 +44,4 @@ const movieAPI = {
     // deleteMovie
 }
 
-module.exports = movieAPI;
+module.exports = movieAPI; */
