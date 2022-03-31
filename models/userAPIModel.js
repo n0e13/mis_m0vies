@@ -100,18 +100,41 @@ const recoverPassword = async (email) => {
     // TODO: recoverpass
 }
 
-const resetPassword = async (email) => {
-    // TODO: resetpass
+// const recoverPassword = async (email) => {
+//     // TODO: recoverpass
+// }
+
+// const resetPassword = async (email) => {
+//     // TODO: resetpass
+// }
+
+// const logoutUser = async (email) => {
+//     // TODO: logout
+
+// } 
+*/
+
+const getUsers = async ()=>{
+    let client,result;
+    try{
+        client = await pool.connect();
+        const data = await client.query((queries.getUsersQuery));
+        result = data.rows;
+    }
+    catch{
+        console.log(err);
+        throw err;
+    }
+    finally{
+        client.release();
+    }
+    return result
 }
-
-const logoutUser = async (email) => {
-    // TODO: logout
-} */
-
 
 const userAPI = {
     /* loginUser, */
     signUpUser,
+    getUsers,
 /*     recoverPassword,
     resetPassword,
     logoutUser */
