@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 require('dotenv').config();
 const username = process.env.ATLAS_USER;
@@ -16,4 +17,5 @@ mongoose.connect(url,connectionParams)
     .catch( (err) => {
         console.error(`Error connecting to the database. \n${err}`);
     })
+
 module.exports = mongoose;

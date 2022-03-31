@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const Movie = require("./movieSchemaModel")
 const getMovieByTitle = async (email) => {
@@ -56,3 +57,4 @@ const movieAPI = {
     deleteMovie
 }
 module.exports = movieAPI;
+
