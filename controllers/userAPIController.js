@@ -8,6 +8,7 @@ const express = require('express');
 const db = require('../models/userAPIModel');
 
 
+
 // TODO: aquí la lógica de negocio
 const app = express();
 app.set('llave', config.llave);
@@ -17,28 +18,17 @@ app.set('llave', config.llave);
 } */
 
 const signUpUser = async (req, res) => {
+    try {
 
-    /*     console.log(req.body); // Objeto recibido de user nuevo
         const newUser = req.body; // {} nuevo user a guardar
-    
         const response = await db.signUpUser(newUser);
         res.status(201).json({"user_created":response});
-     */
-
-    let data;
-    try {
-        const { email, password, username } = req.body;
-        const hashPassword = await bcrypt.hash(password, saltRounds);
-        if (regex.validateEmail(email) && regex.validatePassword(password)) {
-            data = await User.create({ 'email': email, 'password': hashPassword, 'username': username, 'logged': false });
-            res.status(201).json(data);
-        } else {
-            res.status(400).json({ msg: 'Invalid email or password' });
-        }
     } catch (error) {
         console.log('Error:', error);
-    }
+    }  
 }
+
+
 
 /* const recoverPassword = async (req, res) => {
 
@@ -52,7 +42,19 @@ const logoutUser = async (req, res) => {
 
 } */
 
+const users =  (async()=>{
+   const u = await db.getUsers();
+   for (let i = 0; i < u.length; i++) {
+    console.log(u[i].name);
+    console.log(u[i].password);
+
+
+   }
+})();
+
+
 const authUser = async(req,res)=> {
+
     if(req.body.usuario === "hola" && req.body.contrasena === "holamundo") {
         const payload = {
          check:  true
@@ -91,4 +93,3 @@ const user = {
 }
 
 module.exports = user;
-
