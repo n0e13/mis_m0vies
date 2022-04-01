@@ -19,7 +19,6 @@ const getFilms = async (req, res) => {
 
 const inputFilms = (req, res) => {
     const films = req.body.films;
-    console.log(req.body.films);
     // TODO: Hay que quitar esta URL de local
     res.redirect(`http://localhost:3000/search/${films}`)
 }
