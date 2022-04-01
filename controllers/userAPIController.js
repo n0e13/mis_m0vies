@@ -13,7 +13,7 @@ const app = express();
 app.set('llave', config.llave);
 
 
-
+/* 
 const loginUser = async (req, res) => {
 
     try {
@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
         console.log('Error:', error);
     }  
 
-} 
+}  */
 
 const signUpUser = async (req, res) => {
     try {
@@ -52,35 +52,33 @@ const logoutUser = async (req, res) => {
 } */
 
 
-
+/* 
 const users =  (async()=>{
    const u = await db.getUsers();
-   for (let i = 0; i < u.length; i++) {
-    console.log(u[i].name);
-    console.log(u[i].password);
-
-
-   }
-})();
+    console.log(u)
+})(); */
 
 
 const authUser = async(req,res)=> {
-
-    if(req.body.usuario === "hola" && req.body.contrasena === "holamundo") {
+    const users = await db.getUsers();
+    for (let i = 0; i < users.length; i++) {
+    if(req.body.usuario == users[0].name && req.body.contrasena == users[0].password) {
         const payload = {
          check:  true
         };
         const token = jwt.sign(payload, app.get('llave'), {
          expiresIn: 1440
         });
-        res.json({
+         res.json({
          mensaje: 'Autenticación correcta',
          token: token
         });
-          } else {
+    } else {
               res.json({ mensaje: "Usuario o contraseña incorrectos"})
           }
+} 
 }
+
 
 const dataUser = async(req,res)=>{
     const datos = [
@@ -89,12 +87,11 @@ const dataUser = async(req,res)=>{
        ];
        
        res.json(datos);
-      ;
 }
 
 
 const user = {
-    loginUser,
+    /* loginUser, */
     signUpUser,
     /*     recoverPassword,
         resetPassword,

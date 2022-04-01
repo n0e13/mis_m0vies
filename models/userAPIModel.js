@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt'); //bcrypt --> encript password
 
 
 
-const loginUser = async () => {
+/* const loginUser = async () => {
     // TODO: login
 
     let data;
@@ -26,7 +26,7 @@ const loginUser = async () => {
                 const userForToken = {
                     email: email
                 };
-                const token = jwt.sign(userForToken, jwt_secret, {expiresIn: '20m'});
+                const token = jwt.sign(userForToken, {expiresIn: '20m'});
                 res
                 .status(200)
                 .json({
@@ -49,7 +49,7 @@ const loginUser = async () => {
 
 
 
-
+ */
 
 const signUpUser = async (user, res) => {
     
@@ -117,8 +117,9 @@ const getUsers = async ()=>{
     return result
 }
 
+
 const userAPI = {
-    /* loginUser, */
+   /*  loginUser,  */
     signUpUser,
     getUsers,
 /*     recoverPassword,
