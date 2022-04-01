@@ -22,8 +22,8 @@ const loginUser = async (req, res) => {
     // } catch (error) {
     //     console.log('Error:', error);
     // }
-    res.render("auth/login.pug")
-} 
+    res.render("auth/login.pug");
+}; 
 
 const signUpUser = async (req, res) => {
     try {
