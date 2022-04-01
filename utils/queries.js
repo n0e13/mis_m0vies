@@ -5,6 +5,7 @@ const getUsersQuery = `SELECT * FROM users`;
 
 /* const loginUserQuery= `SELECT * FROM users (email, password) WHERE email = $1 && password = $2`
  */
+
 const queries = {
 signUpUserQuery,
 getUsersQuery,

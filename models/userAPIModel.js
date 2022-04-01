@@ -2,7 +2,6 @@ require('dotenv').config(); //dotenv
 const queries = require('../utils/queries.js'); 
 const pool = require('../utils/dbconfig-pg.js')
 const regex = require('../utils/regex');
-
 const bcrypt = require('bcrypt'); //bcrypt --> encript password
 
 /* 
@@ -76,14 +75,16 @@ const signUpUser = async (user, res) => {
     const {name,surname,email,password} = user; 
     const hashPassword = await bcrypt.hash(password, 10);
     let client,result;
+    
     try{
         client = await pool.connect(); // Espera a abrir conexion
+
 
         if(regex.validateEmail(email) && regex.validatePassword(password)){
         const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
         result = data.rowCount
         }else{
-            console.log("hola");
+            
        res.status(400).json({msg: 'Invalid email or password'}); 
         }
     }catch(err){
