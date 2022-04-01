@@ -1,15 +1,24 @@
-include  ../head.pug
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/styles.css")
+        title Busca tu movie
+    body 
 
-section  
-    ul
-        each film in films
-            div  
-                p Año: #{film.description}
-                p Duración: #{film.runtimeStr}
-                p Género/s: #{film.genres}
-                p Título: #{film.title}
-                p Director: #{film.directors}
-                img(src=film.image, alt="Imagen de la película")
-                - var idMovie = film.id
-                form(method='GET' action=`/movie/${idMovie}`)
-                    button(type='submit') Ver detalles de #{film.title}
+        include  ../head.pug
+
+        section  
+            ul
+                each film in films
+                    div  
+                        p Año: #{film.description}
+                        p Duración: #{film.runtimeStr}
+                        p Género/s: #{film.genres}
+                        p Título: #{film.title}
+                        p Director: #{film.directors}
+                        img(src=film.image, alt="Imagen de la película")
+                        - var idMovie = film.id;
+                        a(href='/movie/' + idMovie) Detalle

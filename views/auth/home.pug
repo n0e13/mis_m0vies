@@ -1,10 +1,17 @@
-include   ../head.pug
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/styles.css")
+        title Tu webApp de movies
+    body 
 
+        include   ../head.pug
 
+        h1 MovieApp
+        a(href="/login") Login 
+        a(href="/signup") Sign up   
 
-h1 MovieApp 
-form(method='GET' action='/login')
-    button(type='submit') Login
-form(method='GET' action='/signup')
-    button(type='submit') SignUp
-img(src="../img/astronauta.jpg", alt="")
+        img(src="../img/astronauta.jpg", alt="astronauta con palomitas")

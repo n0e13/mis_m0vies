@@ -14,6 +14,25 @@ const onLoad = (req, res) => {
     res.render("auth/home");
 }
 
+const getLogin = (req, res) => {
+    res.render("auth/login");
+}
+
+const getSignUp = (req, res) => {
+    res.render("auth/signup");
+}
+
+/* 
+const loginUser = async (req, res) => {
+    try {
+        const loginUser = req.body;
+        const response = await db.loginUser(loginUser);
+        res.status(201).json({ "user_logged": response });
+    } catch (error) {
+        console.log('Error:', error);
+    }
+
+
 const loginUser = async (req, res) => {
     // try {
     //     const loginUser = req.body;
@@ -35,7 +54,7 @@ const signUpUser = async (req, res) => {
         console.log('Error:', error);
     }
 }
-
+*/
 
 
 /* const recoverPassword = async (req, res) => {
@@ -90,7 +109,9 @@ const dataUser = async (req, res) => {
 
 const user = {
     onLoad,
-    loginUser,
+    getLogin,
+    getSignUp,
+    //loginUser,
     signUpUser,
     /*     recoverPassword,
         resetPassword,
