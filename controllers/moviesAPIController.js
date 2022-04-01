@@ -1,9 +1,12 @@
 const movies = require('../models/moviesAPIModel');
 const search = require('../utils/moviesAPIUtils')
 
+const dashboard = (req,res) => {
+    res.render("user/dashboard.pug");
+}
 
 const searchFilms = (req, res) => {
-    res.render("user/search.pug")
+    res.render("user/search.pug");
 }
 
 const getFilms = async (req, res) => {
@@ -29,12 +32,19 @@ const showFilm = async (req, res) => {
     };
 };
 
+//-------Esta se encarga de las pelis favoritas----//
+const myMovies = async (req,res)=>{
+    //Aqui dentro va toda la movida del fetch a nuestras pelis favoritas y que se rendericen...
+    //-----------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------
+    res.render("user/myMovies.pug");
+}
+
 const createMovie = async (req, res) => {
     console.log(req.body); // Objeto recibido de entry nueva
     const newEntry = req.body; // {} nuevo producto a guardar
     // Líneas para guardar en una BBDD SQL
     const response = await search.createEntry(newEntry);
-    console.log(response);
     res.status(201).json({ "items_created": response });
 }
 
@@ -56,7 +66,9 @@ const movie = {
     searchFilms,
     getFilms,
     inputFilms,
-    showFilm
+    showFilm,
+    dashboard,
+    myMovies
 }
 
 module.exports = movie;

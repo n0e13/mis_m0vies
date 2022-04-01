@@ -15,7 +15,6 @@ app.set('llave', config.llave);
 
 
 const loginUser = async (req, res) => {
-
     try {
         const loginUser = req.body; 
         const response = await db.loginUser(loginUser);

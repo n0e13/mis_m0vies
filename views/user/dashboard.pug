@@ -1,4 +1,8 @@
 include ../head.pug
 
-button Buscar una peli 
-button Mis pelis 
+
+
+    form(method='get' action=`/search`)
+        button(type='submit') Buscar una peli 
+    form(method='get' action=`/movies`)
+        button(type='submit') Mis pelis 

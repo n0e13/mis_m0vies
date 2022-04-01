@@ -80,7 +80,6 @@ const getUsers = async ()=>{
     return result
 }
 
-
 const signUpUser = async (user, res) => {
     
     // TODO: registro
@@ -91,8 +90,6 @@ const signUpUser = async (user, res) => {
     
     try{
         client = await pool.connect(); // Espera a abrir conexion
-
-
         if(regex.validateEmail(email) && regex.validatePassword(password)){
         const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
         result = data.rowCount
