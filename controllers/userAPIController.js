@@ -42,17 +42,17 @@ const logoutUser = async (req, res) => {
 
 } */
 
-// const users =  (async()=>{
-//    const u = await db.getUsers();
-//    for (let i = 0; i < u.length; i++) {
-//     console.log(u[i].name);
-//     console.log(u[i].password);
 
-
-//    }
+//-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
+// const users = (async()=>{
+//     const u = await db.getUsers();
+//     for (let i = 0; i < u.length; i++) {
+//         console.log(u);        
+//     }
 // })();
 
 
+//------------------------------Esto crea un token si el usuario está en la bbdd---------------//
 const authUser = async(req,res)=> {
     const users = await db.getUsers();
     console.log(users);
@@ -76,9 +76,7 @@ const authUser = async(req,res)=> {
 
 const dataUser = async(req,res)=>{
     const datos = await db.getUsers();
-       
        res.json(datos);
-      ;
 }
 
 
