@@ -4,7 +4,6 @@ const regex = require('../utils/regex');
 const jwt_secret = process.env.ULTRA_SECRET_KEY;
 const config = require('../configs/config');
 const express = require('express');
-
 const db = require('../models/userAPIModel');
 
 
@@ -13,9 +12,19 @@ const db = require('../models/userAPIModel');
 const app = express();
 app.set('llave', config.llave);
 
-/* const loginUser = async (req, res) => {
 
-} */
+
+const loginUser = async (req, res) => {
+
+    try {
+        const loginUser = req.body; 
+        const response = await db.loginUser(loginUser);
+        res.status(201).json({"user_logged":response});
+    } catch (error) {
+        console.log('Error:', error);
+    }  
+
+} 
 
 const signUpUser = async (req, res) => {
     try {
@@ -42,14 +51,13 @@ const logoutUser = async (req, res) => {
 
 } */
 
-
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
-// const users = (async()=>{
-//     const u = await db.getUsers();
-//     for (let i = 0; i < u.length; i++) {
-//         console.log(u);        
-//     }
-// })();
+const users = (async()=>{
+    const u = await db.getUsers();
+    for (let i = 0; i < u.length; i++) {
+        console.log(u);        
+    }
+})();
 
 
 //------------------------------Esto crea un token si el usuario está en la bbdd---------------//
@@ -81,7 +89,7 @@ const dataUser = async(req,res)=>{
 
 
 const user = {
-    /*   loginUser, */
+    loginUser,
     signUpUser,
     /*     recoverPassword,
         resetPassword,
