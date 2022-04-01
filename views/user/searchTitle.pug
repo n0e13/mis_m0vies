@@ -1,8 +1,5 @@
 include  ../head.pug
 
-input(type="search")
-
-
 section  
     ul
         each film in films
@@ -13,6 +10,6 @@ section
                 p Título: #{film.title}
                 p Director: #{film.directors}
                 img(src=film.image, alt="Imagen de la película")
-                form(method='get' action=`movie/`)
-                    button(type='submit').btnDetalles Ver detalles de #{film.title}
-
+                - var idMovie = film.id
+                form(method='GET' action=`/movie/${idMovie}`)
+                    button(type='submit') Ver detalles de #{film.title}

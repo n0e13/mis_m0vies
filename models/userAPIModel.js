@@ -45,11 +45,29 @@ const bcrypt = require('bcrypt'); //bcrypt --> encript password
   return result
 
 } 
+return result */
 
 
 
+//-------------------------Esta función trae todos los usuarios de la bbdd---------------------//
+const getUsers = async ()=>{
+    let client,result;
+    try{
+        client = await pool.connect();
+        const data = await client.query((queries.getUsersQuery));
+        result = data.rows;
+    }
+    catch{
+        console.log(err);
+        throw err;
+    }
+    finally{
+        client.release();
+    }
+    return result
+}
 
- */
+
 
 const signUpUser = async (user, res) => {
     
@@ -100,22 +118,6 @@ const recoverPassword = async (email) => {
 // } 
 */
 
-const getUsers = async ()=>{
-    let client,result;
-    try{
-        client = await pool.connect();
-        const data = await client.query((queries.getUsersQuery));
-        result = data.rows;
-    }
-    catch{
-        console.log(err);
-        throw err;
-    }
-    finally{
-        client.release();
-    }
-    return result
-}
 
 
 const userAPI = {

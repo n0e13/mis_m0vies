@@ -7,34 +7,34 @@ const express = require('express');
 const db = require('../models/userAPIModel');
 
 
-
-// TODO: aquí la lógica de negocio
 const app = express();
 app.set('llave', config.llave);
 
-
+const onLoad = (req, res) => {
+    res.render("auth/home");
+}
 /* 
 const loginUser = async (req, res) => {
 
     try {
-        const loginUser = req.body; 
+        const loginUser = req.body;
         const response = await db.loginUser(loginUser);
-        res.status(201).json({"user_logged":response});
+        res.status(201).json({ "user_logged": response });
     } catch (error) {
         console.log('Error:', error);
-    }  
+    }
 
-}  */
+} */
 
 const signUpUser = async (req, res) => {
     try {
 
         const newUser = req.body; // {} nuevo user a guardar
         const response = await db.signUpUser(newUser);
-        res.status(201).json({"user_created":response});
+        res.status(201).json({ "user_created": response });
     } catch (error) {
         console.log('Error:', error);
-    }  
+    }
 }
 
 
@@ -51,18 +51,21 @@ const logoutUser = async (req, res) => {
 
 } */
 
+//-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
+// const users = (async()=>{
+//     const u = await db.getUsers();
+//     for (let i = 0; i < u.length; i++) {
+//         console.log(u);        
+//     }
+// })();
 
-/* 
-const users =  (async()=>{
-   const u = await db.getUsers();
-    console.log(u)
-})(); */
 
-
+//------------------------------Esto crea un token si el usuario está en la bbdd---------------//
 const authUser = async(req,res)=> {
-    const users = await db.getUsers();
-    for (let i = 0; i < users.length; i++) {
-    if(req.body.usuario == users[0].name && req.body.contrasena == users[0].password) {
+     const users = await db.getUsers();
+     console.log(users);
+     for (let i = 0; i < users.length; i++) {
+    if(req.body.usuario === "1" && req.body.contrasena === "1") {
         const payload = {
          check:  true
         };
@@ -76,22 +79,19 @@ const authUser = async(req,res)=> {
     } else {
               res.json({ mensaje: "Usuario o contraseña incorrectos"})
           }
-} 
+ }
+
 }
 
-
-const dataUser = async(req,res)=>{
-    const datos = [
-        { id: 1, nombre: "Pepe el de los palotes" },
-        { id: 2, nombre: "Michel de Motril"}
-       ];
-       
+const dataUser = async (req, res) => {
+    const datos = await db.getUsers();
        res.json(datos);
 }
 
 
 const user = {
-    /* loginUser, */
+    onLoad,
+    loginUser,
     signUpUser,
     /*     recoverPassword,
         resetPassword,
