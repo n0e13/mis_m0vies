@@ -13,6 +13,6 @@ section
                 p Título: #{film.title}
                 p Director: #{film.directors}
                 img(src=film.image, alt="Imagen de la película")
-                form(method='get' action=`movie/`)
+                form(method='get' action=`/movie`)
                     button(type='submit').btnDetalles Ver detalles de #{film.title}
 

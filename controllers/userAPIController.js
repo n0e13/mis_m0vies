@@ -7,34 +7,34 @@ const express = require('express');
 const db = require('../models/userAPIModel');
 
 
-
-// TODO: aquí la lógica de negocio
 const app = express();
 app.set('llave', config.llave);
 
-
+const onLoad = (req, res) => {
+    res.render("auth/home");
+}
 
 const loginUser = async (req, res) => {
 
     try {
-        const loginUser = req.body; 
+        const loginUser = req.body;
         const response = await db.loginUser(loginUser);
-        res.status(201).json({"user_logged":response});
+        res.status(201).json({ "user_logged": response });
     } catch (error) {
         console.log('Error:', error);
-    }  
+    }
 
-} 
+}
 
 const signUpUser = async (req, res) => {
     try {
 
         const newUser = req.body; // {} nuevo user a guardar
         const response = await db.signUpUser(newUser);
-        res.status(201).json({"user_created":response});
+        res.status(201).json({ "user_created": response });
     } catch (error) {
         console.log('Error:', error);
-    }  
+    }
 }
 
 
@@ -53,49 +53,50 @@ const logoutUser = async (req, res) => {
 
 
 
-
-const users =  (async()=>{
-   const u = await db.getUsers();
-   for (let i = 0; i < u.length; i++) {
-    console.log(u[i].name);
-    console.log(u[i].password);
-
-
-
-//    }
-// })();
+/* 
+const users = (async () => {
+    const u = await db.getUsers();
+    for (let i = 0; i < u.length; i++) {
+        console.log(u[i].name);
+        console.log(u[i].password);
 
 
-const authUser = async(req,res)=> {
+
+    }
+})(); */
+
+
+const authUser = async (req, res) => {
     const users = await db.getUsers();
     console.log(users);
     for (let i = 0; i < users.length; i++) {
-    if(req.body.usuario === users[0].name && req.body.contrasena === users[0].password) {
-        const payload = {
-         check:  true
-        };
-        const token = jwt.sign(payload, app.get('llave'), {
-         expiresIn: 1440
-        });
-        res.json({
-         mensaje: 'Autenticación correcta',
-         token: token
-        });
-          } else {
-              res.json({ mensaje: "Usuario o contraseña incorrectos"})
-          }
+        if (req.body.usuario === users[0].name && req.body.contrasena === users[0].password) {
+            const payload = {
+                check: true
+            };
+            const token = jwt.sign(payload, app.get('llave'), {
+                expiresIn: 1440
+            });
+            res.json({
+                mensaje: 'Autenticación correcta',
+                token: token
+            });
+        } else {
+            res.json({ mensaje: "Usuario o contraseña incorrectos" })
+        }
     }
 }
 
-const dataUser = async(req,res)=>{
+const dataUser = async (req, res) => {
     const datos = await db.getUsers();
-       
-       res.json(datos);
-      ;
+
+    res.json(datos);
+    ;
 }
 
 
 const user = {
+    onLoad,
     loginUser,
     signUpUser,
     /*     recoverPassword,
