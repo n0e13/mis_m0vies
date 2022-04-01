@@ -13,7 +13,7 @@ app.set('llave', config.llave);
 const onLoad = (req, res) => {
     res.render("auth/home");
 }
-
+/* 
 const loginUser = async (req, res) => {
 
     try {
@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
         console.log('Error:', error);
     }
 
-}
+} */
 
 const signUpUser = async (req, res) => {
     try {
@@ -62,9 +62,9 @@ const logoutUser = async (req, res) => {
 
 //------------------------------Esto crea un token si el usuario está en la bbdd---------------//
 const authUser = async(req,res)=> {
-    // const users = await db.getUsers();
-    // console.log(users);
-    // for (let i = 0; i < users.length; i++) {
+     const users = await db.getUsers();
+     console.log(users);
+     for (let i = 0; i < users.length; i++) {
     if(req.body.usuario === "1" && req.body.contrasena === "1") {
         const payload = {
          check:  true
@@ -72,14 +72,14 @@ const authUser = async(req,res)=> {
         const token = jwt.sign(payload, app.get('llave'), {
          expiresIn: 1440
         });
-        res.json({
+         res.json({
          mensaje: 'Autenticación correcta',
          token: token
         });
-          } else {
+    } else {
               res.json({ mensaje: "Usuario o contraseña incorrectos"})
           }
-    // }
+ }
 
 }
 
