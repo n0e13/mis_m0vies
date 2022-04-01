@@ -3,6 +3,8 @@ include   ../head.pug
 
 
 h1 MovieApp 
-button Login  
-button SignUp
+form(method='GET' action='/login')
+    button(type='submit') Login
+form(method='GET' action='/signup')
+    button(type='submit') SignUp
 img(src="../img/astronauta.jpg", alt="")

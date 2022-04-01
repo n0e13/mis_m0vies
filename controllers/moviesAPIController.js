@@ -1,33 +1,31 @@
 const movies = require('../models/moviesAPIModel');
 const search = require('../utils/moviesAPIUtils')
 
-// TODO: lógica de negocio
 
-const searchFilms = (req,res) =>{
+const searchFilms = (req, res) => {
     res.render("user/search.pug")
 }
 
-const getFilms = async (req,res) => {
-    if(req.params.title){
+const getFilms = async (req, res) => {
+    if (req.params.title) {
         const film = await search.getFilmsByTitle(req.params.title);//Devuelve 1
         const f = film.results
-        res.render("user/searchTitle.pug",{"films":f});//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
-      } 
+        res.render("user/searchTitle.pug", { "films": f });//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
+    }
 }
 
-const inputFilms = (req,res) =>{
-    const films =  req.body.films;
+const inputFilms = (req, res) => {
+    const films = req.body.films;
     console.log(req.body.films);
+    // TODO: Hay que quitar esta URL de local
     res.redirect(`http://localhost:3000/search/${films}`)
 }
 
-const showFilm = async (req,res) =>{
-    if(req.params.title){
-        const films = await search.getFilmsByTitle(req.params.title);//Devuelve 1
-        const film = films.results;
-        film.forEach(f => {
-            res.render("user/searchMovieTitle.pug", {"film":f[0]});
-        });
+const showFilm = async (req, res) => {
+    if (req.params.title) {
+        const filmInfo = await search.getFilmInfo(req.params.title);//Devuelve 1
+        console.log("info de la peli",filmInfo);
+        res.render("user/searchMovieTitle", { "film": filmInfo });
     };
 };
 
@@ -37,7 +35,7 @@ const createMovie = async (req, res) => {
     // Líneas para guardar en una BBDD SQL
     const response = await search.createEntry(newEntry);
     console.log(response);
-    res.status(201).json({"items_created":response});
+    res.status(201).json({ "items_created": response });
 }
 
 const updateMovie = async (req, res) => {
