@@ -90,7 +90,7 @@ const dataUser = async (req, res) => {
 
 const user = {
     onLoad,
-    loginUser,
+    // loginUser,
     signUpUser,
     /*     recoverPassword,
         resetPassword,
