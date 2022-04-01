@@ -43,7 +43,7 @@ const loginUser = async (req, res) => {
     // }
     res.render("auth/login.pug");
 }; 
-
+*/
 const signUpUser = async (req, res) => {
     try {
 
@@ -54,7 +54,7 @@ const signUpUser = async (req, res) => {
         console.log('Error:', error);
     }
 }
-*/
+
 
 
 /* const recoverPassword = async (req, res) => {
