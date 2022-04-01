@@ -8,9 +8,9 @@ html(lang="en")
         link(rel="stylesheet", href="/css/styles.css")
     body 
         section 
-            p Año: #{film.description}
+            p Año: #{film.year}
             p Duración: #{film.runtimeStr}
             p Género/s: #{film.genres}
             p Título: #{film.title}
-            p Director: #{film.directors}
+            p Trama : #{film.plot}
             img(src=film.image, alt="Imagen de la película")
