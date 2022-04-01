@@ -11,5 +11,5 @@ section
                 p Director: #{film.directors}
                 img(src=film.image, alt="Imagen de la película")
                 - var idMovie = film.id
-                form(method='get' action=`/movie/${idMovie}`)
+                form(method='GET' action=`/movie/${idMovie}`)
                     button(type='submit') Ver detalles de #{film.title}

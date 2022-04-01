@@ -1,6 +1,9 @@
+const { Router } = require('express');
 const userAPI = require('../controllers/userAPIController');
 const routes = require('express').Router();
 
+
+routes.get('/', userAPI.onLoad);
 
 routes.post('/login', userAPI.loginUser);
 routes.post('/signup', userAPI.signUpUser);
