@@ -51,47 +51,41 @@ const logoutUser = async (req, res) => {
 
 } */
 
+//-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
+// const users = (async()=>{
+//     const u = await db.getUsers();
+//     for (let i = 0; i < u.length; i++) {
+//         console.log(u);        
+//     }
+// })();
 
 
-/* 
-const users = (async () => {
-    const u = await db.getUsers();
-    for (let i = 0; i < u.length; i++) {
-        console.log(u[i].name);
-        console.log(u[i].password);
+//------------------------------Esto crea un token si el usuario está en la bbdd---------------//
+const authUser = async(req,res)=> {
+    // const users = await db.getUsers();
+    // console.log(users);
+    // for (let i = 0; i < users.length; i++) {
+    if(req.body.usuario === "1" && req.body.contrasena === "1") {
+        const payload = {
+         check:  true
+        };
+        const token = jwt.sign(payload, app.get('llave'), {
+         expiresIn: 1440
+        });
+        res.json({
+         mensaje: 'Autenticación correcta',
+         token: token
+        });
+          } else {
+              res.json({ mensaje: "Usuario o contraseña incorrectos"})
+          }
+    // }
 
-
-
-    }
-})(); */
-
-
-const authUser = async (req, res) => {
-    const users = await db.getUsers();
-    console.log(users);
-    for (let i = 0; i < users.length; i++) {
-        if (req.body.usuario === users[0].name && req.body.contrasena === users[0].password) {
-            const payload = {
-                check: true
-            };
-            const token = jwt.sign(payload, app.get('llave'), {
-                expiresIn: 1440
-            });
-            res.json({
-                mensaje: 'Autenticación correcta',
-                token: token
-            });
-        } else {
-            res.json({ mensaje: "Usuario o contraseña incorrectos" })
-        }
-    }
 }
 
 const dataUser = async (req, res) => {
     const datos = await db.getUsers();
-
-    res.json(datos);
-    ;
+       res.json(datos);
 }
 
 

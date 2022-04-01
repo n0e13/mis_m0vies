@@ -12,9 +12,9 @@ routes.post('/signup', userAPI.signUpUser);
 // routes.put('/resetpassword/:recoverToken', userAPI.resetPassword);
 
 
-//-------Estas dos rutas son del token-------------//
+//-------Estas dos rutas son del token(PRUEBA)-------------//
 routes.post("/autenticar",userAPI.authUser);
-routes.get("/datos", userAPI.dataUser)
+routes.get("/datos", userAPI.dataUser);
 
 
 
