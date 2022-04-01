@@ -42,20 +42,22 @@ const logoutUser = async (req, res) => {
 
 } */
 
-const users =  (async()=>{
-   const u = await db.getUsers();
-   for (let i = 0; i < u.length; i++) {
-    console.log(u[i].name);
-    console.log(u[i].password);
+// const users =  (async()=>{
+//    const u = await db.getUsers();
+//    for (let i = 0; i < u.length; i++) {
+//     console.log(u[i].name);
+//     console.log(u[i].password);
 
 
-   }
-})();
+//    }
+// })();
 
 
 const authUser = async(req,res)=> {
-
-    if(req.body.usuario === "hola" && req.body.contrasena === "holamundo") {
+    const users = await db.getUsers();
+    console.log(users);
+    for (let i = 0; i < users.length; i++) {
+    if(req.body.usuario === users[0].name && req.body.contrasena === users[0].password) {
         const payload = {
          check:  true
         };
@@ -69,13 +71,11 @@ const authUser = async(req,res)=> {
           } else {
               res.json({ mensaje: "Usuario o contraseña incorrectos"})
           }
+    }
 }
 
 const dataUser = async(req,res)=>{
-    const datos = [
-        { id: 1, nombre: "Pepe el de los palotes" },
-        { id: 2, nombre: "Michel de Motril"}
-       ];
+    const datos = await db.getUsers();
        
        res.json(datos);
       ;
