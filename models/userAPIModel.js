@@ -60,6 +60,9 @@ try{
 } 
 return result */
 
+
+
+//-------------------------Esta función trae todos los usuarios de la bbdd---------------------//
 const getUsers = async ()=>{
     let client,result;
     try{
@@ -76,6 +79,7 @@ const getUsers = async ()=>{
     }
     return result
 }
+
 
 const signUpUser = async (user, res) => {
     
