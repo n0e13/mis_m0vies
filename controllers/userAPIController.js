@@ -13,6 +13,15 @@ app.set('llave', config.llave);
 const onLoad = (req, res) => {
     res.render("auth/home");
 }
+
+const getLogin = (req, res) => {
+    res.render("auth/login");
+}
+
+const getSignUp = (req, res) => {
+    res.render("auth/signup");
+}
+
 /* 
 const loginUser = async (req, res) => {
     try {
@@ -90,7 +99,9 @@ const dataUser = async (req, res) => {
 
 const user = {
     onLoad,
-    loginUser,
+    getLogin,
+    getSignUp,
+    //loginUser,
     signUpUser,
     /*     recoverPassword,
         resetPassword,

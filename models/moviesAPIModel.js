@@ -1,6 +1,7 @@
 
 require('dotenv').config();
-const Movie = require("./movieSchemaModel")
+const Movie = require("./movieSchemaModel");
+
 const getMovieByTitle = async (email) => {
     // TODO: getMovieByTitle muestra la vista detallada de una peli
 }
@@ -27,7 +28,7 @@ createMovie(entry);
 const updateMovie = async (movie) => {
     // TODO: updateMovie solo admin
     const { title, newTitle, newYear, newDirector, newGenre, newDuration, newImage } = movie;
-    const movieToUpdate = await Movie.findOne({title: title})
+    const movieToUpdate = await Movie.findOne({ title: title })
     const updatedMovie = {
         title: newTitle,
         year: newYear,
@@ -45,10 +46,11 @@ updateMovie(entry);
 const deleteMovie = async (movie) => {
     // TODO: deleteMovie solo admin
     const { title } = movie;
-    await Movie.deleteOne({title: title});
+    await Movie.deleteOne({ title: title });
 }
-const entry = {title: "nuevotítulo"}
-deleteMovie(entry);
+/* const entry = {title: "nuevotítulo"}
+deleteMovie(entry); */
+
 const movieAPI = {
     // getMovieByTitle,
     // getAllMovies,

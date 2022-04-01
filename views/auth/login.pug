@@ -1,13 +1,24 @@
-include ../head.pug
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/styles.css")
+    title Haz login
+  body 
 
-button#signup Sign Up
-h1 MovieApp
-section
-  form(action='')
-    label(for='email') Email
-    input(type='text' name='email')
-    label(for='pass') Contrase&ntilde;a
-    input(type='text' name='pass')
-    button#forgotPass &iquest;Has olvidado tu contrase&ntilde;a?
-    button#login Log in
-  button#google Google
+    include ../head.pug
+
+    a(href="/signup") Sign up 
+
+    h1 MovieApp
+    section
+      form(action='')
+        label(for='email') Email
+        input(type='text' name='email')
+        label(for='pass') Contrase&ntilde;a
+        input(type='text' name='pass')
+        button#forgotPass &iquest;Has olvidado tu contrase&ntilde;a?
+        button#login Log in
+      button#google Google

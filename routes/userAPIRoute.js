@@ -4,8 +4,9 @@ const routes = require('express').Router();
 
 
 routes.get('/', userAPI.onLoad);
-
-routes.post('/login', userAPI.loginUser);
+routes.get('/login', userAPI.getLogin);
+routes.get('/signup', userAPI.getSignUp);
+//routes.post('/login', userAPI.loginUser);
 routes.post('/signup', userAPI.signUpUser);
 // routes.post('/logout/:email', userAPI.logoutUser)
 // routes.get('/recoverpassword/:email', userAPI.recoverPassword);

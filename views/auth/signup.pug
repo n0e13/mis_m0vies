@@ -1,12 +1,24 @@
-include ../head.pug
-button#loginregister
-h1 MovieApp
-section
-  form(action='')
-    label(for='email') email
-    input(type='text' name='email')
-    label(for='pass') contrase&ntilde;a
-    input(type='text' name='pass')
-    label(for='pass2') Repite la contrase&ntilde;a
-    input(type='text' name='pass2')
-    button#signUpRegister Sign Up
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/styles.css")
+    title Regístrate
+  body 
+
+    include ../head.pug
+
+    a(href="/login") Login 
+        
+    h1 MovieApp
+    section
+      form(action='')
+        label(for='email') email
+        input(type='text' name='email')
+        label(for='pass') contrase&ntilde;a
+        input(type='text' name='pass')
+        label(for='pass2') Repite la contrase&ntilde;a
+        input(type='text' name='pass2')
+        button#signUpRegister Sign Up
