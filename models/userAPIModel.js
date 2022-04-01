@@ -4,9 +4,9 @@ const pool = require('../utils/dbconfig-pg.js')
 const regex = require('../utils/regex');
 const bcrypt = require('bcrypt'); //bcrypt --> encript password
 
-/* 
 
-const loginUser = async () => {
+
+/* const loginUser = async () => {
     // TODO: login
 
     let data;
@@ -26,7 +26,7 @@ const loginUser = async () => {
                 const userForToken = {
                     email: email
                 };
-                const token = jwt.sign(userForToken, jwt_secret, {expiresIn: '20m'});
+                const token = jwt.sign(userForToken, {expiresIn: '20m'});
                 res
                 .status(200)
                 .json({
@@ -44,19 +44,6 @@ const loginUser = async () => {
 
   return result
 
-} */
-
-/* const {email, password} = user; // entry = req.body
-let client,result;
-try{
-    client = await pool.connect(); // Espera a abrir conexion
-    const data = await client.query((queries.loginUser),[email, password])
-    result = data.rowCount
-}catch(err){
-    console.log(err);
-    throw err;
-}finally{
-    client.release();
 } 
 return result */
 
@@ -106,6 +93,8 @@ const signUpUser = async (user, res) => {
     return result
    
 }
+
+
 /* 
 const recoverPassword = async (email) => {
     // TODO: recoverpass
@@ -126,8 +115,9 @@ const recoverPassword = async (email) => {
 */
 
 
+
 const userAPI = {
-    /* loginUser, */
+   /*  loginUser,  */
     signUpUser,
     getUsers,
 /*     recoverPassword,
