@@ -6,24 +6,24 @@ const config = require('../configs/config');
 const express = require('express');
 const db = require('../models/userAPIModel');
 
-
 const app = express();
 app.set('llave', config.llave);
+
 
 const onLoad = (req, res) => {
     res.render("auth/home");
 }
-/* 
-const loginUser = async (req, res) => {
-    try {
-        const loginUser = req.body;
-        const response = await db.loginUser(loginUser);
-        res.status(201).json({ "user_logged": response });
-    } catch (error) {
-        console.log('Error:', error);
-    }
 
-} */
+const loginUser = async (req, res) => {
+    // try {
+    //     const loginUser = req.body;
+    //     const response = await db.loginUser(loginUser);
+    //     res.status(201).json({ "user_logged": response });
+    // } catch (error) {
+    //     console.log('Error:', error);
+    // }
+    res.render("auth/login.pug")
+} 
 
 const signUpUser = async (req, res) => {
     try {
@@ -90,7 +90,7 @@ const dataUser = async (req, res) => {
 
 const user = {
     onLoad,
-    // loginUser,
+    loginUser,
     signUpUser,
     /*     recoverPassword,
         resetPassword,
