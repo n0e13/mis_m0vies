@@ -11,7 +11,20 @@ html(lang="es")
         include ../head.pug
 
         h2 Mis pelis Favoritas (Aquí irán las pelis que guarden en favoritos)
-            div 
-                img(src="", alt="")
-                h2 Título 
-                p Nombre del director
+        section  
+            ul
+                each film in films
+                    div  
+                        p Título: #{film.title}
+                        p Año: #{film.year}
+                        p Director: #{film.director}
+                        p Reparto: #{film.casting}
+                        p Sipnosis: #{film.plot}
+                        p Género: #{film.genre}
+                        p Opinión: #{film.rating}
+                        p Duración: #{film.duration}                     
+                        img(src=film.image, alt="Imagen de la película") 
+                        - var idMovie = film._id;
+                        button(class="btn_delete" value = idMovie) Borrar
+
+        script(src="/js/script.js") 
