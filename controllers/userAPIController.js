@@ -46,7 +46,6 @@ const loginUser = async (req, res) => {
         else {
                   res.json({ mensaje: "Usuario o contraseña incorrectos"})
               }
-
     } catch (error) {
         console.log('Error:', error);
     }

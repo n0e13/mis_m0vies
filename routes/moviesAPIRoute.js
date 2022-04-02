@@ -18,6 +18,14 @@ routes.get('/movie/:title?', movieAPI.showFilm);
 routes.post('/search', movieAPI.inputFilms);
 routes.get("/movies",movieAPI.myMovies);
 
+//CRUD DEL ADMIN
+routes.get('/movies', movieAPI.myMovies );
+routes.get("/createMovie",movieAPI.createMovieView);
+routes.post('/createMovie',movieAPI.createMovie);
+
+
+
+
 
 
 module.exports = routes;

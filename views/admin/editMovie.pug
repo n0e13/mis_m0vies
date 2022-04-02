@@ -1,28 +1,18 @@
-doctype html
-html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="/css/styles.css")
-        title Editar movie
-    body 
+include ../head.pug
 
-        include ../head.pug
-
-        h2 Editar una película
-        form(action="post") 
-            label(for="title") Titulo
-            input(type="text" name="title")
-            label(for="director") Director 
-            input(type="text" name="director")
-            label(for="reparto") Reparto
-            input(type="text" name="reparto")
-            label(for="sinopsis") Sinopsis
-            input(type="text" name="sinopsis")
-            label(for="rating") Rating 
-            input(type="text" name="rating")
-            label(for="duracion") Duración
-            input(type="text" name="duracion")
-            label(for="genero") Género
-            input(type="text" name="genero")
+h2 Editar una película
+    form(action="put") 
+        label(for="title") Titulo
+        input(type="text" name="title")
+        label(for="director") Director 
+        input(type="text" name="director")
+        label(for="reparto") Reparto
+        input(type="text" name="reparto")
+        label(for="sinopsis") Sinopsis
+        input(type="text" name="sinopsis")
+        label(for="rating") Rating 
+        input(type="text" name="rating")
+        label(for="duracion") Duración
+        input(type="text" name="duracion")
+        label(for="genero") Género
+        input(type="text" name="genero")
