@@ -65,14 +65,14 @@ const signUpUser = async (req, res) => {
 
 
 
-/* const recoverPassword = async (req, res) => {
-
+const recoverPassword = async (req, res) => {
+    res.render("auth/recoverPass")
 }
 
-const resetPassword = async (req, res) => {
-
+const restorePassword = async (req, res) => {
+    res.render("auth/restorePass")
 }
-
+/*
 const logoutUser = async (req, res) => {
 
 } */
@@ -118,9 +118,9 @@ const user = {
     getSignUp,
     loginUser,
     signUpUser,
-    /*     recoverPassword,
-        resetPassword,
-        logoutUser */
+    recoverPassword,
+    restorePassword,
+        // logoutUser 
     authUser,
     dataUser
 }
