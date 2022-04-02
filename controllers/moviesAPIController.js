@@ -46,33 +46,43 @@ const createMovie = async (req, res) => {
     console.log(req.body); // Objeto recibido de entry nueva
     const newMovie = req.body; // {} nuevo producto a guardar
     // Líneas para guardar en una BBDD SQL
-    const response = await search.createMovie(newMovie);
+    const response = await movies.createMovie(newMovie);
     res.status(201).json({ "movie_created": response });
 }
 
-const updateMovie = async (req, res) => {
+const updateMovieView = (req,res) =>{
+    res.render("admin/editMovie")
+}
 
+const updateMovie = async (req, res) => {
+    const updatedMovie = req.body;
+    const response = await movies.updateMovie
+}
+
+const deleteMovieView = (req,res)=>{
+    res.render("admin/removeMovie");
 }
 
 const deleteMovie = async (req, res) => {
-
+    
 }
 
 
 const movie = {
-
-    // getMovieByTitle,
-    // getAllMovies,
+    //ADMIN
     createMovie,
     createMovieView,
-    // updateMovie,
-    // deleteMovie,
+    updateMovie,
+    updateMovieView,
+    deleteMovie,
+    deleteMovieView,
+    //USER
     searchFilms,
     getFilms,
     inputFilms,
     showFilm,
     dashboard,
-    myMovies
+    myMovies//Esta la comparten admin y user
 }
 
 module.exports = movie;
