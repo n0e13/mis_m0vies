@@ -4,15 +4,17 @@ const routes = require('express').Router();
 
 
 routes.get('/', userAPI.onLoad);
-
-routes.get('/login', userAPI.getLogin);
 routes.get('/signup', userAPI.getSignUp);
+routes.post('/signup', userAPI.signUpUser);
+routes.get('/login', userAPI.getLogin);
 routes.post('/login', userAPI.loginUser);
 
-routes.post('/signup', userAPI.signUpUser);
 // routes.post('/logout/:email', userAPI.logoutUser)
-// routes.get('/recoverpassword/:email', userAPI.recoverPassword);
-// routes.put('/resetpassword/:recoverToken', userAPI.resetPassword);
+routes.get('/recoverpassword', userAPI.recoverPassword);
+routes.post('/recoverpassword',userAPI.recoverPassword);
+
+routes.get('/restorepassword', userAPI.restorePassword);
+routes.put('/restorepassword',userAPI.restorePassword);
 
 
 //-------Estas dos rutas son del token(PRUEBA)-------------//
