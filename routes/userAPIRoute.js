@@ -15,7 +15,7 @@ routes.post('/recoverpassword',userAPI.recoverPassword);
 
 routes.get('/restorepassword', userAPI.restorePassword);
 routes.put('/restorepassword',userAPI.restorePassword);
-
+    
 
 //-------Estas dos rutas son del token(PRUEBA)-------------//
 routes.post("/autenticar",userAPI.authUser);
