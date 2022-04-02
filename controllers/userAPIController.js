@@ -14,8 +14,12 @@ const onLoad = (req, res) => {
     res.render("auth/home");
 }
 
-const loginRender = (req,res)=>{
-    res.render("auth/login.pug");
+const getLogin = (req, res) => {
+    res.render("auth/login");
+}
+
+const getSignUp = (req, res) => {
+    res.render("auth/signup");
 }
 
 const loginUser = async (req, res) => {
@@ -110,7 +114,8 @@ const dataUser = async (req, res) => {
 
 const user = {
     onLoad,
-    loginRender,
+    getLogin,
+    getSignUp,
     loginUser,
     signUpUser,
     /*     recoverPassword,
