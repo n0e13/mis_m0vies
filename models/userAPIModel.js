@@ -10,7 +10,7 @@ app.set('llave', config.llave);
 
 
 const loginUser = async () => {
-    TODO: login
+    // TODO: login
     let data;
     try {
         const {email, password} = user
