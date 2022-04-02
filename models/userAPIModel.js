@@ -1,20 +1,21 @@
 require('dotenv').config(); //dotenv
+const express = require('express'); 
 const queries = require('../utils/queries.js'); 
-const pool = require('../utils/dbconfig-pg.js')
+const pool = require('../utils/dbconfig-pg.js');
 const regex = require('../utils/regex');
 const bcrypt = require('bcrypt'); //bcrypt --> encript password
+const config = require('../configs/config');
+const app = express();
+app.set('llave', config.llave);
 
 
-
-/* const loginUser = async () => {
+const loginUser = async () => {
     // TODO: login
-
     let data;
     try {
         const {email, password} = user
-        data = await client.query(queries.loginUserQuery,[email, password])
+        data = await client.query(queries.getUsersQuery)
         result = data.rowCount
-        
         //----
 
         if(!data){
@@ -44,8 +45,8 @@ const bcrypt = require('bcrypt'); //bcrypt --> encript password
 
   return result
 
-} 
-return result */
+}
+
 
 
 
@@ -117,7 +118,7 @@ const recoverPassword = async (email) => {
 
 
 const userAPI = {
-   /*  loginUser,  */
+    // loginUser,  
     signUpUser,
     getUsers,
 /*     recoverPassword,
