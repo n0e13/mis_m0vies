@@ -1,28 +1,17 @@
-doctype html
-html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="/css/styles.css")
-        title Guarda tu movie
-    body 
-
-        include ../head.pug
-
-        h2 Crear una película
-        form(action="post") 
-            label(for="title") Titulo
-            input(type="text" name="title")
-            label(for="director") Director 
-            input(type="text" name="director")
-            label(for="reparto") Reparto
-            input(type="text" name="reparto")
-            label(for="sinopsis") Sinopsis
-            input(type="text" name="sinopsis")
-            label(for="rating") Rating 
-            input(type="text" name="rating")
-            label(for="duracion") Duración
-            input(type="text" name="duracion")
-            label(for="genero") Genero
-            input(type="text" name="genero")
+include ../head.pug
+    h2 Crear una película
+    form(action="post") 
+        label(for="title") Titulo
+        input(type="text" name="title")
+        label(for="director") Director 
+        input(type="text" name="director")
+        label(for="reparto") Reparto
+        input(type="text" name="reparto")
+        label(for="sinopsis") Sinopsis
+        input(type="text" name="sinopsis")
+        label(for="rating") Rating 
+        input(type="text" name="rating")
+        label(for="duracion") Duración
+        input(type="text" name="duracion")
+        label(for="genero") Genero
+        input(type="text" name="genero")

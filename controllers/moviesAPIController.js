@@ -38,12 +38,16 @@ const myMovies = async (req, res) => {
     res.render("user/myMovies");
 }
 
+const createMovieView = (req,res) =>{
+    res.render("admin/createMovie")
+}
+
 const createMovie = async (req, res) => {
     console.log(req.body); // Objeto recibido de entry nueva
-    const newEntry = req.body; // {} nuevo producto a guardar
+    const newMovie = req.body; // {} nuevo producto a guardar
     // Líneas para guardar en una BBDD SQL
-    const response = await search.createEntry(newEntry);
-    res.status(201).json({ "items_created": response });
+    const response = await search.createMovie(newMovie);
+    res.status(201).json({ "movie_created": response });
 }
 
 const updateMovie = async (req, res) => {
@@ -60,6 +64,7 @@ const movie = {
     // getMovieByTitle,
     // getAllMovies,
     createMovie,
+    createMovieView,
     // updateMovie,
     // deleteMovie,
     searchFilms,
