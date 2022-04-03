@@ -21,54 +21,51 @@ const scrap_sensacine = async (title) => {
     await page.click('.header-search-submit');
     await page.waitForSelector('.mdl')
     await page.screenshot({ path: 'sensacine3.png' });
+    console.log("Hecho el 3er screenshot");
 
 
     
     //inspeccionamos página para sacar los enlaces de las reviews
-   const links = await page.evaluate(() => { 
-        const elements = document.querySelectorAll('.rating-holder a')
-        return elements.map((element) => element.href)
+  const links = await page.evaluate(() => { 
+    console.log("A ver eso QUÉ?1");
+        const elements = document.querySelectorAll('.xXx rating-title a');
+        console.log(elements);
+        
+        return elements;/* elements.map((element) => element.href) */
     })
-    console.log("Estos son los resultados y enlaces", links);
+    console.log("Estos son los resultados y enlaces", links); 
 
 
     //buscamos el enlace que contenga "criticas-espectadores"
-    const match = links.find(element => element.includes('criticas-espectadores'));
+    /* const match = links.find(element => element.includes('criticas-espectadores'));
     console.log("Resultado de match: ", match);
-    
-   
+     */
+   /* 
     //hacemos click en ese enlace
     await page.goto(match);
-    /* await page.waitForSelector('.hred') */
-    await page.screenshot({ path: 'sensacine4.png' });
+    await page.waitForSelector('.titlebar');
+    await page.screenshot({ path: 'sensacine4.png' }); */
+   
+    
      
 
+    //inspeccionamos página para sacar los comentarios de las reviews de usuarios
+   /*  const review = await page.evaluate(() => { 
 
-    const review = [];
-    
-
-
-    for(let enlace of enlaces){
-        await page.goto(enlace);
-        await page.waitForSelector('h1');
-
-        const oferta = await page.evaluate(()=>{
-            const tmp = {};
-            tmp.title = document.querySelector('h1').innerText;
-            tmp.company = document.querySelector('h2').innerText;
-            tmp.salary = document.querySelector('dd:nth-of-type(4n)').innerText;
-            tmp.url = window.location.href;
-            return tmp
-        });
-        ofertas.push(oferta);
-    }
-    console.log("Scrap Domestika conseguido!")
-
+        const obj = {}; //div con la info de la review
+        obj.div
+        const elements = document.querySelectorAll('.hred review-card cf').innerText
+        return obj
+    })
+    console.log(review);
+    await page.screenshot({ path: 'sensacine5.png' });
+ */
 
     await browser.close();
 
 };
 
-scrap_sensacine("el rey arturo");
+scrap_sensacine("amelie");
 
 
+/* module.exports = scrap_sensacine; */
