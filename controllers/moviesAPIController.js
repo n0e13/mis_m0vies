@@ -1,6 +1,6 @@
 const movies = require('../models/moviesAPIModel');
-const search = require('../utils/moviesAPIUtils')
-const scrap = require('../utils/scrap_sensacine')
+const search = require('../utils/moviesAPIUtils');
+const scraper = require('../utils/scrap_sensacine.js');
 
 
 const dashboard = (req, res) => {
@@ -21,7 +21,8 @@ const getFilms = async (req, res) => {
 
 const inputFilms = (req, res) => {
     const films = req.body.films;
-    /* scrap(films); */ // scrapping de la pelicula que se busque.
+/*     scraper.scrap_sensacine(films) // scrapping de la pelicula que se busque.
+ */
     res.render(`http://localhost:3000/search/${films}`)
 }
 
