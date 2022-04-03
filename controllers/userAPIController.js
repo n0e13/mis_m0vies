@@ -53,10 +53,10 @@ const loginUser = async (req, res) => {
 
 const signUpUser = async (req, res) => {
     try {
-
         const newUser = req.body; // {} nuevo user a guardar
         const response = await db.signUpUser(newUser);
         res.status(201).json({ "user_created": response });
+        res.redirect("http://localhost:3000/login");
     } catch (error) {
         console.log('Error:', error);
     }

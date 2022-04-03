@@ -69,21 +69,17 @@ const getUsers = async ()=>{
 }
 
 const signUpUser = async (user, res) => {
-    
     // TODO: registro
-
     const {name,surname,email,password} = user; 
-    const hashPassword = await bcrypt.hash(password, 10);
+    // const hashPassword = await bcrypt.hash(password, 10);
     let client,result;
-    
     try{
         client = await pool.connect(); // Espera a abrir conexion
         if(regex.validateEmail(email) && regex.validatePassword(password)){
-        const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
-        result = data.rowCount
+            const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
+            result = data.rowCount;
         }else{
-            
-       res.status(400).json({msg: 'Invalid email or password'}); 
+            res.status(400).json({msg: 'Invalid email or password'}); 
         }
     }catch(err){
         console.log(err);
@@ -92,7 +88,6 @@ const signUpUser = async (user, res) => {
         client.release();
     } 
     return result
-   
 }
 
 
