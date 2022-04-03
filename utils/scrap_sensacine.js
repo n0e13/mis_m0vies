@@ -61,6 +61,4 @@ const scrap_sensacine = async (movie) => {
 
 };
 
-module.exports = {
-  scrap_sensacine,
-};
+module.exports = {scrap_sensacine};

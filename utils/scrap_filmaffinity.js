@@ -60,8 +60,4 @@ const scrap_filmaffinity = async (title) => {
 
 };
 
-scrap_filmaffinity("amelie")
-
-/* module.exports = {
-  scrap_sensacine,
-}; */
+module.exports = {scrap_filmaffinity};
