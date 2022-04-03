@@ -1,6 +1,6 @@
 include ../head.pug
     h2 Crear una película
-    form(action="post") 
+    form(action="/createMovie", method="post") 
         label(for="title") Titulo
         input(type="text" name="title")
         label(for="director") Director 

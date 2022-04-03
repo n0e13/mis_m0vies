@@ -1,7 +1,7 @@
 include ../head.pug
 
 h2 Editar una película
-    form(action="put") 
+    form(action="/editMovie", method="post") 
         label(for="title") Titulo
         input(type="text" name="title")
         label(for="director") Director 

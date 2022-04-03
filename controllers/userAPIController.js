@@ -23,14 +23,17 @@ const getSignUp = (req, res) => {
 }
 
 const loginUser = async (req, res) => {
+    const email = req.body.email;
+    const pass = req.body.pass;
+    if (!email) return res.status(200).send({ success: false, error: "email not provided" });
+    if (!password) return res.status(200).send({ success: false, error: "password not provided" });
     try {
         // const loginUser = req.body;
         // const response = await db.loginUser(loginUser);
-        const email = req.body.email;
-        const pass = req.body.pass;
-        // const users = await db.getUsers();
-        // console.log(users);
-        if(email == "1" && pass == "1") {
+
+        const users = await db.getUsers();
+        console.log(users);
+        if(email == users[i].email && pass == users[i].password) {
             // const payload = {
             //  check:  true
             // };
