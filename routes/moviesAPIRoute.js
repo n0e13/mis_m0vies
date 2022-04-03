@@ -18,7 +18,7 @@ routes.get("/createMovie", movieAPI.createMovieView);
 routes.post('/createMovie', movieAPI.createMovie);
 routes.get("/editMovie", movieAPI.updateMovieView)
 routes.put("/editMovie", movieAPI.updateMovie);
-//routes.get("/removeMovie", movieAPI.deleteMovieView);
+routes.get("/removeMovie", movieAPI.deleteMovieView);
 routes.post("/removemovie", movieAPI.deleteMovie);
 
 
