@@ -20,7 +20,7 @@ const getFilms = async (req, res) => {
 
 const inputFilms = (req, res) => {
     const films = req.body.films;
-    res.redirect(`http://localhost:3000/search/${films}`)
+    res.render(`http://localhost:3000/search/${films}`)
 }
 
 const showFilm = async (req, res) => {
@@ -32,39 +32,41 @@ const showFilm = async (req, res) => {
 
 //-------Esta se encarga de las pelis favoritas----//
 const myMovies = async (req, res) => {
-    //Aqui dentro va toda la movida del fetch a nuestras pelis favoritas y que se rendericen...
-    //-----------------------------------------------------------------------------------------
-    //-----------------------------------------------------------------------------------------
-    res.render("user/myMovies");
+    //TODO: if else para saber si es admin o user
+
+    // Admin
+    const aMovies = await movies.getAllMovies();
+    res.render("user/myMovies", { "films": aMovies });
 }
 
-const createMovieView = (req,res) =>{
+const createMovieView = (req, res) => {
     res.render("admin/createMovie")
 }
 
 const createMovie = async (req, res) => {
-    console.log(req.body); // Objeto recibido de entry nueva
     const newMovie = req.body; // {} nuevo producto a guardar
-    // Líneas para guardar en una BBDD SQL
     const response = await movies.createMovie(newMovie);
-    res.status(201).json({ "movie_created": response });
+    res.render("admin/createMovie");
 }
 
-const updateMovieView = (req,res) =>{
+const updateMovieView = (req, res) => {
     res.render("admin/editMovie")
 }
 
 const updateMovie = async (req, res) => {
     const updatedMovie = req.body;
-    const response = await movies.updateMovie
+    await movies.updateMovie(updatedMovie);
 }
 
-const deleteMovieView = (req,res)=>{
+const deleteMovieView = (req, res) => {
     res.render("admin/removeMovie");
 }
 
 const deleteMovie = async (req, res) => {
-    
+    const deleteMovieById = req.body.id;
+    console.log(deleteMovieById);
+    await movies.deleteMovie(deleteMovieById);
+    //TODO: falta recargar la vista y borrar las relaciones con esa peli en SQL
 }
 
 

@@ -22,3 +22,5 @@ html(lang="es")
                         img(src=film.image, alt="Imagen de la película")
                         - var idMovie = film.id;
                         a(href='/movie/' + idMovie) Detalle
+                        form(action="/savemovie", method="post") 
+                            button(type="submit") Guardar en favoritos
