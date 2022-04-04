@@ -9,19 +9,14 @@ const app = express();
 app.set('llave', config.llave);
 
 
-const loginUser = async (user,res) => {
+const loginUser = async () => {
     // TODO: login
-    const {email,pass} = user; 
-    let data,client,result;
-    // const users = queries.getUsersQuery;
-    if (!email) return res.status(200).send({ success: false, error: "email not provided" });
-    if (!pass) return res.status(200).send({ success: false, error: "password not provided" });
+    let data;
     try {
-        // client = await pool.connect();
-        if((email == "1" ) && (pass == "1")){
-            // data = await client.query(queries.getUsersQuery)
-            // result = data.rowsa
-        }
+        const {email, password} = user
+        data = await client.query(queries.getUsersQuery)
+        result = data.rows
+
 
         // if(!data){
         //     res.status(400).json({ msg: 'Incorrect user or password'}); 
@@ -44,12 +39,11 @@ const loginUser = async (user,res) => {
         // }        
     } catch (error) {
         console.log('Error:', error);
-    }
-    //  finally{
-    // client.release();
-    // } 
+    } finally{
+    client.release();
+    } 
 
-//   return result
+  return result
 
 }
 
@@ -120,7 +114,7 @@ const recoverPassword = async (email) => {
 
 
 const userAPI = {
-    loginUser,  
+    // loginUser,  
     signUpUser,
     getUsers,
 /*     recoverPassword,
