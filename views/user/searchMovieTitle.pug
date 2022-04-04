@@ -9,9 +9,11 @@ html(lang="es")
     
     body 
         section 
-            p Año: #{film.year}
-            p Duración: #{film.runtimeStr}
-            p Género/s: #{film.genres}
-            p Título: #{film.title}
-            p Trama : #{film.plot}
-            img(src=film.image, alt="Imagen de la película")
+            p Año: #{film.info.year}
+            p Duración: #{film.info.runtimeStr}
+            p Género/s: #{film.info.genres}
+            p Título: #{film.info.title}
+            p Trama : #{film.info.plot}
+            img(src=film.info.image, alt="Imagen de la película")
+            p Review Sensacine: #{film.reviewS}
+            p Review Filmaffinity: #{film.reviewF}

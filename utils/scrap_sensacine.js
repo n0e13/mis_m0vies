@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
 
 const scrap_sensacine = async (movie) => {
-    console.log("Empieza scrap Sensacine");
+    try{
+      console.log("Empieza scrap Sensacine");
     
     //lanzamos chrome
     const browser = await puppeteer.launch({headless: true});
@@ -18,8 +19,14 @@ const scrap_sensacine = async (movie) => {
 
     //selecciono la clase común a las cajas que me interesan (se ven en la propia pagina)
     await page.click('.header-search-submit');
-    await page.waitForSelector('.mdl')
-
+    
+      try {
+        await page.waitForSelector('.mdl', 15000)
+      }
+      catch(error) {
+        return console.log(`ERROR: ${error.stack}. No existe ese selector porque no está esa peli`);
+        }
+    
 
     const links = await page.evaluate(() => {
       const elements = document.querySelectorAll('.rating-holder a')
@@ -46,21 +53,32 @@ const scrap_sensacine = async (movie) => {
    
   //sacamos el primer comentario de las reviews de usuarios (username + comentario)
  
-  let innerTextOfReview = await page.$eval('div.review-card-review-holder > div.content-txt.review-card-content', el => el.innerText) 
-  let innerUserOfReview = await page.$eval('div.review-card-aside > div > div > div > span', el => el.innerText)
+  let innerTextOfReview = await page.$eval('.review-card-content', el => el.innerText) 
+  let innerUserOfReview = await page.$eval('.meta-title', el => el.innerText)
 
   if(innerUserOfReview == "Un visitante"){
     innerUserOfReview = "Un visitante de Sensacine"
   }
   
-  console.log("innerTextOfReview: ", innerTextOfReview); 
-  console.log("innerUserOfReview: ", innerUserOfReview);
+/*   console.log("innerTextOfReview: ", innerTextOfReview); 
+  console.log("innerUserOfReview: ", innerUserOfReview); */
   
 
-    await browser.close();
+await browser.close();
 
+ const reviewsSensacine = {
+  innerTextOfReview,
+  innerUserOfReview
+}
+
+return reviewsSensacine; 
+
+}catch (error) {
+return console.log(`ERROR: ${error.stack}`);
+
+}
 };
 
-module.exports = {
-  scrap_sensacine,
-};
+
+
+module.exports = scrap_sensacine;

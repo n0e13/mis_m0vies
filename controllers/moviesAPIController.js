@@ -1,6 +1,7 @@
 const movies = require('../models/moviesAPIModel');
 const search = require('../utils/moviesAPIUtils');
-const scraper = require('../utils/scrap_sensacine.js');
+const scrap_sensacine = require('../utils/scrap_sensacine');
+const scrap_filmaffinity = require('../utils/scrap_filmaffinity');
 
 
 const dashboard = (req, res) => {
@@ -21,14 +22,21 @@ const getFilms = async (req, res) => {
 
 const  inputFilms = (req, res) => {
     const films = req.body.films;
-/*     scraper.scrap_sensacine(films) // scrapping de la pelicula que se busque.
- */
     res.redirect(`http://localhost:3000/search/${films}`)
 }
 
 const showFilm = async (req, res) => {
     if (req.params.title) {
-        const filmInfo = await search.getFilmInfo(req.params.title);//Devuelve 1
+        const info = await search.getFilmInfo(req.params.title);//Devuelve 1
+        const reviewS = await scrap_sensacine(req.params.title);  //objeto
+        const reviewF =  await scrap_filmaffinity(req.params.title); 
+        const filmInfo = {
+            info,
+            reviewS,
+            reviewF
+        }
+        console.log("console log de reviewF: ", reviewF);
+        console.log("console log de reviewS: ", reviewS);
         res.render("user/searchMovieTitle", { "film": filmInfo });
     };
 };

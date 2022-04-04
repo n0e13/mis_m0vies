@@ -91,7 +91,45 @@ const logoutUser = async (req, res) => {
 //     const u = await db.getUsers();
 //     console.log(u);        
 
+<<<<<<< HEAD
 // })();
+=======
+//-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
+const users = (async()=>{
+    const u = await db.getUsers();
+        /* console.log(u);  */       
+    
+})();
+
+
+//------------------------------Esto crea un token si el usuario está en la bbdd---------------//
+const authUser = async(req,res)=> {
+    const users = await db.getUsers();
+    /* console.log(users); */
+    if(req.body.usuario === users[i].name && req.body.contrasena === users[i].password) {
+        const payload = {
+         check:  true
+        };
+        const token = jwt.sign(payload, app.get('llave'), {
+         expiresIn: 1440
+        });
+         res.json({
+         mensaje: 'Autenticación correcta',
+         token: token
+        });
+    } else {
+              res.json({ mensaje: "Usuario o contraseña incorrectos"})
+          }
+}
+
+const dataUser = async (req, res) => {
+    // const datos = await db.getUsers();
+    const datos = {
+        user: "topotamadre"
+    }
+       res.json(datos);
+}
+>>>>>>> scrap
 
 
 const user = {
