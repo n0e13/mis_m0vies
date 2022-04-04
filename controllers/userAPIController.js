@@ -41,8 +41,10 @@ const loginUser = async (req, res) => {
              mensaje: 'Autenticación correcta',
              token: token
             });
-            
-            res.redirect("http://localhost:3000/dashboard");
+            res.cookie("refreshToken", token, {
+                httpOnly: true,
+                sameSite: "strict",
+            }).redirect("http://localhost:3000/dashboard");
         } 
         else {
                   res.json({ mensaje: "Usuario o contraseña incorrectos"})

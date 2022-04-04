@@ -23,7 +23,7 @@ const  inputFilms = (req, res) => {
     const films = req.body.films;
 /*     scraper.scrap_sensacine(films) // scrapping de la pelicula que se busque.
  */
-    res.render(`http://localhost:3000/search/${films}`)
+    res.redirect(`http://localhost:3000/search/${films}`)
 }
 
 const showFilm = async (req, res) => {
