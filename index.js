@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Rutas
-// app.use("/api", moviesRouter);
 app.use("/", moviesRouter);
 app.use("/", userRouter);
 
