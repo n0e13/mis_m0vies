@@ -10,6 +10,22 @@ html(lang="es")
 
         include ../head.pug
 
+        header
+            nav(class='navbar')
+                    a(href="#", class="nav-branding") MovieApp
+                    ul(class="nav-menu")
+                        li(class="nav-item")
+                            a(href="/search", class="nav-link") Search
+                        li(class="nav-item")
+                            a(href="/movies", class="nav-link") My movies
+                        li(class="nav-item")
+                            a(href="#", class="nav-link") Logout
+                    div(class="hamburger")
+                            span(class="bar")
+                            span(class="bar")
+                            span(class="bar")
+
         a(href="/search") Buscar una peli
 
         a(href="/movies") Mis pelis
+    script(src="/js/hamburger.js") 

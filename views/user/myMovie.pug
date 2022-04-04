@@ -10,6 +10,22 @@ html(lang="es")
 
         include ../head.pug
         //- Esta vista de qué es 
+
+        header
+            nav(class='navbar')
+                    a(href="#", class="nav-branding") MovieApp
+                    ul(class="nav-menu")
+                        li(class="nav-item")
+                            a(href="/dashboard", class="nav-link") Dashboard
+                        li(class="nav-item")
+                            a(href="/search", class="nav-link") Search
+                        li(class="nav-item")
+                            a(href="#", class="nav-link") Logout
+                    div(class="hamburger")
+                            span(class="bar")
+                            span(class="bar")
+                            span(class="bar")
+
         section 
             h2 Título 
             h4 Director 
@@ -17,3 +33,5 @@ html(lang="es")
             p sinopsis 
             p rating 
             h4 Opiniones 
+
+    script(src="/js/hamburger.js") 

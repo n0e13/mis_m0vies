@@ -10,6 +10,21 @@ html(lang="es")
 
                 include ../head.pug
 
+                header
+                        nav(class='navbar')
+                                a(href="#", class="nav-branding") MovieApp
+                                ul(class="nav-menu")
+                                        li(class="nav-item")
+                                                a(href="/dashboard", class="nav-link") Dashboard
+                                        li(class="nav-item")
+                                                a(href="/movies", class="nav-link") My movies
+                                        li(class="nav-item")
+                                                a(href="#", class="nav-link") Logout
+                                div(class="hamburger")
+                                        span(class="bar")
+                                        span(class="bar")
+                                        span(class="bar")
+
                 h3 ¡Busca una peli! 
                 form(action="/search", method="post") 
                         label(for="films") Introduce el título de la película
@@ -17,3 +32,4 @@ html(lang="es")
                         br
                         input(type="text" name="films" placeholder="Título...")
                         button(type="submit") Buscar
+        script(src="/js/hamburger.js") 
