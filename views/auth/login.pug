@@ -15,11 +15,11 @@ html(lang="es")
     h1 MovieApp
     section
 
-      form(action="/dashboard", method="post")
+      form(action="/login", method="post")
         label(for='email') Email
         input(type='text' name='email')
         label(for='pass') Contrase&ntilde;a
-        input(type='text' name='pass')
+        input(type='password' name='pass')
         button#login Log in
 
         a(href="/recoverPassword") &iquest;Has olvidado tu contrase&ntilde;a?

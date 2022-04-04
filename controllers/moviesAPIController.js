@@ -20,7 +20,7 @@ const getFilms = async (req, res) => {
     }
 }
 
-const inputFilms = (req, res) => {
+const  inputFilms = (req, res) => {
     const films = req.body.films;
     res.render(`http://localhost:3000/search/${films}`)
 }
