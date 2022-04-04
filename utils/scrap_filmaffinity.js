@@ -49,8 +49,8 @@ const scrap_filmaffinity = async (title) => {
    
   //sacamos el primer comentario de las reviews de usuarios (username + comentario)
  
-  let innerTextOfReview = await page.$eval('#pro-reviews > li:nth-child(1) > div > a > div', el => el.innerText) 
-  let innerUserOfReview = await page.$eval('#pro-reviews > li:nth-child(1) > div > div', el => el.innerText)
+  let innerTextOfReview = await page.$eval('.pro-review div:nth-child(1)', el => el.innerText) 
+  let innerUserOfReview = await page.$eval('.pro-crit-med', el => el.innerText)
   
   console.log("innerTextOfReview: ", innerTextOfReview); 
   console.log("innerUserOfReview: ", innerUserOfReview); 
@@ -60,4 +60,4 @@ const scrap_filmaffinity = async (title) => {
 
 };
 
-module.exports = {scrap_filmaffinity};
+module.exports = scrap_filmaffinity;
