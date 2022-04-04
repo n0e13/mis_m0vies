@@ -91,9 +91,6 @@ const logoutUser = async (req, res) => {
 //     const u = await db.getUsers();
 //     console.log(u);        
 
-<<<<<<< HEAD
-// })();
-=======
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
 const users = (async()=>{
     const u = await db.getUsers();
@@ -129,7 +126,6 @@ const dataUser = async (req, res) => {
     }
        res.json(datos);
 }
->>>>>>> scrap
 
 
 const user = {
