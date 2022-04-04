@@ -26,24 +26,22 @@ const loginUser = async (req, res) => {
     const email = req.body.email;
     const pass = req.body.pass;
     if (!email) return res.status(200).send({ success: false, error: "email not provided" });
-    if (!password) return res.status(200).send({ success: false, error: "password not provided" });
+    if (!pass) return res.status(200).send({ success: false, error: "password not provided" });
     try {
-        // const loginUser = req.body;
-        // const response = await db.loginUser(loginUser);
-
-        const users = await db.getUsers();
-        console.log(users);
-        if(email == users[i].email && pass == users[i].password) {
-            // const payload = {
-            //  check:  true
-            // };
-            // const token = jwt.sign(payload, app.get('llave'), {
-            //  expiresIn: 1440
-            // });
-            //  res.json({
-            //  mensaje: 'Autenticación correcta',
-            //  token: token
-            // });
+        // const users = await db.getUsers();
+        // console.log(users);
+        if(email == "1" && pass == "1") {
+            const payload = {
+             check:  true
+            };
+            const token = jwt.sign(payload, app.get('llave'), {
+             expiresIn: 1440
+            });
+             console.log({
+             mensaje: 'Autenticación correcta',
+             token: token
+            });
+            
             res.redirect("http://localhost:3000/dashboard");
         } 
         else {
@@ -80,12 +78,12 @@ const logoutUser = async (req, res) => {
 } */
 
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
-// const users = (async()=>{
-//     const u = await db.getUsers();
-//     for (let i = 0; i < u.length; i++) {
-//         console.log(u);        
-//     }
-// })();
+const users = (async()=>{
+    const u = await db.getUsers();
+    for (let i = 0; i < u.length; i++) {
+        console.log(u);        
+    }
+})();
 
 
 //------------------------------Esto crea un token si el usuario está en la bbdd---------------//
@@ -109,7 +107,10 @@ const authUser = async(req,res)=> {
 }
 
 const dataUser = async (req, res) => {
-    const datos = await db.getUsers();
+    // const datos = await db.getUsers();
+    const datos = {
+        user: "topotamadre"
+    }
        res.json(datos);
 }
 

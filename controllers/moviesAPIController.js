@@ -19,7 +19,7 @@ const getFilms = async (req, res) => {
     }
 }
 
-const inputFilms = (req, res) => {
+const  inputFilms = (req, res) => {
     const films = req.body.films;
 /*     scraper.scrap_sensacine(films) // scrapping de la pelicula que se busque.
  */
