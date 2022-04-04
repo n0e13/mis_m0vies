@@ -1,28 +1,29 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-//const User = require('../models/user');
 const jwt_secret = process.env.ULTRA_SECRET_KEY;
+const config = require('../configs/config');
 
 const protectedRoutes = express.Router();
 
 protectedRoutes.use((req, res, next) => {
-    const token = req.headers['access_token'];
-// TODO: llamada a SQL
-    if (token) {
-     /*  jwt.verify(token, jwt_secret, async (err, decoded) => {
-        let data = await User.findOne({"email": decoded.email}, '-_id -__v');
-        if (data.logged == true) {
-          req.decoded = decoded;    
-          next();   
-        } else {
-          return res.json({ msg: 'Invalid token' });
-        }
-      }); */
-    } else {
-      res.send({ 
-          msg: 'Token not provided' 
+  const cookies = req.headers.cookie;
+
+  if (cookies) {
+    const cookieArray = cookies.split("=");
+    const token = cookieArray[1];
+
+      jwt.verify(token, config.llave, (err, user) => {
+          if (err) {
+              return res.status(401).send({
+                message: "Unauthorized!"
+              });
+          }
+          req.user = user;
+          next();
       });
-    }
- });
+  } else {
+      res.sendStatus(401);
+  }
+});
 
 module.exports = protectedRoutes;
