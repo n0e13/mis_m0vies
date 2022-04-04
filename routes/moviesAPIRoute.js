@@ -7,7 +7,7 @@ const routes = require('express').Router();
 
 routes.get("/dashboard", movieAPI.dashboard)
 routes.get('/search', movieAPI.searchFilms);
-routes.get('/search/:title', movieAPI.getFilms);
+routes.get('/search/:title?', movieAPI.getFilms);
 routes.get('/movie/:title?', movieAPI.showFilm);
 routes.post('/search', movieAPI.inputFilms);
 routes.get("/movies", movieAPI.myMovies);

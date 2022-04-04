@@ -71,7 +71,7 @@ const getUsers = async ()=>{
 const signUpUser = async (user, res) => {
     // TODO: registro
     const {name,surname,email,pass,pass2} = user; 
-    console.log(user);
+    /* console.log(user); */
     // const hashPassword = await bcrypt.hash(password, 10);
     let client,result;
     try{

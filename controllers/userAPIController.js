@@ -82,7 +82,7 @@ const logoutUser = async (req, res) => {
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
 const users = (async()=>{
     const u = await db.getUsers();
-        console.log(u);        
+        /* console.log(u);  */       
     
 })();
 
@@ -90,7 +90,7 @@ const users = (async()=>{
 //------------------------------Esto crea un token si el usuario está en la bbdd---------------//
 const authUser = async(req,res)=> {
     const users = await db.getUsers();
-    console.log(users);
+    /* console.log(users); */
     if(req.body.usuario === users[i].name && req.body.contrasena === users[i].password) {
         const payload = {
          check:  true
