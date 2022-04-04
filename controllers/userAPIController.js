@@ -28,9 +28,9 @@ const loginUser = async (req, res) => {
     if (!email) return res.status(200).send({ success: false, error: "email not provided" });
     if (!pass) return res.status(200).send({ success: false, error: "password not provided" });
     try {
-        // const users = await db.getUsers();
+        const users = await db.getUsers();
         // console.log(users);
-        if(email == "1" && pass == "1") {
+        if(email == users[0].email && pass == users[0].password) {
             const payload = {
              check:  true
             };
@@ -80,9 +80,8 @@ const logoutUser = async (req, res) => {
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
 const users = (async()=>{
     const u = await db.getUsers();
-    for (let i = 0; i < u.length; i++) {
         console.log(u);        
-    }
+    
 })();
 
 
