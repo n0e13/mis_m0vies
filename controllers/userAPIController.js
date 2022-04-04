@@ -58,8 +58,7 @@ const signUpUser = async (req, res) => {
     try {
         const newUser = req.body; // {} nuevo user a guardar
         const response = await db.signUpUser(newUser);
-        res.status(201).json({ "user_created": response });
-        res.redirect("http://localhost:3000/login");
+        res.status(201).redirect("http://localhost:3000/login");
     } catch (error) {
         console.log('Error:', error);
     }
@@ -79,12 +78,12 @@ const logoutUser = async (req, res) => {
 
 } */
 
-//-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
-const users = (async()=>{
-    const u = await db.getUsers();
-        console.log(u);        
+//-------------------------Esta función loguea los usuarios de la bbdd en la terminal(Descomentar para loguear)--------------//
+// const users = (async()=>{
+//     const u = await db.getUsers();
+//         console.log(u);        
     
-})();
+// })();
 
 
 //------------------------------Esto crea un token si el usuario está en la bbdd---------------//

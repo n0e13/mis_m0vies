@@ -72,12 +72,12 @@ const signUpUser = async (user, res) => {
     // TODO: registro
     const {name,surname,email,pass,pass2} = user; 
     console.log(user);
-    // const hashPassword = await bcrypt.hash(password, 10);
+    const hashPassword = await bcrypt.hash(pass, 10);
     let client,result;
     try{
         client = await pool.connect(); // Espera a abrir conexion
         if(regex.validateEmail(email) && regex.validatePassword(pass) && pass==pass2){
-            const data = await client.query((queries.signUpUserQuery),[name,surname,email,/*hashPassword*/,pass])
+            const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
             result = data.rowCount;
         }else{
             res.status(400).json({msg: 'Invalid email or password'}); 
