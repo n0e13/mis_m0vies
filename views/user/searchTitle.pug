@@ -10,6 +10,23 @@ html(lang="es")
 
         include  ../head.pug
 
+        header
+            nav(class='navbar')
+                a(href="#", class="nav-branding") MovieApp
+                ul(class="nav-menu")
+                    li(class="nav-item")
+                        a(href="/dashboard", class="nav-link") Dashboard
+                    li(class="nav-item")
+                        a(href="/search", class="nav-link") Search
+                    li(class="nav-item")
+                        a(href="/movies", class="nav-link") My movies
+                    li(class="nav-item")
+                        a(href="/logout", class="nav-link") Logout
+                div(class="hamburger")
+                        span(class="bar")
+                        span(class="bar")
+                        span(class="bar")
+
         section  
             ul
                 each film in films
@@ -21,3 +38,5 @@ html(lang="es")
                         a(href='/movie/' + idMovie + '&'+ film.title) Detalle
                         form(action="/savemovie", method="post") 
                             button(type="submit") Guardar en favoritos
+
+        script(src="/js/hamburger.js") 
