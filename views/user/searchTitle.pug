@@ -31,12 +31,12 @@ html(lang="es")
             ul
                 each film in films
                     div  
-                        p Año: #{film.description}
-                        p Título: #{film.title}
+                        p Year: #{film.description}
+                        p Title: #{film.title}
                         img(src=film.image, alt="Imagen de la película")
                         - var idMovie = film.id;
-                        a(href='/movie/' + idMovie + '&'+ film.title) Detalle
+                        a(href='/movie/' + idMovie + '&'+ film.title) Details
                         form(action="/savemovie", method="post") 
-                            button(type="submit") Guardar en favoritos
+                            button(type="submit") Add to favourites
 
         script(src="/js/hamburger.js") 

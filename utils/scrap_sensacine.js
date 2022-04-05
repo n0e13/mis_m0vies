@@ -11,7 +11,6 @@ const scrap_sensacine = async (movie) => {
 
     //abrimos site
     await page.goto('https://www.sensacine.com/peliculas/');
-    /* await page.screenshot({ path: 'sensacine1.png' }); */
 
     //escribimos en el buscador el nombre que le introduzcamos como argumento
     await page.type('#header-search-input', movie)
