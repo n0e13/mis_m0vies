@@ -32,13 +32,10 @@ html(lang="es")
                 each film in films
                     div  
                         p Año: #{film.description}
-                        p Duración: #{film.runtimeStr}
-                        p Género/s: #{film.genres}
                         p Título: #{film.title}
-                        p Director: #{film.directors}
                         img(src=film.image, alt="Imagen de la película")
                         - var idMovie = film.id;
-                        a(href='/movie/' + idMovie) Detalle
+                        a(href='/movie/' + idMovie + '&'+ film.title) Detalle
                         form(action="/savemovie", method="post") 
                             button(type="submit") Guardar en favoritos
 

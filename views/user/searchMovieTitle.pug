@@ -26,11 +26,21 @@ html(lang="es")
                             span(class="bar")
                             span(class="bar") 
         section 
-            p Año: #{film.year}
-            p Duración: #{film.runtimeStr}
-            p Género/s: #{film.genres}
-            p Título: #{film.title}
-            p Trama : #{film.plot}
-            img(src=film.image, alt="Imagen de la película")
 
-        script(src="/js/hamburger.js") 
+            p Año: #{film.info.year}
+            p Duración: #{film.info.runtimeStr}
+            p Género/s: #{film.info.genres}
+            p Título: #{film.info.title}
+            p Trama : #{film.info.plot}
+            img(src=film.info.image, alt="Imagen de la película")
+            p Review Sensacine:
+            p Author: #{film.reviewS.innerUserOfReview} 
+            p #{film.reviewS.innerTextOfReview}
+            p Review FilmAffinity:
+            p Author: #{film.reviewF.innerUserOfReview} 
+            p #{film.reviewF.innerTextOfReview} 
+           
+
+          
+
+        script(src="/js/hamburger.js")
