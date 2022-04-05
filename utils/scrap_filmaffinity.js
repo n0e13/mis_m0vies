@@ -11,12 +11,12 @@ const scrap_filmaffinity = async (title) => {
     await page.setViewport({width:1440, height:614});
 
     //abrimos site
-    await page.goto('https://www.filmaffinity.com/es/main.html');
+    await page.goto('https://www.filmaffinity.com');
 
 
     if(await page.$('#qc-cmp2-main > div')){
         await page.click('#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay > div > button.css-v43ltw');
-    } 
+    }  
 
     //escribimos en el buscador el nombre que le introduzcamos como argumento
     await page.type('#top-search-input', title)
@@ -24,8 +24,8 @@ const scrap_filmaffinity = async (title) => {
 
     //selecciono la clase común a las cajas que me interesan (se ven en la propia pagina)
     await page.click('#button-search');
-    await page.waitForSelector('.ye-w')    
-
+/*    await page.waitForSelector('.ye-w'); 
+ */
     const links = await page.evaluate(() => {
       const elements = document.querySelectorAll('.mc-title a')
 
@@ -41,11 +41,13 @@ const scrap_filmaffinity = async (title) => {
     await page.goto(links[0]);
     await page.waitForSelector('#main-title');
   
+    //va a críticas
     await page.click('.ntabs li:nth-child(2)');
+    await page.waitForSelector('.review-text1');
 
   //sacamos el primer comentario de las reviews de usuarios (username + comentario)
-  let innerTextOfReview = await page.$eval('.review-text1', el => el.innerText) 
-  let innerUserOfReview = await page.$eval('.user-info :nth-child(1)', el => el.innerText)
+  let innerTextOfReview = await page.$eval('.fa-shadow.movie-review-wrapper.rw-item .review-text1', el => el.textContent) 
+  let innerUserOfReview = await page.$eval('div.mr-user-nick > a > b', el => el.innerText) || 'nada'
   
   console.log("console log en scrap js de innerTextOfReview: ", innerTextOfReview); 
   console.log("console log en scrap js de innerUserOfReview: ", innerUserOfReview); 
@@ -53,16 +55,16 @@ const scrap_filmaffinity = async (title) => {
   const reviewsFilmaffinity = {
     innerTextOfReview,
     innerUserOfReview
-  
   }
   
     await browser.close();
     return reviewsFilmaffinity;
 
 } catch (error) {
-  return console.log(`ERROR: ${error.stack}`);
+  return console.log(`There's no review in Filmaffinity because of: ${error.stack}`);
   
   }
 }
 
-module.exports = scrap_filmaffinity;
+scrap_filmaffinity("the legend of Tarzan")
+/* module.exports = scrap_filmaffinity;  */

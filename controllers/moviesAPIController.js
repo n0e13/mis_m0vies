@@ -16,30 +16,40 @@ const getFilms = async (req, res) => {
     if (req.params.title) {
         const film = await search.getFilmsByTitle(req.params.title);//Devuelve 1
         const f = film.results
+        console.log(f);
         res.render("user/searchTitle", { "films": f });//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
     }
 }
 
 const  inputFilms = (req, res) => {
-    const films = req.body.films;
+    const films = req.body.films; //post con palabra introducida en el buscador
     res.redirect(`http://localhost:3000/search/${films}`)
 }
 
 const showFilm = async (req, res) => {
-    if (req.params.title) {
-        const info = await search.getFilmInfo(req.params.title);//Devuelve 1
-        const reviewS = await scrap_sensacine(req.params.title);  //objeto
-        const reviewF =  await scrap_filmaffinity(req.params.title); 
+   
+    console.log(req.params);
+    try{
+        console.log("ESTO SON LOS REQ.PARAMS: ",req.params);
+        const info = await search.getFilmInfo(req.params.id);//Devuelve detalles de 1 peli a través de su ID
+        const reviewS = await scrap_sensacine(req.params.title);  
+        const reviewF =  await scrap_filmaffinity(req.params.title);
+   /*      console.log("console log de reviewF: ", reviewF);
+        console.log("console log de reviewS: ", reviewS); */
+
+        
         const filmInfo = {
             info,
             reviewS,
             reviewF
         }
-        console.log("console log de reviewF: ", reviewF);
-        console.log("console log de reviewS: ", reviewS);
+        console.log(filmInfo);
         res.render("user/searchMovieTitle", { "film": filmInfo });
-    };
+
+    } catch (error) {
+        console.log('Error:', error);}
 };
+
 
 //-------Esta se encarga de las pelis favoritas----//
 const myMovies = async (req, res) => {

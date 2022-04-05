@@ -21,7 +21,7 @@ const scrap_sensacine = async (movie) => {
     await page.click('.header-search-submit');
     
       try {
-        await page.waitForSelector('.mdl', 15000)
+        await page.waitForSelector('.mdl')
       }
       catch(error) {
         return console.log(`ERROR: ${error.stack}. No existe ese selector porque no está esa peli`);
@@ -60,8 +60,9 @@ const scrap_sensacine = async (movie) => {
     innerUserOfReview = "Un visitante de Sensacine"
   }
   
-/*   console.log("innerTextOfReview: ", innerTextOfReview); 
-  console.log("innerUserOfReview: ", innerUserOfReview); */
+   
+  console.log("console log en scrap js de innerTextOfReview: ", innerTextOfReview); 
+  console.log("console log en scrap js de innerUserOfReview: ", innerUserOfReview);  
   
 
 await browser.close();
@@ -80,5 +81,6 @@ return console.log(`ERROR: ${error.stack}`);
 };
 
 
+/* scrap_sensacine("mulan") */
 
 module.exports = scrap_sensacine;

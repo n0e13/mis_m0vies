@@ -15,5 +15,10 @@ html(lang="es")
             p Título: #{film.info.title}
             p Trama : #{film.info.plot}
             img(src=film.info.image, alt="Imagen de la película")
-            p Review Sensacine: #{film.reviewS}
-            p Review Filmaffinity: #{film.reviewF}
+            p Review Sensacine:
+            p Author: #{film.reviewS.innerUserOfReview} 
+            p #{film.reviewS.innerTextOfReview}
+            p Review FilmAffinity:
+            p Author: #{film.reviewF.innerUserOfReview} 
+            p #{film.reviewF.innerTextOfReview} 
+           

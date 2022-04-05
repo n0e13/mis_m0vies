@@ -108,7 +108,7 @@ const authUser = async(req,res)=> {
          check:  true
         };
         const token = jwt.sign(payload, app.get('llave'), {
-         expiresIn: 1440
+         expiresIn: "24h"
         });
          res.json({
          mensaje: 'Autenticación correcta',
