@@ -7,7 +7,24 @@ html(lang="es")
         link(rel="stylesheet", href="/css/styles.css")
         title Movies 
     
-    body 
+    body
+
+        header
+            nav(class='navbar')
+                    a(href="#", class="nav-branding") MovieApp
+                    ul(class="nav-menu")
+                        li(class="nav-item")
+                            a(href="/dashboard", class="nav-link") Dashboard
+                        li(class="nav-item")
+                            a(href="/search", class="nav-link") Search
+                        li(class="nav-item")
+                            a(href="/movies", class="nav-link") My movies
+                        li(class="nav-item")
+                            a(href="/logout", class="nav-link") Logout
+                    div(class="hamburger")
+                            span(class="bar")
+                            span(class="bar")
+                            span(class="bar") 
         section 
             p Año: #{film.year}
             p Duración: #{film.runtimeStr}
@@ -15,3 +32,5 @@ html(lang="es")
             p Título: #{film.title}
             p Trama : #{film.plot}
             img(src=film.image, alt="Imagen de la película")
+
+        script(src="/js/hamburger.js") 

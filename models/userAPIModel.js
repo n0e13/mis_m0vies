@@ -8,6 +8,46 @@ const config = require('../configs/config');
 
 
 
+const loginUser = async () => {
+    // TODO: login
+    let data;
+    try {
+        const {email, password} = user
+        data = await client.query(queries.getUsersQuery)
+        result = data.rows
+
+
+        if(!data){
+            res.status(400).json({ msg: 'Incorrect user or password'}); 
+        }else{
+            const match = await bcrypt.compare(password, data.hashPassword);
+            if(match){
+                const email = data;
+                const userForToken = {
+                    email: email
+                };
+                const token = jwt.sign(userForToken, {expiresIn: '20m'});
+                res
+                .status(200)
+                .json({
+                    msg:'Correct authentication',
+                    token: token});
+            }else {
+                res.status(400).json({ msg: 'Incorrect user or password'});
+            }
+        }        
+    } catch (error) {
+        console.log('Error:', error);
+    } finally{
+        client.release();
+    } 
+
+  return result
+
+}
+
+
+
 
 //-------------------------Esta función trae todos los usuarios de la bbdd---------------------//
 const getUsers = async ()=>{
@@ -39,7 +79,7 @@ const signUpUser = async (user, res) => {
             const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
             result = data.rowCount;
         }else{
-            res.status(400).json({msg: 'Invalid email or password'}); 
+            // res.status(400).json({msg: 'Invalid email or password'}); 
         }
     }catch(err){
         console.log(err);
@@ -73,6 +113,7 @@ const recoverPassword = async (email) => {
 
 
 const userAPI = {
+    loginUser,  
     signUpUser,
     getUsers,
 /*     recoverPassword,
