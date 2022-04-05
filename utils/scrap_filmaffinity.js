@@ -6,7 +6,7 @@ const scrap_filmaffinity = async (title) => {
       console.log("Empieza scrap Filmaffinity");
     
     //lanzamos chrome
-    const browser = await puppeteer.launch({headless: true});
+    const browser = await puppeteer.launch({headless: true });
     const page = await browser.newPage();
     await page.setViewport({width:1440, height:614});
 
@@ -24,8 +24,8 @@ const scrap_filmaffinity = async (title) => {
 
     //selecciono la clase común a las cajas que me interesan (se ven en la propia pagina)
     await page.click('#button-search');
-/*    await page.waitForSelector('.ye-w'); 
- */
+    await page.waitForSelector('.se-it mt');
+
     const links = await page.evaluate(() => {
       const elements = document.querySelectorAll('.mc-title a')
 
@@ -66,5 +66,5 @@ const scrap_filmaffinity = async (title) => {
   }
 }
 
-scrap_filmaffinity("the legend of Tarzan")
-/* module.exports = scrap_filmaffinity;  */
+/* scrap_filmaffinity("the legend of Tarzan") */
+/* module.exports = scrap_filmaffinity; */
