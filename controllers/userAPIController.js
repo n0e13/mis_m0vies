@@ -5,7 +5,6 @@ const jwt_secret = process.env.ULTRA_SECRET_KEY;
 const config = require('../configs/config');
 const express = require('express');
 const db = require('../models/userAPIModel');
-const comparePassword = require("../utils/userAPIUtils");
 
 const refreshTokens = [];
 
