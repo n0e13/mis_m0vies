@@ -5,8 +5,7 @@ const pool = require('../utils/dbconfig-pg.js');
 const regex = require('../utils/regex');
 const bcrypt = require('bcrypt'); //bcrypt --> encript password
 const config = require('../configs/config');
-const app = express();
-app.set('llave', config.llave);
+
 
 
 
