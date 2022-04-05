@@ -15,10 +15,6 @@ routes.get('/restorepassword', userAPI.restorePassword);
 routes.put('/restorepassword',userAPI.restorePassword);
 
 
-//-------Estas dos rutas son del token(PRUEBA)-------------//
-routes.post("/autenticar",userAPI.authUser);
-routes.get("/datos", userAPI.dataUser);
-
 
 
 module.exports = routes;

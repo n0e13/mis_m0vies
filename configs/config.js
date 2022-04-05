@@ -1,3 +1,6 @@
+
+
 module.exports = {
-    llave: "clavesecreta"
+    llave: "nUeStRacLaVeuLtRaSecRetafUllStacker2022",
+    refreshTokenSecret : 'yourrefreshtokensecrethere',
 }

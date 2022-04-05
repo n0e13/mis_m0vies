@@ -5,9 +5,9 @@ const jwt_secret = process.env.ULTRA_SECRET_KEY;
 const config = require('../configs/config');
 const express = require('express');
 const db = require('../models/userAPIModel');
+const comparePassword = require("../utils/userAPIUtils");
 
-const app = express();
-app.set('llave', config.llave);
+const refreshTokens = [];
 
 
 const onLoad = (req, res) => {
@@ -25,31 +25,37 @@ const getSignUp = (req, res) => {
 const loginUser = async (req, res) => {
     const email = req.body.email;
     const pass = req.body.pass;
+    
     if (!email) return res.status(200).send({ success: false, error: "email not provided" });
     if (!pass) return res.status(200).send({ success: false, error: "password not provided" });
     try {
         const users = await db.getUsers();
-        // console.log(users);
-        if(email == users[0].email && pass == users[0].password) {
+        const user = users.find(u => { return u.email === email && u.password === pass });
+        if(user){
+            console.log(user);
             const payload = {
-             check:  true
-            };
-            const token = jwt.sign(payload, app.get('llave'), {
-             expiresIn: 1440
-            });
-             console.log({
-             mensaje: 'Autenticación correcta',
-             token: token
-            });
-            res.cookie("refreshToken", token, {
-                httpOnly: true,
-                sameSite: "strict",
-            }).redirect("http://localhost:3000/dashboard");
-        } 
-        else {
-                  res.json({ mensaje: "Usuario o contraseña incorrectos"})
-              }
-    } catch (error) {
+                check:  true
+               };
+               const token = jwt.sign(payload, config.llave, {
+                expiresIn: "1m"
+               });
+               const refreshToken = jwt.sign(payload,config.refreshTokenSecret);
+               refreshTokens.push(refreshToken);
+               console.log(refreshTokens);
+                console.log({
+                mensaje: 'Autenticación correcta',
+                token: token,
+                refreshToken: refreshToken
+               });
+               res.cookie("access-token", token, {
+                   httpOnly: true,
+                   sameSite: "strict",
+               }).redirect("http://localhost:3000/dashboard");
+           } else {
+            res.send('Username or password incorrect');
+        }
+        }
+    catch (error) {
         console.log('Error:', error);
     }
 }; 
@@ -73,46 +79,19 @@ const recoverPassword = async (req, res) => {
 const restorePassword = async (req, res) => {
     res.render("auth/restorePass")
 }
-/*
-const logoutUser = async (req, res) => {
 
-} */
+const logoutUser = async (req, res) => {
+    const { token } = req.body;
+    refreshTokens = refreshTokens.filter(token => t !== token);
+    res.send("Logout successful");
+} 
 
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal(Descomentar para loguear)--------------//
-// const users = (async()=>{
+// const users = (async(req,res)=>{
 //     const u = await db.getUsers();
-//         console.log(u);        
-    
+//     console.log(u);        
+
 // })();
-
-
-//------------------------------Esto crea un token si el usuario está en la bbdd---------------//
-const authUser = async(req,res)=> {
-    const users = await db.getUsers();
-    console.log(users);
-    if(req.body.usuario === users[i].name && req.body.contrasena === users[i].password) {
-        const payload = {
-         check:  true
-        };
-        const token = jwt.sign(payload, app.get('llave'), {
-         expiresIn: 1440
-        });
-         res.json({
-         mensaje: 'Autenticación correcta',
-         token: token
-        });
-    } else {
-              res.json({ mensaje: "Usuario o contraseña incorrectos"})
-          }
-}
-
-const dataUser = async (req, res) => {
-    // const datos = await db.getUsers();
-    const datos = {
-        user: "topotamadre"
-    }
-       res.json(datos);
-}
 
 
 const user = {
@@ -123,9 +102,7 @@ const user = {
     signUpUser,
     recoverPassword,
     restorePassword,
-        // logoutUser 
-    authUser,
-    dataUser
+        // logoutUser   
 }
 
 module.exports = user;
