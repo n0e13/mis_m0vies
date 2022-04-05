@@ -1,6 +1,5 @@
 
 
 module.exports = {
-    llave: "nUeStRacLaVeuLtRaSecRetafUllStacker2022",
-    refreshTokenSecret : 'yourrefreshtokensecrethere',
+    llave: "nUeStRacLaVeuLtRaSecRetafUllStacker2022"
 }
