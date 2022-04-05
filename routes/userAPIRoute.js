@@ -8,7 +8,7 @@ routes.get('/signup', userAPI.getSignUp);
 routes.post('/signup', userAPI.signUpUser);
 routes.get('/login', userAPI.getLogin);
 routes.post('/login', userAPI.loginUser);
-// routes.post('/logout/:email', userAPI.logoutUser)
+routes.get('/logout', userAPI.logoutUser)
 routes.get('/recoverpassword', userAPI.recoverPassword);
 routes.post('/recoverpassword',userAPI.recoverPassword);
 routes.get('/restorepassword', userAPI.restorePassword);

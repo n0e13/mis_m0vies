@@ -6,8 +6,6 @@ const config = require('../configs/config');
 const express = require('express');
 const db = require('../models/userAPIModel');
 
-const refreshTokens = [];
-
 
 const onLoad = (req, res) => {
     res.render("auth/home");
@@ -38,15 +36,7 @@ const loginUser = async (req, res) => {
                     check:  true
                    };
                    const token = jwt.sign(payload, config.llave, {
-                    expiresIn: "3m"
-                   });
-                   const refreshToken = jwt.sign(payload,config.refreshTokenSecret);
-                   refreshTokens.push(refreshToken);
-                   console.log(refreshTokens);
-                    console.log({
-                    mensaje: 'Autenticación correcta',
-                    token: token,
-                    refreshToken: refreshToken
+                    expiresIn: "20m"
                    });
                    res.cookie("access-token", token, {
                        httpOnly: true,
@@ -75,8 +65,6 @@ const signUpUser = async (req, res) => {
     }
 }
 
-
-
 const recoverPassword = async (req, res) => {
     res.render("auth/recoverPass")
 }
@@ -86,9 +74,7 @@ const restorePassword = async (req, res) => {
 }
 
 const logoutUser = async (req, res) => {
-    const { token } = req.body;
-    refreshTokens = refreshTokens.filter(token => t !== token);
-    res.send("Logout successful");
+    res.clearCookie("access-token").redirect("http://localhost:3000/")
 } 
 
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal(Descomentar para loguear)--------------//
@@ -107,7 +93,7 @@ const user = {
     signUpUser,
     recoverPassword,
     restorePassword,
-        // logoutUser   
+    logoutUser   
 }
 
 module.exports = user;

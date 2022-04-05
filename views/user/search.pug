@@ -1,19 +1,10 @@
-doctype html
-html(lang="es")
-        head
-                meta(charset="UTF-8")
-                meta(http-equiv="X-UA-Compatible", content="IE=edge")
-                meta(name="viewport", content="width=device-width, initial-scale=1.0")
-                link(rel="stylesheet", href="/css/styles.css")
-                title Busca tu movie
-        body
+include ../head.pug
 
-                include ../head.pug
-
-                h3 ¡Busca una peli! 
-                form(action="/search", method="post") 
-                        label(for="films") Introduce el título de la película
-                        br
-                        br
-                        input(type="text" name="films" placeholder="Título...")
-                        button(type="submit") Buscar
+h3 ¡Busca una peli! 
+form(action="/search", method="post") 
+        label(for="films") Introduce el título de la película
+        br
+        br
+        input(type="text" name="films" placeholder="Título...")
+        button(type="submit") Buscar
+a(href="/logout") logout
