@@ -30,29 +30,35 @@ const loginUser = async (req, res) => {
     if (!pass) return res.status(200).send({ success: false, error: "password not provided" });
     try {
         const users = await db.getUsers();
-        const user = users.find(u => { return u.email === email && u.password === pass });
+        const user = users.find(u => { return u.email === email});
         if(user){
+            const match = await bcrypt.compare(pass, user.password);
             console.log(user);
-            const payload = {
-                check:  true
-               };
-               const token = jwt.sign(payload, config.llave, {
-                expiresIn: "1m"
-               });
-               const refreshToken = jwt.sign(payload,config.refreshTokenSecret);
-               refreshTokens.push(refreshToken);
-               console.log(refreshTokens);
-                console.log({
-                mensaje: 'Autenticación correcta',
-                token: token,
-                refreshToken: refreshToken
-               });
-               res.cookie("access-token", token, {
-                   httpOnly: true,
-                   sameSite: "strict",
-               }).redirect("http://localhost:3000/dashboard");
-           } else {
-            res.send('Username or password incorrect');
+            if(match){
+                const payload = {
+                    check:  true
+                   };
+                   const token = jwt.sign(payload, config.llave, {
+                    expiresIn: "3m"
+                   });
+                   const refreshToken = jwt.sign(payload,config.refreshTokenSecret);
+                   refreshTokens.push(refreshToken);
+                   console.log(refreshTokens);
+                    console.log({
+                    mensaje: 'Autenticación correcta',
+                    token: token,
+                    refreshToken: refreshToken
+                   });
+                   res.cookie("access-token", token, {
+                       httpOnly: true,
+                       sameSite: "strict",
+                   }).redirect("http://localhost:3000/dashboard");
+            }
+            else{
+                res.send('Email or password incorrect');
+            }
+        } else {
+            res.send('Email or password incorrect');
         }
         }
     catch (error) {
