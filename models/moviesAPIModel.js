@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const { ObjectId } = require('mongodb');
 const Movie = require("./movieSchemaModel");
@@ -42,7 +41,7 @@ const updateMovie = async (movie) => {
 
 
 const deleteMovie = async (id) => {
-    console.log(id);
+    /* console.log(id); */
     await Movie.deleteOne({ _id: id });
 }
 

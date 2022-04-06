@@ -1,9 +1,13 @@
 include ../head.pug
-h2 Reestablecer contraseña
-p Establece la nueva contraseña para tu cuenta
+h2 Reset the password 
+p Write your new password
 form(action="", method="post") 
-    label(for="pass1") Escribe la contraseña
+    label(for="pass1") Write password
+
     input(type="password", name="pass1") 
-    label(for="pass2") Repite la contraseña
+    label(for="pass2") Repeat password
     input(type="password", name="pass2") 
-    button(type="submit") Restaurar contraseña
+    button(type="submit") Reset password
+
+script(src="/js/recoverToken") 
+

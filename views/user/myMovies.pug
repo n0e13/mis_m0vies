@@ -10,19 +10,36 @@ html(lang="es")
 
         include ../head.pug
 
-        h2 Mis pelis Favoritas (Aquí irán las pelis que guarden en favoritos)
+        header
+            nav(class='navbar')
+                    a(href="#", class="nav-branding") MovieApp
+                    ul(class="nav-menu")
+                        li(class="nav-item")
+                            a(href="/dashboard", class="nav-link") Dashboard
+                        li(class="nav-item")
+                            a(href="/search", class="nav-link") Search
+                        li(class="nav-item")
+                            a(href="/logout", class="nav-link") Logout
+                    div(class="hamburger")
+                            span(class="bar")
+                            span(class="bar")
+                            span(class="bar")
+
+        h2 My favourite movies (Aquí irán las pelis que guarden en favoritos)
         section  
                 each film in films
                     div  
-                        p Título: #{film.title}
-                        p Año: #{film.year}
+                        p Title: #{film.title}
+                        p Year: #{film.year}
                         p Director: #{film.director}
-                        p Reparto: #{film.casting}
-                        p Sipnosis: #{film.plot}
-                        p Género: #{film.genre}
-                        p Opinión: #{film.rating}
-                        p Duración: #{film.duration}                     
+                        p Actorlist: #{film.casting}
+                        p Plot: #{film.plot}
+                        p Genre: #{film.genre}
+                        p Reviews: #{film.rating}
+                        p Duration: #{film.duration}                     
                         img(src=film.image, alt="Imagen de la película") 
+
                         //-- var idMovie = film._id;
                         //-button(class="btn_delete" value = idMovie) Borrar
    
+

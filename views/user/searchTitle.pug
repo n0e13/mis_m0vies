@@ -10,17 +10,33 @@ html(lang="es")
 
         include  ../head.pug
 
+        header
+            nav(class='navbar')
+                a(href="#", class="nav-branding") MovieApp
+                ul(class="nav-menu")
+                    li(class="nav-item")
+                        a(href="/dashboard", class="nav-link") Dashboard
+                    li(class="nav-item")
+                        a(href="/search", class="nav-link") Search
+                    li(class="nav-item")
+                        a(href="/movies", class="nav-link") My movies
+                    li(class="nav-item")
+                        a(href="/logout", class="nav-link") Logout
+                div(class="hamburger")
+                        span(class="bar")
+                        span(class="bar")
+                        span(class="bar")
+
         section  
             ul
                 each film in films
                     div  
-                        p Año: #{film.description}
-                        p Duración: #{film.runtimeStr}
-                        p Género/s: #{film.genres}
-                        p Título: #{film.title}
-                        p Director: #{film.directors}
+                        p Year: #{film.description}
+                        p Title: #{film.title}
                         img(src=film.image, alt="Imagen de la película")
                         - var idMovie = film.id;
-                        a(href='/movie/' + idMovie) Detalle
+                        a(href='/movie/' + idMovie + '&'+ film.title) Details
                         form(action="/savemovie", method="post") 
-                            button(type="submit") Guardar en favoritos
+                            button(type="submit") Add to favourites
+
+        script(src="/js/hamburger.js") 
