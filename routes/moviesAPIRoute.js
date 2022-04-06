@@ -15,7 +15,7 @@ routes.post('/search',protectedRoutes, movieAPI.inputFilms);
 //routes.get("/movies",protectedRoutes, movieAPI.myMovies);
 
 //CRUD DEL ADMIN
-routes.get('/movies',protectedRoutes,checkAdmin, movieAPI.myMovies);
+routes.get('/movies',protectedRoutes, movieAPI.myMovies);
 routes.get("/createMovie",protectedRoutes,checkAdmin, movieAPI.createMovieView);
 routes.post('/createMovie',protectedRoutes,checkAdmin, movieAPI.createMovie);
 routes.get("/editMovie",protectedRoutes,checkAdmin, movieAPI.updateMovieView)

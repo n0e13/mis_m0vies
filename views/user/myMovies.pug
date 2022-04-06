@@ -26,7 +26,8 @@ html(lang="es")
                             span(class="bar")
 
         h2 My favourite movies (Aquí irán las pelis que guarden en favoritos)
-        section  
+        section 
+            if films 
                 each film in films
                     div  
                         p Title: #{film.title}
