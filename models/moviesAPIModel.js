@@ -1,6 +1,8 @@
 require('dotenv').config();
 const { ObjectId } = require('mongodb');
 const Movie = require("./movieSchemaModel");
+const queries = require('../utils/queries.js'); 
+const pool = require('../utils/dbconfig-pg.js');
 
 const getMovieById = async (id) => {
     const oId = new ObjectId(id);
@@ -42,7 +44,23 @@ const updateMovie = async (movie) => {
 
 const deleteMovie = async (id) => {
     /* console.log(id); */
-    await Movie.deleteOne({ _id: id });
+    await Movie.deleteOne({ _id: id })
+
+    //borrar de SQL también
+    let client,result;
+    client = await pool.connect();
+    try{
+        const data = await client.query(queries.deleteMovieQuery,[id]);
+        result = data.rows;
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+    finally{
+        client.release();
+    }
+    return result;
 }
 
 
@@ -52,6 +70,7 @@ const movieAPI = {
     createMovie,
     updateMovie,
     deleteMovie
-}
-module.exports = movieAPI;
+}  
 
+module.exports = movieAPI;
+ 

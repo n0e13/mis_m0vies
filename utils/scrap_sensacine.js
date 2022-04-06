@@ -80,6 +80,6 @@ return console.log(`ERROR: ${error.stack}`);
 };
 
 
-/* scrap_sensacine("mulan") */
-
+/* scrap_sensacine("mulan");
+ */
 module.exports = scrap_sensacine;

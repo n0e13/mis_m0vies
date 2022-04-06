@@ -38,19 +38,28 @@ const showFilm = async (req, res) => {
     try{
         console.log("ESTO SON LOS REQ.PARAMS: ",req.params);
         const info = await search.getFilmInfo(req.params.id);//Devuelve detalles de 1 peli a través de su ID
-        const reviewS = await scrap_sensacine(req.params.title);  
+        const reviewS = await scrap_sensacine(req.params.title);  //Devuelve detalles de 1 peli a través de su titulo
         const reviewF =  await scrap_filmaffinity(req.params.title);
    /*      console.log("console log de reviewF: ", reviewF);
         console.log("console log de reviewS: ", reviewS); */
-
-        
-        const filmInfo = {
-            info,
-            reviewS,
-            reviewF
+        if(reviewF == undefined){
+            const filmInfo = {
+                info,
+                reviewS
+            }
+            console.log(filmInfo);
+            res.render("user/searchMovieTitle", { "film": filmInfo });
+        } else {
+            const filmInfo = {
+                info,
+                reviewS,
+                reviewF
+            }
+            console.log(filmInfo);
+            res.render("user/searchMovieTitle", { "film": filmInfo });
         }
-        console.log(filmInfo);
-        res.render("user/searchMovieTitle", { "film": filmInfo });
+        
+        
 
     } catch (error) {
         console.log('Error:', error);}
@@ -108,6 +117,7 @@ const deleteMovieView = (req, res) => {
 const deleteMovie = async (req, res) => {
     const deleteMovieById = req.body.id;
     await movies.deleteMovie(deleteMovieById);
+    res.redirect("http://localhost:3000/movies");
     //TODO: falta recargar la vista y borrar las relaciones con esa peli en SQL
 }
 

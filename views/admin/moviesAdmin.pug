@@ -5,9 +5,19 @@ html(lang="es")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="/css/styles.css")
-        title Mis movies
+        title My movies
     body 
         include ../head.pug
+<<<<<<< HEAD
+        h2 My movies
+        button Create a movie
+        section 
+            button#removeMovie Icono basurita
+            button#editMovie Icono rueda
+            img(src="", alt="")
+            h2 Title
+            p Director's name
+=======
 
         header
             nav(class='navbar')
@@ -43,3 +53,4 @@ html(lang="es")
                         a#editMovie(href='/editMovie/' + idMovie) Editar
 
         script(src="/js/deleteMovie.js") 
+>>>>>>> develop

@@ -1,5 +1,28 @@
 include ../head.pug
 
+<<<<<<< HEAD
+h2 Editar una película
+    form(action="/editMovie", method="post") 
+        label(for="title") Title
+        input(type="text" name="title")
+        label(for="director") Director 
+        input(type="text" name="director")
+        label(for="year") Year
+        input(type="text" name="year")
+        label(for="casting") Actorlist
+        input(type="text" name="casting")
+        label(for="plot") Plot
+        input(type="text" name="plot")
+        label(for="rating") Rating 
+        input(type="text" name="rating")
+        label(for="duration") Duration
+        input(type="text" name="duration")
+        label(for="genre") Genre
+        input(type="text" name="genre")
+        label(for="image") Cover
+        input(type="text" name="image")
+        button(type="submit") Save
+=======
     header
             nav(class='navbar')
                     a(href="#", class="nav-branding") MovieApp
@@ -38,3 +61,4 @@ include ../head.pug
             input(type="text" name="image" value=film.image)
             button(type="submit") Guardar
 
+>>>>>>> develop
