@@ -5,7 +5,7 @@ html(lang="es")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet", href="/css/styles.css")
-    title Haz login
+    title Login
   body 
 
     include ../head.pug
@@ -18,10 +18,10 @@ html(lang="es")
       form(action="/login", method="post")
         label(for='email') Email
         input(type='text' name='email')
-        label(for='pass') Contrase&ntilde;a
+        label(for='pass') Password
         input(type='password' name='pass')
         button#login Log in
 
-        a(href="/recoverPassword") &iquest;Has olvidado tu contrase&ntilde;a?
+        a(href="/recoverPassword") Forgot the password?
         button#google Google
 

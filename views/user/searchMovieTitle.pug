@@ -7,11 +7,40 @@ html(lang="es")
         link(rel="stylesheet", href="/css/styles.css")
         title Movies 
     
-    body 
+    body
+
+        header
+            nav(class='navbar')
+                    a(href="#", class="nav-branding") MovieApp
+                    ul(class="nav-menu")
+                        li(class="nav-item")
+                            a(href="/dashboard", class="nav-link") Dashboard
+                        li(class="nav-item")
+                            a(href="/search", class="nav-link") Search
+                        li(class="nav-item")
+                            a(href="/movies", class="nav-link") My movies
+                        li(class="nav-item")
+                            a(href="/logout", class="nav-link") Logout
+                    div(class="hamburger")
+                            span(class="bar")
+                            span(class="bar")
+                            span(class="bar") 
         section 
-            p Año: #{film.year}
-            p Duración: #{film.runtimeStr}
-            p Género/s: #{film.genres}
-            p Título: #{film.title}
-            p Trama : #{film.plot}
-            img(src=film.image, alt="Imagen de la película")
+
+            p Year: #{film.info.year}
+            p Duration: #{film.info.runtimeStr}
+            p Genre: #{film.info.genres}
+            p Title: #{film.info.title}
+            p Plot : #{film.info.plot}
+            img(src=film.info.image, alt="Imagen de la película")
+            p Review Sensacine:
+            p Author: #{film.reviewS.innerUserOfReview} 
+            p #{film.reviewS.innerTextOfReview}
+            p Review FilmAffinity:
+            p Author: #{film.reviewF.innerUserOfReview} 
+            p #{film.reviewF.innerTextOfReview} 
+           
+
+          
+
+        script(src="/js/hamburger.js")
