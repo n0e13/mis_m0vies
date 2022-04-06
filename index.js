@@ -11,13 +11,13 @@ const userRouter = require('./routes/userAPIRoute');
 const app = express();
 const port = 3000;
 
-// Motor de vistas PUG
 
 app.set('view engine', 'pug');
 app.set('views', './views');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 // Rutas
 app.use("/", moviesRouter);
