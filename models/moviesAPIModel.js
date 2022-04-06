@@ -1,13 +1,12 @@
-
 require('dotenv').config();
 const Movie = require("./movieSchemaModel");
 const queries = require('../utils/queries.js'); 
 const pool = require('../utils/dbconfig-pg.js');
 
-/* const getMovieByTitle = async (email) => {
+ const getMovieByTitle = async (email) => {
     // TODO: getMovieByTitle muestra la vista detallada de una peli
-} */
-/* const getAllMovies = async (email) => {
+} 
+ const getAllMovies = async (email) => {
     const aMovies = await Movie.find({});
     return aMovies;
 }
@@ -35,7 +34,7 @@ const updateMovie = async (movie) => {
     movieToUpdate.overwrite(updatedMovie);
     await movieToUpdate.save();
 }
- */
+
 
 const deleteMovie = async (id) => {
     /* console.log(id); */
@@ -58,15 +57,16 @@ const deleteMovie = async (id) => {
     return result;
 }
 
-deleteMovie('624d9efcf94e91c0bec14ec2');
 
 
-/* const movieAPI = {
+
+ const movieAPI = {
     // getMovieByTitle,
     getAllMovies,
     createMovie,
     updateMovie,
     deleteMovie
-} */
-/* module.exports = movieAPI;
- */
+}  
+
+module.exports = movieAPI;
+ 
