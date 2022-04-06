@@ -7,7 +7,7 @@ const protectedRoutes = express.Router();
 
 protectedRoutes.use((req, res, next) => {
   const cookies = req.headers.cookie;
-
+  console.log(cookies);
   if (cookies) {
     const cookieArray = cookies.split("=");
     const token = cookieArray[1];

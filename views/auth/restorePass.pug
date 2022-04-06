@@ -3,7 +3,11 @@ h2 Reset the password
 p Write your new password
 form(action="", method="post") 
     label(for="pass1") Write password
+
     input(type="password", name="pass1") 
     label(for="pass2") Repeat password
     input(type="password", name="pass2") 
     button(type="submit") Reset password
+
+script(src="/js/recoverToken") 
+
