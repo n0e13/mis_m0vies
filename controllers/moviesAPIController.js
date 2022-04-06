@@ -1,5 +1,8 @@
 const movies = require('../models/moviesAPIModel');
 const search = require('../utils/moviesAPIUtils');
+const db = require('../models/userAPIModel');
+const jwt = require('jsonwebtoken');
+const config = require('../configs/config');
 const scrap_sensacine = require('../utils/scrap_sensacine');
 const scrap_filmaffinity = require('../utils/scrap_filmaffinity');
 
@@ -21,9 +24,12 @@ const getFilms = async (req, res) => {
     }
 }
 
-const  inputFilms = (req, res) => {
-    const films = req.body.films; //post con palabra introducida en el buscador
-    res.redirect(`http://localhost:3000/search/${films}`)
+const inputFilms = (req, res) => {
+    const films = req.body.films;
+    /*     scraper.scrap_sensacine(films) // scrapping de la pelicula que se busque.
+     */
+    res.redirect(`${process.env.URL_BASE}/search/${films}`)
+
 }
 
 const showFilm = async (req, res) => {
@@ -32,19 +38,28 @@ const showFilm = async (req, res) => {
     try{
         console.log("ESTO SON LOS REQ.PARAMS: ",req.params);
         const info = await search.getFilmInfo(req.params.id);//Devuelve detalles de 1 peli a través de su ID
-        const reviewS = await scrap_sensacine(req.params.title);  
+        const reviewS = await scrap_sensacine(req.params.title);  //Devuelve detalles de 1 peli a través de su titulo
         const reviewF =  await scrap_filmaffinity(req.params.title);
    /*      console.log("console log de reviewF: ", reviewF);
         console.log("console log de reviewS: ", reviewS); */
-
-        
-        const filmInfo = {
-            info,
-            reviewS,
-            reviewF
+        if(reviewF == undefined){
+            const filmInfo = {
+                info,
+                reviewS
+            }
+            console.log(filmInfo);
+            res.render("user/searchMovieTitle", { "film": filmInfo });
+        } else {
+            const filmInfo = {
+                info,
+                reviewS,
+                reviewF
+            }
+            console.log(filmInfo);
+            res.render("user/searchMovieTitle", { "film": filmInfo });
         }
-        console.log(filmInfo);
-        res.render("user/searchMovieTitle", { "film": filmInfo });
+        
+        
 
     } catch (error) {
         console.log('Error:', error);}
@@ -54,10 +69,21 @@ const showFilm = async (req, res) => {
 //-------Esta se encarga de las pelis favoritas----//
 const myMovies = async (req, res) => {
     //TODO: if else para saber si es admin o user
-
-    // Admin
-    const aMovies = await movies.getAllMovies();
-    res.render("user/myMovies", { "films": aMovies });
+    const users = await db.getUsers();
+    const token = (req.headers.cookie).slice(13);
+    const decoded = jwt.verify(token, config.llave)
+    const user = users.find(u => { return u.email ===  decoded.email});
+    
+    if(user.admin == true){ // Admin
+        const aMovies = await movies.getAllMovies();
+        console.log("yeah")
+        res.render("admin/moviesAdmin", { "films": aMovies });
+    } else { // User
+        res.render("user/myMovies");
+        // res.render("user/myMovies", {"films": ---pelis guardadas en favoritos---})
+        console.log("nono")
+    }
+    
 }
 
 const createMovieView = (req, res) => {
@@ -67,16 +93,21 @@ const createMovieView = (req, res) => {
 const createMovie = async (req, res) => {
     const newMovie = req.body; // {} nuevo producto a guardar
     const response = await movies.createMovie(newMovie);
-    res.render("admin/createMovie");
+    res.status(201).redirect(`${process.env.URL_BASE}/movies`);
 }
 
-const updateMovieView = (req, res) => {
-    res.render("admin/editMovie")
+const updateMovieView = async (req, res) => {
+    if (req.params.id) {
+        const movie = await movies.getMovieById(req.params.id); //Devuelve 1
+        res.render("admin/editMovie", { "film": movie });
+    };
 }
 
 const updateMovie = async (req, res) => {
-    const updatedMovie = req.body;
-    await movies.updateMovie(updatedMovie);
+    let movie = req.body;
+    movie._id = req.params.id;
+    await movies.updateMovie(movie);
+    res.status(201).redirect(`${process.env.URL_BASE}/moviesAdmin`);
 }
 
 const deleteMovieView = (req, res) => {
@@ -85,8 +116,8 @@ const deleteMovieView = (req, res) => {
 
 const deleteMovie = async (req, res) => {
     const deleteMovieById = req.body.id;
-    console.log(deleteMovieById);
     await movies.deleteMovie(deleteMovieById);
+    res.redirect("http://localhost:3000/movies");
     //TODO: falta recargar la vista y borrar las relaciones con esa peli en SQL
 }
 
