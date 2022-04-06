@@ -7,6 +7,8 @@ const express = require('express');
 const db = require('../models/userAPIModel');
 const transporter = require('../configs/nodemailer');7
 const pool = require('../utils/dbconfig-pg.js');
+const auth = require("../configs/auth");
+const passport = require('passport');
 
 
 const onLoad = (req, res) => {
@@ -158,6 +160,12 @@ const logoutUser = async (req, res) => {
 
 
 
+const google = (req,res)=>{
+    res.send('<a href="/auth/google">Authenticate with google </a>')
+}
+
+const googleAuth = passport.authenticate("google", {scope: ['email', 'profile']});
+const googleCallBack = passport.authenticate('google',{failureRedirect: '/auth/failure'});
 
 
 const user = {
@@ -170,7 +178,13 @@ const user = {
     recoverPass,
     restorePassView,
     restorePass,
-    logoutUser   
+    logoutUser,
+
+
+
+    google,
+    googleAuth,
+    googleCallBack
 }
 
 module.exports = user;
