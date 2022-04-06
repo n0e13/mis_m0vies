@@ -1,3 +1,5 @@
 
 include ../head.pug
-    h2 ¿Desea eliminar esta película?
+    h2 Would you like to delete this movie?
+    form(action="/removeMovie", method="post") 
+        button(type="submit") Yes, delete movie

@@ -36,9 +36,10 @@ html(lang="es")
             p Review Sensacine:
             p Author: #{film.reviewS.innerUserOfReview} 
             p #{film.reviewS.innerTextOfReview}
-            p Review FilmAffinity:
-            p Author: #{film.reviewF.innerUserOfReview} 
-            p #{film.reviewF.innerTextOfReview} 
+            if reviewF != undefined
+                p Review FilmAffinity:
+                p Author: #{film.reviewF.innerUserOfReview} 
+                p #{film.reviewF.innerTextOfReview} 
            
 
           
