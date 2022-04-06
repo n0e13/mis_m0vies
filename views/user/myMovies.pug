@@ -23,8 +23,6 @@ html(lang="es")
                         p Opinión: #{film.rating}
                         p Duración: #{film.duration}                     
                         img(src=film.image, alt="Imagen de la película") 
-                        - var idMovie = film._id;
-                        button(class="btn_delete" value = idMovie) Borrar
-                        a(href='/editMovie/' + idMovie) Editar
-
-        script(src="/js/deleteMovie.js") 
+                        //-- var idMovie = film._id;
+                        //-button(class="btn_delete" value = idMovie) Borrar
+   

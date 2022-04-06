@@ -36,7 +36,7 @@ const showFilm = async (req, res) => {
 //-------Esta se encarga de las pelis favoritas----//
 const myMovies = async (req, res) => {
     //TODO: if else para saber si es admin o user
-//user
+//user[]
 //res.render("user/myMovies", { "films": aMovies });
     // Admin
     const aMovies = await movies.getAllMovies();
