@@ -7,6 +7,8 @@ const express = require('express');
 const db = require('../models/userAPIModel');
 const transporter = require('../configs/nodemailer');7
 const pool = require('../utils/dbconfig-pg.js');
+const auth = require("../configs/auth");
+const passport = require('passport');
 
 
 const onLoad = (req, res) => {
@@ -142,41 +144,19 @@ const logoutUser = async (req, res) => {
 //     console.log(u);        
 
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
-const users = (async()=>{
-    const u = await db.getUsers();
-        /* console.log(u);  */       
+// const users = (async()=>{
+//     const u = await db.getUsers();
+//         /* console.log(u);  */       
     
-})();
+// })();
 
-
-//------------------------------Esto crea un token si el usuario está en la bbdd---------------//
-const authUser = async(req,res)=> {
-    const users = await db.getUsers();
-    /* console.log(users); */
-    if(req.body.usuario === users[i].name && req.body.contrasena === users[i].password) {
-        const payload = {
-         check:  true
-        };
-        const token = jwt.sign(payload, app.get('llave'), {
-         expiresIn: "24h"
-        });
-         res.json({
-         mensaje: 'Autenticación correcta',
-         token: token
-        });
-    } else {
-              res.json({ mensaje: "Usuario o contraseña incorrectos"})
-          }
+const google = (req,res)=>{
+    res.send('<a href="/auth/google">Authenticate with google </a>')
 }
 
-const dataUser = async (req, res) => {
-    // const datos = await db.getUsers();
-    const datos = {
-        user: "topotamadre"
-    }
-       res.json(datos);
+const googleAuth =()=>{
+    passport.authenticate("google", {scope: ['email', 'profile']})
 }
-
 
 const user = {
     onLoad,
@@ -188,7 +168,15 @@ const user = {
     recoverPass,
     restorePassView,
     restorePass,
-    logoutUser   
+    logoutUser,
+
+
+
+
+
+
+    google,
+    googleAuth
 }
 
 module.exports = user;
