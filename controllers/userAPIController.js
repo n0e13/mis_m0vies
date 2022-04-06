@@ -33,8 +33,23 @@ const loginUser = async (req, res) => {
         if(user){
             const match = await bcrypt.compare(pass, user.password);
             console.log(user);
-            if(match){
+            if(match && user.admin == false){
                 const payload = {
+                    email: user.email,
+                    check:  true
+                   };
+                   //console.log(payload);
+                   const token = jwt.sign(payload, config.llave, {
+                    expiresIn: "20m"
+                   });
+                   res.cookie("access-token", token, {
+                       httpOnly: true,
+                       sameSite: "strict",
+                   }).redirect("http://localhost:3000/dashboard");
+            }
+            else if(match && user.admin == true){
+                const payload = {
+                    email: user.email,
                     check:  true
                    };
                    const token = jwt.sign(payload, config.llave, {
@@ -43,7 +58,7 @@ const loginUser = async (req, res) => {
                    res.cookie("access-token", token, {
                        httpOnly: true,
                        sameSite: "strict",
-                   }).redirect("http://localhost:3000/dashboard");
+                   }).redirect("http://localhost:3000/movies");
             }
             else{
                 res.send('Email or password incorrect');
