@@ -9,10 +9,10 @@ routes.post('/signup', userAPI.signUpUser);
 routes.get('/login', userAPI.getLogin);
 routes.post('/login', userAPI.loginUser);
 routes.get('/logout', userAPI.logoutUser)
-routes.get('/recoverpassword', userAPI.recoverPassword);
-routes.post('/recoverpassword',userAPI.recoverPassword);
-routes.get('/restorepassword', userAPI.restorePassword);
-routes.put('/restorepassword',userAPI.restorePassword);
+routes.get('/recoverpassword/', userAPI.recoverPassView);
+routes.post('/recoverpassword/',userAPI.recoverPass);
+routes.get('/restorepassword/:recoverToken', userAPI.restorePassView);
+routes.post('/restorepassword/:recoverToken',userAPI.restorePass);
 
 
 

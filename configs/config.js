@@ -1,5 +1,4 @@
-
-
 module.exports = {
-    llave: "nUeStRacLaVeuLtRaSecRetafUllStacker2022"
+    llave: "nUeStRacLaVeuLtRaSecRetafUllStacker2022",
+    llaveRecover : "EstaEsLaLlaveDeRecover"
 }
