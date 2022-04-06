@@ -2,6 +2,8 @@ const { Router } = require('express');
 const userAPI = require('../controllers/userAPIController');
 const routes = require('express').Router();
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const config = require('../configs/config');
 
 
 routes.get('/', userAPI.onLoad);
@@ -16,15 +18,22 @@ routes.get('/restorepassword/:recoverToken', userAPI.restorePassView);
 routes.post('/restorepassword/:recoverToken',userAPI.restorePass);
 
 routes.get('/google',userAPI.google);
-routes.get('/auth/google',   passport.authenticate('google', { scope: [ 'email', 'profile' ] }));
-routes.get('/google/callBack',passport.authenticate('google',{
-    successRedirect: '/dashboard',
-    failureRedirect: '/auth/failure'
-}))
+routes.get('/auth/google', userAPI.googleAuth);
+routes.get('/google/callBack',userAPI.googleCallBack, function(req,res){
+    const payload = {
+        check:  true
+       };
+       const token = jwt.sign(payload, config.llave, {
+        expiresIn: "20m"
+       });
+       res.cookie("access-token", token, {
+           httpOnly: true,
+           sameSite: "strict",
+       }).redirect("/dashboard");
+})
 routes.get('/auth/failure',(req,res)=>{
     res.send('Something went wrong..')
 });
-
 
 
 module.exports = routes;

@@ -143,20 +143,14 @@ const logoutUser = async (req, res) => {
 //     const u = await db.getUsers();
 //     console.log(u);        
 
-//-------------------------Esta función loguea los usuarios de la bbdd en la terminal--------------//
-// const users = (async()=>{
-//     const u = await db.getUsers();
-//         /* console.log(u);  */       
-    
-// })();
 
 const google = (req,res)=>{
     res.send('<a href="/auth/google">Authenticate with google </a>')
 }
 
-const googleAuth =()=>{
-    passport.authenticate("google", {scope: ['email', 'profile']})
-}
+const googleAuth = passport.authenticate("google", {scope: ['email', 'profile']});
+const googleCallBack = passport.authenticate('google',{failureRedirect: '/auth/failure'});
+
 
 const user = {
     onLoad,
@@ -172,11 +166,9 @@ const user = {
 
 
 
-
-
-
     google,
-    googleAuth
+    googleAuth,
+    googleCallBack
 }
 
 module.exports = user;
