@@ -1,23 +1,25 @@
 include ../head.pug
 
 h2 Editar una película
-    form(action="/editMovie", method="post") 
+    - let idMovie = film._id;
+    form(action="/editMovie/" + idMovie , method="POST") 
         label(for="title") Titulo
-        input(type="text" name="title")
+        input(type="text" name="title" value=film.title)
         label(for="director") Director 
-        input(type="text" name="director")
+        input(type="text" name="director" value=film.director)
         label(for="year") Año
-        input(type="text" name="year")
+        input(type="text" name="year" value=film.year)
         label(for="casting") Reparto
-        input(type="text" name="casting")
+        input(type="text" name="casting" value=film.casting)
         label(for="plot") Sinopsis
-        input(type="text" name="plot")
+        input(type="text" name="plot" value=film.plot)
         label(for="rating") Rating 
-        input(type="text" name="rating")
+        input(type="text" name="rating" value=film.rating)
         label(for="duration") Duración
-        input(type="text" name="duration")
+        input(type="text" name="duration" value=film.duration)
         label(for="genre") Genero
-        input(type="text" name="genre")
+        input(type="text" name="genre" value=film.genre)
         label(for="image") Cartel
-        input(type="text" name="image")
+        input(type="text" name="image" value=film.image)
         button(type="submit") Guardar
+
