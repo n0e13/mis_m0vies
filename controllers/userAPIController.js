@@ -37,7 +37,7 @@ const loginUser = async (req, res) => {
                 check:  true
                };
                const token = jwt.sign(payload, config.llave, {
-                expiresIn: "1m"
+                expiresIn: "1h"
                });
                const refreshToken = jwt.sign(payload,config.refreshTokenSecret);
                refreshTokens.push(refreshToken);
@@ -50,7 +50,7 @@ const loginUser = async (req, res) => {
                res.cookie("access-token", token, {
                    httpOnly: true,
                    sameSite: "strict",
-               }).redirect("http://localhost:3000/dashboard");
+               }).redirect(`${process.env.URL_BASE}/dashboard`);
            } else {
             res.send('Username or password incorrect');
         }
@@ -64,7 +64,7 @@ const signUpUser = async (req, res) => {
     try {
         const newUser = req.body; // {} nuevo user a guardar
         const response = await db.signUpUser(newUser);
-        res.status(201).redirect("http://localhost:3000/login");
+        res.status(201).redirect(`${process.env.URL_BASE}/login`);
     } catch (error) {
         console.log('Error:', error);
     }

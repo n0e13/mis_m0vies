@@ -12,7 +12,6 @@ html(lang="es")
 
         h2 Mis pelis Favoritas (Aquí irán las pelis que guarden en favoritos)
         section  
-            ul
                 each film in films
                     div  
                         p Título: #{film.title}
@@ -26,5 +25,6 @@ html(lang="es")
                         img(src=film.image, alt="Imagen de la película") 
                         - var idMovie = film._id;
                         button(class="btn_delete" value = idMovie) Borrar
+                        a(href='/editMovie/' + idMovie) Editar
 
-        script(src="/js/script.js") 
+        script(src="/js/deleteMovie.js") 

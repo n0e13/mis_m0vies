@@ -9,10 +9,22 @@ html(lang="es")
     body 
         include ../head.pug
         h2 Mis peliculas
-        button Crear una peli
-        section 
-            button#removeMovie Icono basurita
-            button#editMovie Icono rueda
-            img(src="", alt="")
-            h2 Título 
-            p Nombre del director
+        a(href='/createmovie') Crear una peli
+ 
+        section  
+                each film in films
+                    div  
+                        p Título: #{film.title}
+                        p Año: #{film.year}
+                        p Director: #{film.director}
+                        p Reparto: #{film.casting}
+                        p Sipnosis: #{film.plot}
+                        p Género: #{film.genre}
+                        p Opinión: #{film.rating}
+                        p Duración: #{film.duration}                     
+                        img(src=film.image, alt="Imagen de la película") 
+                        - var idMovie = film._id;
+                        button#removeMovie(class="btn_delete" value = idMovie) Borrar
+                        a#editMovie(href='/editMovie/' + idMovie) Editar
+
+        script(src="/js/deleteMovie.js") 
