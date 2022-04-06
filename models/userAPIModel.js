@@ -79,7 +79,7 @@ const signUpUser = async (user, res) => {
             const data = await client.query((queries.signUpUserQuery),[name,surname,email,hashPassword])
             result = data.rowCount;
         }else{
-            // res.status(400).json({msg: 'Invalid email or password'}); 
+            res.status(400).json({msg: 'Invalid email or password'}); 
         }
     }catch(err){
         console.log(err);
