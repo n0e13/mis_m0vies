@@ -27,7 +27,6 @@ html(lang="es")
 
         h2 My favourite movies (Aquí irán las pelis que guarden en favoritos)
         section  
-            ul
                 each film in films
                     div  
                         p Title: #{film.title}
@@ -39,8 +38,8 @@ html(lang="es")
                         p Reviews: #{film.rating}
                         p Duration: #{film.duration}                     
                         img(src=film.image, alt="Imagen de la película") 
-                        - var idMovie = film._id;
-                        button(class="btn_delete" value = idMovie) Delete
 
-        script(src="/js/script.js") 
-        script(src="/js/hamburger.js") 
+                        //-- var idMovie = film._id;
+                        //-button(class="btn_delete" value = idMovie) Borrar
+   
+
