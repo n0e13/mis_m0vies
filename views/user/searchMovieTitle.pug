@@ -26,20 +26,23 @@ html(lang="es")
                             span(class="bar")
                             span(class="bar") 
         section 
-
+            form(action="/savemovie", method="post") 
+                button(type="submit") Add to favourites
             p Year: #{film.info.year}
             p Duration: #{film.info.runtimeStr}
             p Genre: #{film.info.genres}
             p Title: #{film.info.title}
             p Plot : #{film.info.plot}
             img(src=film.info.image, alt="Imagen de la película")
-            p Review Sensacine:
-            p Author: #{film.reviewS.innerUserOfReview} 
-            p #{film.reviewS.innerTextOfReview}
-            if reviewF != undefined
+            if reviewS !== 'undefined'
+                p Review Sensacine:
+                p Author: #{film.reviewS.innerUserOfReview} 
+                p #{film.reviewS.innerTextOfReview}
+            if reviewF !== 'undefined'
                 p Review FilmAffinity:
                 p Author: #{film.reviewF.innerUserOfReview} 
-                p #{film.reviewF.innerTextOfReview} 
+                p #{film.reviewF.innerTextOfReview}
+             
            
 
           
