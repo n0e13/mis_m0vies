@@ -5,14 +5,9 @@ const getUsersQuery = `SELECT * FROM users`
 const deleteMovieQuery = `DELETE FROM movies WHERE movie_id = $1`
 
 
-
-/* const loginUserQuery= `SELECT * FROM users (email, password) WHERE email = $1 && password = $2`
- */
-
 const queries = {
 signUpUserQuery,
 getUsersQuery,
-/* loginUserQuery */
 deleteMovieQuery
 
 }
