@@ -6,7 +6,7 @@ const scrap_filmaffinity = async (title) => {
       console.log("Empieza scrap Filmaffinity");
     
     //lanzamos chrome
-    const browser = await puppeteer.launch({headless: false });
+    const browser = await puppeteer.launch({headless: true });
     const page = await browser.newPage();
     await page.setViewport({width:1440, height:614});
 
@@ -40,9 +40,14 @@ const scrap_filmaffinity = async (title) => {
     //hacemos click en ese enlace
     await page.goto(links[0]);
     await page.waitForSelector('#main-title');
+  /*   if(await page.$('#top-ad')){
+      await page.waitForTimeout(2000)
+    } */
+    
   
     //va a críticas
     await page.click('.ntabs li:nth-child(2)');
+    await page.waitForTimeout(2000)
     await page.waitForSelector('.review-text1');
 
   //sacamos el primer comentario de las reviews de usuarios (username + comentario)
@@ -66,5 +71,5 @@ const scrap_filmaffinity = async (title) => {
   }
 }
 
-/* scrap_filmaffinity("the legend of Tarzan")  */
- module.exports = scrap_filmaffinity;
+/* scrap_filmaffinity("pulp fiction")  */
+module.exports = scrap_filmaffinity;
