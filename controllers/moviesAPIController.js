@@ -87,9 +87,13 @@ const myMovies = async (req, res) => {
 }
 
 const addFavMovie = async (req, res) => {
+    const users = await db.getUsers();
+    const token = (req.headers.cookie).slice(13);
+    const decoded = jwt.verify(token, config.llave)
+    const user = users.find(u => { return u.email === decoded.email });
+
     const addMovieId = req.body.id;
-    console.log(addMovieId);
-    await movies.addFavMovie(addMovieId);
+    await movies.addFavMovie(addMovieId, user);
 }
 
 const createMovieView = (req, res) => {

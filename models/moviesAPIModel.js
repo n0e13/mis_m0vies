@@ -45,8 +45,8 @@ const getFavs = async (token) => {
 
         const mongoMovies = [];
         let mongoMovie;
-        for (const movieID of mongoIDs){
-            mongoMovie = await Movie.find({_id: movieID});
+        for (const movieID of mongoIDs) {
+            mongoMovie = await Movie.find({ _id: movieID });
             mongoMovies.push(mongoMovie);
 
         }
@@ -59,9 +59,18 @@ const getFavs = async (token) => {
     }
 }
 
-const addFavMovie = async (id) => {
+const addFavMovie = async (id, user) => {
     //TODO: Se meten en SQL 
-    console.log("peli añadida ", id);
+    let client;
+    client = await pool.connect();
+    try {
+        const data = await client.query(`INSERT INTO movies(movie_id, user_id) VALUES `, [id, user.user_id]);
+        console.log(data.rows);
+        const allIDs = data.rows;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 }
 
 
