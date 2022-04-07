@@ -8,11 +8,11 @@ const checkAdmin = require("../middlewares/checkAdmin");
 
 
 routes.get("/dashboard", protectedRoutes, movieAPI.dashboard)
-routes.get('/search', /* protectedRoutes, */ movieAPI.searchFilms);
-routes.get('/search/:title?', /* protectedRoutes, */ movieAPI.getFilms);
-routes.get('/movie/:id&:title', /* protectedRoutes, */ movieAPI.showFilm);
-routes.post('/search', /* protectedRoutes, */ movieAPI.inputFilms);
-routes.post('/savemovie', movieAPI.addFavMovie);
+routes.get('/search', protectedRoutes, movieAPI.searchFilms);
+routes.get('/search/:title?', protectedRoutes, movieAPI.getFilms);
+routes.get('/movie/:id&:title', protectedRoutes, movieAPI.showFilm);
+routes.post('/search', protectedRoutes, movieAPI.inputFilms);
+routes.post('/savemovie', protectedRoutes, movieAPI.addFavMovie);
 routes.get("/movies", protectedRoutes, movieAPI.myMovies);
 
 //CRUD DEL ADMIN
