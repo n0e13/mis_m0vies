@@ -92,7 +92,9 @@ const recoverPassView = (req, res) => {
 }
 
 const recoverPass = async (req, res) => {
+    console.log("No entra en el try");
     try {
+        console.log("Entra en el try");
         const recoverToken = jwt.sign({ email: req.body.email }, config.llaveRecover, { expiresIn: '10m' });
         const url = `${process.env.URL_BASE}/restorepassword/` + recoverToken;
         await transporter.sendMail({
@@ -115,7 +117,7 @@ const restorePassView = (req, res) => {
 }
 
 const restorePass = async (req, res) => {
-    console.log("hola");
+
     try {
         let client;
         const users = await db.getUsers();
@@ -150,9 +152,6 @@ const restorePass = async (req, res) => {
     }
 }
 
-const emailSent = async (req,res) =>{
-    res.render("auth/emailsent")
-}
 
 const logoutUser = async (req, res) => {
     // req.logout();
@@ -227,7 +226,6 @@ const user = {
     recoverPass,
     restorePassView,
     restorePass,
-    emailSent,
     logoutUser,
 
     google,
