@@ -76,12 +76,13 @@ const myMovies = async (req, res) => {
     
     if(user.admin == true){ // Admin
         const aMovies = await movies.getAllMovies();
-        console.log("yeah")
+        
         res.render("admin/moviesAdmin", { "films": aMovies });
     } else { // User
-        res.render("user/myMovies");
-        // res.render("user/myMovies", {"films": ---pelis guardadas en favoritos---})
-        console.log("nono")
+        res.render("user/myMovies"); // línea a comentar
+        // const favMovies = await movies.getFavs()
+        // res.render("user/myMovies", {"films": favMovies })
+        
     }
     
 }
