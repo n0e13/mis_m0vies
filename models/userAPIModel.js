@@ -51,8 +51,8 @@ const loginUser = async () => {
 //-------------------------Esta función trae todos los usuarios de la bbdd---------------------//
 const getUsers = async () => {
     let client, result;
+    client = await pool.connect();
     try {
-        client = await pool.connect();
         const data = await client.query((queries.getUsersQuery));
         result = data.rows;
     }
@@ -72,8 +72,8 @@ const signUpUser = async (user, res) => {
     console.log(user);
     const hashPassword = await bcrypt.hash(pass, 10);
     let client, result;
+    client = await pool.connect(); // Espera a abrir conexion
     try {
-        client = await pool.connect(); // Espera a abrir conexion
         if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2) {
             const data = await client.query((queries.signUpUserQuery), [name, surname, email, hashPassword])
             result = data.rowCount;
