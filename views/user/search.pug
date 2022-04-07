@@ -1,6 +1,6 @@
 include ../head.pug
 
-
+body
 header
         nav(class='navbar')
                                 a(href="/dashboard", class="nav-branding") MovieApp
@@ -15,14 +15,17 @@ header
                                         span(class="bar")
                                         span(class="bar")
                                         span(class="bar")
+main
+        div(id="div-search")
+                h3 ¡Search a movie! 
+                form(action="/search", method="post", class="searchForm")
+                                div(class="search-div")
 
-h3 ¡Search a movie! 
-form(action="/search", method="post", class="searchForm") 
-                        label(for="films") Type de title of a movie
-                        br
-                        br
-                        input(type="text" name="films" placeholder="Title...")
-                        button(type="submit") Search
+                                        //-label(for="films") Type the title of a movie
+                                        input(type="text" name="films" placeholder="Type the title of a movie...")
+
+                                        button(type="submit" id="search-btn")
+                                                img(src="../../img/search.svg", alt="search")
 div(class="lds-roller")
   div
   div
@@ -33,4 +36,4 @@ div(class="lds-roller")
   div
   div
 script(src="/js/hamburger.js")
-script(src="/js/spinner.js") 
+script(src="/js/spinner.js")
