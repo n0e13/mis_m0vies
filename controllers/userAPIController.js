@@ -157,17 +157,6 @@ const logoutUser = async (req, res) => {
     res.clearCookie("access-token").redirect(`${process.env.URL_BASE}`)
 }
 
-const getUserByEmail = async (req,res) => {
-    if(req.body.email){
-        const entries = await db.getProductById(req.query.email);//Devuelve 1
-        res.status(200).json(entries);//Deuelve JSON respuesta
-      } 
-      else{
-        const entries = await db.getAllEntries();
-        res.status(200).json(entries);//Deuelve JSON respuesta
-      }
-}
-
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal(Descomentar para loguear)--------------//
 // const users = (async(req,res)=>{
 //     const u = await db.getUsers();
@@ -185,7 +174,6 @@ const googleToken = async (req,res)=>{
     const users = await db.getUsers();
     const user = users.find(u => { return req.user.emails[0].value === u.email });
     if (user) {
-        console.log(user.password);
         const name = req.user.name.givenName;
         // console.log(req.user);
         
@@ -209,7 +197,7 @@ const googleToken = async (req,res)=>{
             email: req.user.emails[0].value,
             pass: passRandom,
             pass2: passRandom    
-        }; // {} nuevo user a guardar
+        }; 
         await db.signUpUser(newUser);
         const payload = {
             email: newUser.email,

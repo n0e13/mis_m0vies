@@ -2,8 +2,6 @@ const puppeteer = require('puppeteer');
 
 const scrap_filmaffinity = async (title) => {
     try{
-      
-      console.log("Empieza scrap Filmaffinity");
     
     //lanzamos chrome
     const browser = await puppeteer.launch({headless: true });
@@ -35,7 +33,6 @@ const scrap_filmaffinity = async (title) => {
       }
       return links;
   })
-  console.log("Estos son los enlaces de peliculas que aparecen como resultado de búsqueda", links);
 
     //hacemos click en ese enlace
     await page.goto(links[0]);
@@ -53,9 +50,6 @@ const scrap_filmaffinity = async (title) => {
   //sacamos el primer comentario de las reviews de usuarios (username + comentario)
   let innerTextOfReview = await page.$eval('.fa-shadow.movie-review-wrapper.rw-item .review-text1', el => el.textContent) 
   let innerUserOfReview = await page.$eval('div.mr-user-nick > a > b', el => el.innerText) || 'nada'
-  
-  console.log("console log en scrap js de innerTextOfReview: ", innerTextOfReview); 
-  console.log("console log en scrap js de innerUserOfReview: ", innerUserOfReview); 
 
   const reviewsFilmaffinity = {
     innerTextOfReview,
