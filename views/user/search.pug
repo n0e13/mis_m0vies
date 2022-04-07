@@ -1,6 +1,6 @@
 include ../head.pug
 
-
+body
 header
         nav(class='navbar')
                                 img(src="../../img/movies.svg", alt="logo" href="/dashboard", class="nav-branding")
@@ -15,12 +15,20 @@ header
                                         span(class="bar")
                                         span(class="bar")
                                         span(class="bar")
+main
+        div(id="div-search")
+                h3 ¡Search a movie! 
+                form(action="/search", method="post", class="searchForm")
+                                div(class="search-div")
 
+<<<<<<< HEAD
 div(id="div-search")
                 h3 Search a movie! 
                 form(action="/search", method="post", class="searchForm")
                                 div(class="search-div")
 
+=======
+>>>>>>> develop
                                         //-label(for="films") Type the title of a movie
                                         input(type="text" name="films" placeholder="Type the title of a movie...")
 
@@ -36,4 +44,4 @@ div(class="lds-roller")
         div
         div
 script(src="/js/hamburger.js")
-script(src="/js/spinner.js") 
+script(src="/js/spinner.js")
