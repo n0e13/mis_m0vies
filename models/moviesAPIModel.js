@@ -40,7 +40,7 @@ const getFavs = async (token) => {
         const sqlIDs = sqlIDsObjects.map(function (obj) {
             return obj.movie_id
         });
-        //console.log([mongoIDs, sqlIDs])
+        console.log([mongoIDs, sqlIDs])
         
         return [mongoIDs, sqlIDs]
     }

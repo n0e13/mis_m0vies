@@ -80,7 +80,7 @@ const myMovies = async (req, res) => {
         
         res.render("admin/moviesAdmin", { "films": aMovies });
     } else { // User
-        res.render("user/myMovies"); // línea a comentar
+        
         const favMovies = await movies.getFavs(token)
         res.render("user/myMovies", {"films": favMovies })
         
