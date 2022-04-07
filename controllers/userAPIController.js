@@ -212,7 +212,7 @@ const googleToken = async (req,res)=>{
         }; // {} nuevo user a guardar
         await db.signUpUser(newUser);
         const payload = {
-            email: user.email,
+            email: newUser.email,
             check: true
         };
         const token = jwt.sign(payload, config.llave, {
@@ -221,7 +221,7 @@ const googleToken = async (req,res)=>{
         res.cookie("access-token", token, {
             httpOnly: true,
             sameSite: "strict",
-        }).status(201).redirect(`${process.env.URL_BASE}/`);
+        }).status(201).redirect(`${process.env.URL_BASE}/dashboard`);
     }
 }
 
