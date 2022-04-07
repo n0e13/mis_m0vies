@@ -41,11 +41,14 @@ const getFavs = async (token) => {
             return obj.movie_id
         });
 
+        console.log([mongoIDs, sqlIDs])
+
         const mongoMovies = [];
         let mongoMovie;
         for (const movieID of mongoIDs){
             mongoMovie = await Movie.find({_id: movieID});
-            mongoMovies.push(mongoMovie[0]);
+            mongoMovies.push(mongoMovie);
+
         }
         console.log(mongoMovies)
         return [mongoMovies, sqlIDs]
