@@ -17,9 +17,12 @@ const searchFilms = (req, res) => {
 
 const getFilms = async (req, res) => {
     if (req.params.title) {
+        const mongoFilms = await movies.getFilmsByTitle(req.params.title);
+        console.log(mongoFilms);
         const film = await search.getFilmsByTitle(req.params.title);//Devuelve 1
-        const f = film.results
-        res.render("user/searchTitle", { "films": f });//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
+        const apiFilms = film.results;
+        const aFilms = [...mongoFilms, ...apiFilms];
+        res.render("user/searchTitle", { "films": aFilms });//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
     }
 }
 
@@ -32,8 +35,6 @@ const inputFilms = (req, res) => {
 }
 
 const showFilm = async (req, res) => {
-
-    console.log(req.params);
     try {
         console.log("ESTO SON LOS REQ.PARAMS: ", req.params);
         const info = await search.getFilmInfo(req.params.id);//Devuelve detalles de 1 peli a través de su ID
@@ -53,9 +54,6 @@ const showFilm = async (req, res) => {
             }
             res.render("user/searchMovieTitle", { "film": filmInfo });
         }
-
-
-
     } catch (error) {
         console.log('Error:', error);
     }
@@ -64,7 +62,6 @@ const showFilm = async (req, res) => {
 
 //-------Esta se encarga de las pelis favoritas----//
 const myMovies = async (req, res) => {
-    //TODO: if else para saber si es admin o user
     const users = await db.getUsers();
     const token = (req.headers.cookie).slice(13);
     const decoded = jwt.verify(token, config.llave)
@@ -72,18 +69,24 @@ const myMovies = async (req, res) => {
 
     if (user.admin == true) { // Admin
         const aMovies = await movies.getAllMovies();
-        
+
         res.render("admin/moviesAdmin", { "films": aMovies });
     } else { // User
-        const favMovies = await movies.getFavs(token)
-        res.render("user/myMovies", {"films": favMovies })  
+        //TODO: Hacer el fetch de los datos de la API y mostrar los de Mongo
+        const favMovies = await movies.getFavs(token);
+        console.log(favMovies);
+        res.render("user/myMovies", { "films": favMovies })
     }
 }
 
 const addFavMovie = async (req, res) => {
+    const users = await db.getUsers();
+    const token = (req.headers.cookie).slice(13);
+    const decoded = jwt.verify(token, config.llave)
+    const user = users.find(u => { return u.email === decoded.email });
+
     const addMovieId = req.body.id;
-    console.log(addMovieId);
-    await movies.addFavMovie(addMovieId);
+    await movies.addFavMovie(addMovieId, user);
 }
 
 const createMovieView = (req, res) => {
