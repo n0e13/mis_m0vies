@@ -1,9 +1,8 @@
 const { Router } = require('express');
 const userAPI = require('../controllers/userAPIController');
 const routes = require('express').Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const config = require('../configs/config');
+
+
 
 
 routes.get('/', userAPI.onLoad);
@@ -18,23 +17,11 @@ routes.get('/restorepassword/:recoverToken', userAPI.restorePassView);
 routes.post('/restorepassword/:recoverToken', userAPI.restorePass);
 
 routes.get('/google', userAPI.google);
-routes.get('/auth/google', userAPI.googleAuth);
+routes.get('/auth/google', userAPI.googleAuth)  ;
 //TODO: Se puede mover a otra parte la función?
-routes.get('/google/callBack', userAPI.googleCallBack, function (req, res) {
-    const name = req.user.name.givenName;
-    const payload = {
-        check: true
-    };
-    const token = jwt.sign(payload, config.llave, {
-        expiresIn: "20m"
-    });
-    res.cookie("access-token", token, {
-        httpOnly: true,
-        sameSite: "strict",
-    }).send(`Bienvenid@ ${name}. Te has logueado con éxito, haz click para ir a la web: <a href='/dashboard'>MovieApp</a>`);
-})
+routes.get('/google/callBack', userAPI.googleCallBack, userAPI.googleToken)
 routes.get('/auth/failure', (req, res) => {
-    res.send('Something went wrong..')
+    res.send('Something went wrong..')  
 });
 
 

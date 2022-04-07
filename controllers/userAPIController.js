@@ -9,6 +9,8 @@ const transporter = require('../configs/nodemailer'); 7
 const pool = require('../utils/dbconfig-pg.js');
 const auth = require("../configs/auth");
 const passport = require('passport');
+const googlePassport = require("../configs/auth");
+const { v4: uuidv4 } = require('uuid');
 
 
 const onLoad = (req, res) => {
@@ -109,6 +111,7 @@ const recoverPass = async (req, res) => {
 }
 
 
+
 const restorePassView = (req, res) => {
     res.render("auth/restorePass")
 }
@@ -150,7 +153,19 @@ const restorePass = async (req, res) => {
 }
 
 const logoutUser = async (req, res) => {
+    // req.logout();
     res.clearCookie("access-token").redirect(`${process.env.URL_BASE}`)
+}
+
+const getUserByEmail = async (req,res) => {
+    if(req.body.email){
+        const entries = await db.getProductById(req.query.email);//Devuelve 1
+        res.status(200).json(entries);//Deuelve JSON respuesta
+      } 
+      else{
+        const entries = await db.getAllEntries();
+        res.status(200).json(entries);//Deuelve JSON respuesta
+      }
 }
 
 //-------------------------Esta función loguea los usuarios de la bbdd en la terminal(Descomentar para loguear)--------------//
@@ -164,8 +179,52 @@ const google = (req, res) => {
     res.send('<a href="/auth/google">Authenticate with google </a>')
 }
 
-const googleAuth = passport.authenticate("google", { scope: ['email', 'profile'] });
+const googleAuth = passport.authenticate("google", { scope: ['email', 'profile'], prompt: "select_account" });
 const googleCallBack = passport.authenticate('google', { failureRedirect: '/auth/failure' });
+const googleToken = async (req,res)=>{
+    const users = await db.getUsers();
+    const user = users.find(u => { return req.user.emails[0].value === u.email });
+    if (user) {
+        console.log(user.password);
+        const name = req.user.name.givenName;
+        // console.log(req.user);
+        
+        const payload = {
+            email: user.email,
+            check: true
+        };
+        const token = jwt.sign(payload, config.llave, {
+            expiresIn: "20m"
+        });
+        res.cookie("access-token", token, {
+            httpOnly: true,
+            sameSite: "strict",
+        }).send(`Bienvenid@ ${name}. Te has logueado con éxito, haz click para ir a la web: <a href='/dashboard'>MovieApp</a>`);
+    }
+    else {
+        const passRandom = "A$"+uuidv4();
+        const newUser = { 
+            name: req.user.name.givenName, 
+            surname: req.user.name.familyName || "googleIncognito", 
+            email: req.user.emails[0].value,
+            pass: passRandom,
+            pass2: passRandom    
+        }; // {} nuevo user a guardar
+        await db.signUpUser(newUser);
+        const payload = {
+            email: user.email,
+            check: true
+        };
+        const token = jwt.sign(payload, config.llave, {
+            expiresIn: "20m"
+        });
+        res.cookie("access-token", token, {
+            httpOnly: true,
+            sameSite: "strict",
+        }).status(201).redirect(`${process.env.URL_BASE}/`);
+    }
+}
+
 
 
 const user = {
@@ -180,11 +239,10 @@ const user = {
     restorePass,
     logoutUser,
 
-
-
     google,
     googleAuth,
-    googleCallBack
+    googleCallBack,
+    googleToken
 }
 
 module.exports = user;
