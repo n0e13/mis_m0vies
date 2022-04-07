@@ -80,10 +80,8 @@ const myMovies = async (req, res) => {
         
         res.render("admin/moviesAdmin", { "films": aMovies });
     } else { // User
-        
         const favMovies = await movies.getFavs(token)
-        res.render("user/myMovies", {"films": favMovies })
-        
+        res.render("user/myMovies", {"films": favMovies })  
     }
 }
 
