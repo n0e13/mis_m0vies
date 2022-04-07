@@ -10,16 +10,17 @@
     font-family: 'Montserrat', sans-serif
 }
 
-/*****************+
+/*************************************************************************+
 
 
-HOME
+    HOME
 
 
-*******************/
+***************************************************************************/
 
 #body-home,
-#body-login {
+#body-login,
+#body-signup {
     background-image: url(../img/bg.svg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -91,36 +92,42 @@ HOME
 
 
 
-/*****************+
+/*************************************************************************+
 
 
-LOGIN
+    LOGIN
 
 
-*******************/
+***************************************************************************/
 
-#header-login {
+.signup-signup-top{
+    padding: 1em;
+}
+
+.header-login-signup {
     display: flex;
     justify-content: flex-end;
 }
 
-#h2-login {
+.h2-login-signup{
     margin-top: 2em;
 }
 
-#section-login-form {
+.section-login-signup-form {
     background-color: #F5F8FA;
     width: 80%;
     border-radius: 10px;
+    max-width: 25em;
+    margin-bottom: 3em;
 }
 
-#div-login-form {
+.div-form {
     display: flex;
     justify-content: center;
     margin-top: 3em;
 }
 
-#form-login {
+.form-login-signup {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -130,7 +137,7 @@ LOGIN
     max-width: 25em;
 }
 
-#form-login label,
+.form-login-signup label,
 input {
     margin: 0.2em;
     height: 35px;
@@ -140,12 +147,14 @@ input {
 
 }
 
-#form-login label {
+.form-login-signup label {
     margin-left: 14px;
     margin-top: 9px;
+    display: flex;
+    align-items: flex-end;
 }
 
-#login {
+#login, #signUpRegister {
     margin: 0.2em;
     width: 100%;
     background-color: #22172B;
@@ -154,6 +163,10 @@ input {
     border-style: none;
     border-radius: 4px;
     margin-top: 2em;
+}
+
+#signUpRegister{
+    margin-bottom: 3em;
 }
 
 
@@ -191,6 +204,9 @@ input {
 
 
 
+
+
+/*MENÚ HAMBURGUESA*/
 section {
     display: flex;
     flex-direction: column;
@@ -222,7 +238,7 @@ p {
 }
 
 header {
-    background-color: #262626;
+    background-color: #100a14;
 }
 
 li {

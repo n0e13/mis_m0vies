@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 
 const scrap_sensacine = async (movie) => {
     try{
-      console.log("Empieza scrap Sensacine");
     
     //lanzamos chrome
     const browser = await puppeteer.launch({headless: true});
@@ -36,12 +35,10 @@ const scrap_sensacine = async (movie) => {
       }
       return links;
   })
-  console.log("Estos son los enlaces", links);
 
 
     //buscamos el enlace que contenga "criticas-espectadores"
     const match = links.find(element => element.includes('criticas-espectadores'));
-    console.log("Resultado de match: ", match);
     
    
     //hacemos click en ese enlace
@@ -59,9 +56,6 @@ const scrap_sensacine = async (movie) => {
     innerUserOfReview = "Un visitante de Sensacine"
   }
   
-   
-  console.log("console log en scrap js de innerTextOfReview: ", innerTextOfReview); 
-  console.log("console log en scrap js de innerUserOfReview: ", innerUserOfReview);  
   
 
 await browser.close();
@@ -75,7 +69,6 @@ return reviewsSensacine;
 
 }catch (error) {
 return console.log(`ERROR: ${error.stack}`);
-
 }
 };
 
