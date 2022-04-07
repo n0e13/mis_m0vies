@@ -102,9 +102,7 @@ const recoverPass = async (req, res) => {
                 <a href = ${url}>Click to recover password</a>
                 <p>Link will expire in 10 minutes</p>`
         });
-        res.json({
-            message: 'Un enlace para reestablecer tu contraseña ha sido enviado a tu email. Mira en la carpeta de spam si no lo encuentras.'
-        })
+        res.render("auth/emailsent")
     } catch (error) {
         console.log('Error:', error)
     }
@@ -150,6 +148,10 @@ const restorePass = async (req, res) => {
     } catch (error) {
         console.log('Error:', error);
     }
+}
+
+const emailSent = async (req,res) =>{
+    res.render("auth/emailsent")
 }
 
 const logoutUser = async (req, res) => {
@@ -225,6 +227,7 @@ const user = {
     recoverPass,
     restorePassView,
     restorePass,
+    emailSent,
     logoutUser,
 
     google,
