@@ -1,3 +1,4 @@
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 
 //TODO: Esto es necesario?
@@ -6,8 +7,8 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: "fullmovies.team@gmail.com",
-        pass: "Meencantamac-2022"
+        user: `${process.env.GOOGLE_USER}`,
+        pass: `${process.env.GOOGLE_PASS}`
     }
 });
 

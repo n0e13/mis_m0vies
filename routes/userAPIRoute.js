@@ -16,6 +16,7 @@ routes.post('/recoverpassword/', userAPI.recoverPass);
 routes.get('/restorepassword/:recoverToken', userAPI.restorePassView);
 routes.post('/restorepassword/:recoverToken', userAPI.restorePass);
 
+
 routes.get('/google', userAPI.google);
 routes.get('/auth/google', userAPI.googleAuth)  ;
 //TODO: Se puede mover a otra parte la función?
