@@ -14,13 +14,11 @@ const getMovieById = async (id) => {
 }
 
 const getAllMovies = async () => {
-    //TODO: Comprobar el usuario
     const aMovies = await Movie.find({});
     return aMovies;
 }
 
 const getFavs = async (token) => {
-
     const decoded = jwt.verify(token, config.llave)
     let client, result;
     client = await pool.connect();
@@ -40,17 +38,12 @@ const getFavs = async (token) => {
         const sqlIDs = sqlIDsObjects.map(function (obj) {
             return obj.movie_id
         });
-
-        console.log([mongoIDs, sqlIDs])
-
         const mongoMovies = [];
         let mongoMovie;
         for (const movieID of mongoIDs) {
             mongoMovie = await Movie.find({ _id: movieID });
             mongoMovies.push(mongoMovie);
-
         }
-        console.log(mongoMovies)
         return [mongoMovies, sqlIDs]
     }
     catch (err) {
@@ -60,13 +53,10 @@ const getFavs = async (token) => {
 }
 
 const addFavMovie = async (id, user) => {
-    //TODO: Se meten en SQL 
     let client;
     client = await pool.connect();
     try {
-        const data = await client.query(`INSERT INTO movies(movie_id, user_id) VALUES `, [id, user.user_id]);
-        console.log(data.rows);
-        const allIDs = data.rows;
+        await client.query(queries.addFavs, [id, user.user_id]);
     } catch (err) {
         console.log(err);
         throw err;
