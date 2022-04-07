@@ -19,24 +19,37 @@ const getAllMovies = async () => {
     return aMovies;
 }
 
-const getFavs = async () => {
-    const mongoIDs = [];
-    const sqlIDs = [];
-    //const token = (req.headers.cookie).slice(13);
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyYW5jb0BnbWFpbC5jb20iLCJjaGVjayI6dHJ1ZSwiaWF0IjoxNjQ5MzI2MDMxLCJleHAiOjE2NDkzMjcyMzF9.RFIe1DBbg-gMOpdAj4kfp7A_C1gGX0OWzE7hhnT5D6s"
+const getFavs = async (token) => {
+    
     const decoded = jwt.verify(token, config.llave)
     let client,result;
     client = await pool.connect();
     try{
-        const data = await client.query(queries.getFavs,["franco@gmail.com"]);
-        console.log(data.rows);
+        const data = await client.query(queries.getFavs,[decoded.email]);
+        //console.log(data.rows);
+        const allIDs = data.rows;
+        const mongoIDsObjects = allIDs.filter(function (e) {
+            return e.movie_id.length > 19
+        });
+        const sqlIDsObjects = allIDs.filter(function (e) {
+            return e.movie_id.length < 19
+        });
+        const mongoIDs = mongoIDsObjects.map(function (obj) {
+            return obj.movie_id
+        });
+        const sqlIDs = sqlIDsObjects.map(function (obj) {
+            return obj.movie_id
+        });
+        //console.log([mongoIDs, sqlIDs])
+        
+        return [mongoIDs, sqlIDs]
     }
     catch(err){
         console.log(err);
         throw err;
     }
 }
-getFavs()
+
 
 const addFavMovie = async (id) => {
     //TODO: Se meten en SQL 
@@ -94,7 +107,7 @@ const deleteMovie = async (id) => {
 const movieAPI = {
     getMovieById,
     getAllMovies,
-    //getFavs,
+    getFavs,
     addFavMovie,
     createMovie,
     updateMovie,
