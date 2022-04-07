@@ -1,13 +1,11 @@
 include ../head.pug
 
-body(id="body-recoverpass")
+body(id="body-emailSent")
     div(class="div-form")
         section(class="section-login-signup-form")
             h2(class="h2-login-signup") Forgot the password?
             p Write your email and you will receive a link to reset the password.
             img(src="../../img/astronauta.svg", alt="astronauta", id="astornauta-recoverpass")
             div(class="div-form-recoverpass")
-                form(action="/emailSent", method="post" class="form-login-signup")
-                    label(for='email') Email
-                    input(type="text", name="email")
-                    button(type="submit" id="recoverpass-submit") SEND ME THE LINK      
+                form(action="/login", method="post" class="form-login-signup")
+                    button(type="submit" id="gotologin-submit") GO TO LOGIN

@@ -10,16 +10,17 @@
     font-family: 'Montserrat', sans-serif
 }
 
-/*****************+
+/*************************************************************************+
 
 
-HOME
+    HOME
 
 
-*******************/
+***************************************************************************/
 
 #body-home,
-#body-login {
+#body-login,
+#body-signup {
     background-image: url(../img/bg.svg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -91,36 +92,42 @@ HOME
 
 
 
-/*****************+
+/*************************************************************************+
 
 
-LOGIN
+    LOGIN & SIGN UP
 
 
-*******************/
+***************************************************************************/
 
-#header-login {
+.signup-signup-top{
+    padding: 1em;
+}
+
+.header-login-signup {
     display: flex;
     justify-content: flex-end;
 }
 
-#h2-login {
+.h2-login-signup{
     margin-top: 2em;
 }
 
-#section-login-form {
+.section-login-signup-form {
     background-color: #F5F8FA;
     width: 80%;
     border-radius: 10px;
+    max-width: 25em;
+    margin-bottom: 3em;
 }
 
-#div-login-form {
+.div-form {
     display: flex;
     justify-content: center;
     margin-top: 3em;
 }
 
-#form-login {
+.form-login-signup {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -130,7 +137,7 @@ LOGIN
     max-width: 25em;
 }
 
-#form-login label,
+.form-login-signup label,
 input {
     margin: 0.2em;
     height: 35px;
@@ -140,12 +147,14 @@ input {
 
 }
 
-#form-login label {
+.form-login-signup label {
     margin-left: 14px;
     margin-top: 9px;
+    display: flex;
+    align-items: flex-end;
 }
 
-#login {
+#login, #signUpRegister, #recoverpass-submit {
     margin: 0.2em;
     width: 100%;
     background-color: #22172B;
@@ -154,6 +163,10 @@ input {
     border-style: none;
     border-radius: 4px;
     margin-top: 2em;
+}
+
+#signUpRegister{
+    margin-bottom: 3em;
 }
 
 
@@ -188,9 +201,53 @@ input {
 
 
 
+/*************************************************************************+
+
+
+    RECOVER PASS
+
+
+***************************************************************************/
 
 
 
+#body-recoverpass{
+    background-color: #f5f8fa;
+}
+
+.div-form-recoverpass{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#astornauta-recoverpass{
+    width: 100px;
+    height: auto;
+}
+
+#recoverpass-submit{
+    max-width: 23em;
+}
+
+.div-form-recoverpass label{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    max-width: 23em;
+    margin-left:0;
+}
+
+.div-form-recoverpass form{
+    margin-top:0;
+}
+
+
+
+/*MENÚ HAMBURGUESA*/
 section {
     display: flex;
     flex-direction: column;
@@ -222,7 +279,7 @@ p {
 }
 
 header {
-    background-color: #262626;
+    background-color: #100a14;
 }
 
 li {
@@ -313,3 +370,100 @@ a {
         left: 0;
     }
 }
+
+
+
+/*______________________________________________________
+
+
+
+SPINNER
+
+
+__________________________________________________________*/
+
+
+.lds-roller {
+    display: none;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-roller div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+  }
+  .lds-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fcf;
+    margin: -4px 0 0 -4px;
+  }
+  .lds-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+  }
+  .lds-roller div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+  }
+  .lds-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+  }
+  .lds-roller div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+  }
+  .lds-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+  }
+  .lds-roller div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+  }
+  .lds-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+  }
+  .lds-roller div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+  }
+  .lds-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+  }
+  .lds-roller div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+  }
+  .lds-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+  }
+  .lds-roller div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+  }
+  .lds-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+  }
+  .lds-roller div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+  }
+  .lds-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+  }
+  .lds-roller div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+  }
+  @keyframes lds-roller {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
