@@ -21,8 +21,8 @@ const getFilms = async (req, res) => {
         console.log(mongoFilms);
         const film = await search.getFilmsByTitle(req.params.title);//Devuelve 1
         const apiFilms = film.results;
-        const aFilms = [...mongoFilms, ...apiFilms];
-        res.render("user/searchTitle", { "films": aFilms });//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
+        // const aFilms = [...mongoFilms, ...apiFilms];
+        res.render("user/searchTitle", { "films": apiFilms });//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
     }
 }
 
