@@ -35,7 +35,17 @@ html(lang="es")
                         p Title: #{film.title}
                         img(src=film.image, alt="Imagen de la película")
                         - let idMovie = film.id;
-                        a(href='/movie/' + idMovie + '&'+ film.title) Details
+                        a(href='/movie/' + idMovie + '&'+ film.title, class="toDetails") Details
+                        div(class="lds-roller")
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div
+                            div                       
                         button(class="btn_fav" value = idMovie) Add to favourites
         script(src="/js/favMovie.js")
-        script(src="/js/hamburger.js") 
+        script(src="/js/hamburger.js")
+        script(src="/js/spinner.js")
