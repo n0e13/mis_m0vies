@@ -5,10 +5,12 @@ const jwt_secret = process.env.ULTRA_SECRET_KEY;
 const config = require('../configs/config');
 const express = require('express');
 const db = require('../models/userAPIModel');
-const transporter = require('../configs/nodemailer'); 7
+const transporter = require('../configs/nodemailer'); 
 const pool = require('../utils/dbconfig-pg.js');
 const auth = require("../configs/auth");
 const passport = require('passport');
+const googlePassport = require("../configs/auth");
+const { v4: uuidv4 } = require('uuid');
 
 
 const onLoad = (req, res) => {
@@ -34,7 +36,6 @@ const loginUser = async (req, res) => {
         const user = users.find(u => { return u.email === email });
         if (user) {
             const match = await bcrypt.compare(pass, user.password);
-            console.log(user);
             if (match && user.admin == false) {
                 const payload = {
                     email: user.email,
@@ -77,7 +78,7 @@ const loginUser = async (req, res) => {
 const signUpUser = async (req, res) => {
     try {
         const newUser = req.body; // {} nuevo user a guardar
-        const response = await db.signUpUser(newUser);
+        const response = await db.signUpUser(newUser, res);
         res.status(201).redirect(`${process.env.URL_BASE}/login`);
     } catch (error) {
         console.log('Error:', error);
@@ -100,13 +101,12 @@ const recoverPass = async (req, res) => {
                 <a href = ${url}>Click to recover password</a>
                 <p>Link will expire in 10 minutes</p>`
         });
-        res.json({
-            message: 'Un enlace para reestablecer tu contraseña ha sido enviado a tu email. Mira en la carpeta de spam si no lo encuentras.'
-        })
+        res.render("auth/emailsent")
     } catch (error) {
         console.log('Error:', error)
     }
 }
+
 
 
 const restorePassView = (req, res) => {
@@ -114,13 +114,12 @@ const restorePassView = (req, res) => {
 }
 
 const restorePass = async (req, res) => {
-    console.log("hola");
+
     try {
         let client;
         const users = await db.getUsers();
         const recoverToken = req.params.recoverToken;
         const payload = jwt.verify(recoverToken, config.llaveRecover);
-        console.log(payload.email);
         const pass = req.body.pass1
         const pass2 = req.body.pass2
         const user = users.find(u => { return payload.email === u.email });
@@ -149,7 +148,9 @@ const restorePass = async (req, res) => {
     }
 }
 
+
 const logoutUser = async (req, res) => {
+    // req.logout();
     res.clearCookie("access-token").redirect(`${process.env.URL_BASE}`)
 }
 
@@ -164,8 +165,51 @@ const google = (req, res) => {
     res.send('<a href="/auth/google">Authenticate with google </a>')
 }
 
-const googleAuth = passport.authenticate("google", { scope: ['email', 'profile'] });
+const googleAuth = passport.authenticate("google", { scope: ['email', 'profile'], prompt: "select_account" });
 const googleCallBack = passport.authenticate('google', { failureRedirect: '/auth/failure' });
+const googleToken = async (req,res)=>{
+    const users = await db.getUsers();
+    const user = users.find(u => { return req.user.emails[0].value === u.email });
+    if (user) {
+        const name = req.user.name.givenName;
+        // console.log(req.user);
+        
+        const payload = {
+            email: user.email,
+            check: true
+        };
+        const token = jwt.sign(payload, config.llave, {
+            expiresIn: "20m"
+        });
+        res.cookie("access-token", token, {
+            httpOnly: true,
+            sameSite: "strict",
+        }).render("auth/welcomeGoogle");
+    }
+    else {
+        const passRandom = "A$"+uuidv4();
+        const newUser = { 
+            name: req.user.name.givenName, 
+            surname: req.user.name.familyName || "googleIncognito", 
+            email: req.user.emails[0].value,
+            pass: passRandom,
+            pass2: passRandom    
+        }; 
+        await db.signUpUser(newUser);
+        const payload = {
+            email: newUser.email,
+            check: true
+        };
+        const token = jwt.sign(payload, config.llave, {
+            expiresIn: "20m"
+        });
+        res.cookie("access-token", token, {
+            httpOnly: true,
+            sameSite: "strict",
+        }).status(201).render("auth/welcomeGoogle");
+    }
+}
+
 
 
 const user = {
@@ -180,11 +224,10 @@ const user = {
     restorePass,
     logoutUser,
 
-
-
     google,
     googleAuth,
-    googleCallBack
+    googleCallBack,
+    googleToken
 }
 
 module.exports = user;

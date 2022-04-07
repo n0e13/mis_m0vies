@@ -10,20 +10,20 @@ html(lang="es")
     include ../head.pug
   body(id="body-login") 
 
-    header(id="header-login")
-      a(href="/signup") Sign up 
-    div(id="div-login-form")
+    header(class="header-login-signup")
+      a(href="/signup" class="signup-signup-top") Sign up
 
-      section(id="section-login-form")
-        h2(id="h2-login") Login
-        form(action="/login", method="post" id="form-login")
+    div(class="div-form")
+      section(class="section-login-signup-form")
+        h2(class="h2-login-signup") Login
+        form(action="/login", method="post" class="form-login-signup")
           label(for='email') Email
           input(type='text' name='email')
           label(for='pass') Password
           input(type='password' name='pass')
-          a(href="/recoverPassword") Forgot the password?
+          a(href="/recoverPassword" onclick="window.open(this.href);return false;") Forgot the password?
           button#login LOGIN
 
         div(class="google-btn-div")
           img(src="https://img.icons8.com/color/48/000000/google-logo.png", alt="google", class="google-logo")
-          button#google Login with Google
+          a(href="/auth/google", id="google") Login with Google

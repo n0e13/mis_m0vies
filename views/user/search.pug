@@ -17,11 +17,20 @@ header
                                         span(class="bar")
 
 h3 ¡Search a movie! 
-form(action="/search", method="post") 
+form(action="/search", method="post", class="searchForm") 
                         label(for="films") Type de title of a movie
                         br
                         br
-                        input(type="text" name="films" placeholder="Título...")
+                        input(type="text" name="films" placeholder="Title...")
                         button(type="submit") Search
-
-script(src="/js/hamburger.js") 
+div(class="lds-roller")
+  div
+  div
+  div
+  div
+  div
+  div
+  div
+  div
+script(src="/js/hamburger.js")
+script(src="/js/spinner.js") 
