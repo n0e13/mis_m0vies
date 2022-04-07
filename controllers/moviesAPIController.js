@@ -77,11 +77,12 @@ const myMovies = async (req, res) => {
 
     if (user.admin == true) { // Admin
         const aMovies = await movies.getAllMovies();
-        
+
         res.render("admin/moviesAdmin", { "films": aMovies });
     } else { // User
+        //TODO: Hacer el fetch de los datos de la API y mostrar los de Mongo
         const favMovies = await movies.getFavs(token)
-        res.render("user/myMovies", {"films": favMovies })  
+        res.render("user/myMovies", { "films": favMovies })
     }
 }
 
