@@ -6,8 +6,8 @@ const regex = require('../utils/regex');
 const bcrypt = require('bcrypt'); //bcrypt --> encript password
 const config = require('../configs/config');
 
-
-
+// esta función no hace absolutamente nada
+/*
 const loginUser = async () => {
     let data;
     try {
@@ -44,7 +44,7 @@ const loginUser = async () => {
     return result
 
 }
-
+ */
 
 
 
@@ -66,6 +66,7 @@ const getUsers = async () => {
     return result
 }
 
+
 const signUpUser = async (user, res) => {
 
     const { name, surname, email, pass, pass2 } = user;
@@ -74,11 +75,11 @@ const signUpUser = async (user, res) => {
     let client, result;
     client = await pool.connect(); // Espera a abrir conexion
     try {
-        if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2) {
+        if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2 && regex.validateName(name) && regex.validateName(surname)) {
             const data = await client.query((queries.signUpUserQuery), [name, surname, email, hashPassword])
             result = data.rowCount;
         } else {
-            res.status(400).json({ msg: 'Invalid email or password' });
+            res.status(400).json({ msg: 'Incorrect data provided' });
         }
     } catch (err) {
         console.log(err);
@@ -109,7 +110,7 @@ const getUserByEmail = async(email)=>{
 
 
 const userAPI = {
-    loginUser,
+    //loginUser,
     signUpUser,
     getUsers,
     getUserByEmail

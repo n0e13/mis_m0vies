@@ -79,7 +79,7 @@ const loginUser = async (req, res) => {
 const signUpUser = async (req, res) => {
     try {
         const newUser = req.body; // {} nuevo user a guardar
-        const response = await db.signUpUser(newUser);
+        const response = await db.signUpUser(newUser, res);
         res.status(201).redirect(`${process.env.URL_BASE}/login`);
     } catch (error) {
         console.log('Error:', error);
