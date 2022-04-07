@@ -1,31 +1,29 @@
-doctype html
-html(lang="es")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="/css/styles.css")
-        title Dashboard
-    body 
+include ../head.pug
 
-        include ../head.pug
-
-        header
+body(id="body-dashboard") 
+    header
             nav(class='navbar')
-                    a(href="#", class="nav-branding") MovieApp
-                    ul(class="nav-menu")
-                        li(class="nav-item")
-                            a(href="/search", class="nav-link") Search
-                        li(class="nav-item")
-                            a(href="/movies", class="nav-link") My movies
-                        li(class="nav-item")
-                            a(href="/logout", class="nav-link") Logout
-                    div(class="hamburger")
-                            span(class="bar")
-                            span(class="bar")
-                            span(class="bar")
-
-        a(href="/search") Search a movie
-
-        a(href="/movies") My movies
-    script(src="/js/hamburger.js") 
+                        img(src="../../img/movies.svg", alt="logo" href="/dashboard", class="nav-branding")
+                        ul(class="nav-menu")
+                            li(class="nav-item")
+                                a(href="/search", class="nav-link") Search
+                            li(class="nav-item")
+                                a(href="/movies", class="nav-link") My movies
+                            li(class="nav-item")
+                                a(href="/logout", class="nav-link") Logout
+                        div(class="hamburger")
+                                span(class="bar")
+                                span(class="bar")
+                                span(class="bar")
+    main
+        section(id="container-dashboard")
+            h3(class="welcome") WELCOME
+            h3(class="welcome") TO
+            div(id="div-astronauta-dashboard")
+                img(src="../img/astronauta.movies.svg", alt="astronauta con palomitas" id="astronautamovies-dashboard")
+            section(id="section-buttons-dashboard")
+                button(href="/search" type="submit" id="search-submit") SEARCH A MOVIE
+                button(href="/movies" type="submit" id="mymovies-submit") GO TO MY MOVIES
+                
+        
+script(src="/js/hamburger.js") 

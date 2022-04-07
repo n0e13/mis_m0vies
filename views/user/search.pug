@@ -1,8 +1,8 @@
 include ../head.pug
 
 body
-header
-        nav(class='navbar')
+        header
+                nav(class='navbar')
                                 img(src="../../img/movies.svg", alt="logo" href="/dashboard", class="nav-branding")
                                 ul(class="nav-menu")
                                         li(class="nav-item")
@@ -15,33 +15,25 @@ header
                                         span(class="bar")
                                         span(class="bar")
                                         span(class="bar")
-main
-        div(id="div-search")
-                h3 ¡Search a movie! 
-                form(action="/search", method="post", class="searchForm")
-                                div(class="search-div")
+        main
+                div(id="div-search")
+                        h3 Search a movie! 
+                        form(action="/search", method="post", class="searchForm")
+                                        div(class="search-div")
 
-<<<<<<< HEAD
-div(id="div-search")
-                h3 Search a movie! 
-                form(action="/search", method="post", class="searchForm")
-                                div(class="search-div")
+                                                //-label(for="films") Type the title of a movie
+                                                input(type="text" name="films" placeholder="Type the title of a movie...")
 
-=======
->>>>>>> develop
-                                        //-label(for="films") Type the title of a movie
-                                        input(type="text" name="films" placeholder="Type the title of a movie...")
-
-                                        button(type="submit" id="search-btn")
-                                                img(src="../../img/search.svg", alt="search")
-div(class="lds-roller")
-        div
-        div
-        div
-        div
-        div
-        div
-        div
-        div
-script(src="/js/hamburger.js")
-script(src="/js/spinner.js")
+                                                button(type="submit" id="search-btn")
+                                                        img(src="../../img/search.svg", alt="search")
+        div(class="lds-roller")
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+        script(src="/js/hamburger.js")
+        script(src="/js/spinner.js")
