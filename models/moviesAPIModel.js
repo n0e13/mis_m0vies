@@ -7,6 +7,12 @@ const db = require('../models/userAPIModel');
 const jwt = require('jsonwebtoken');
 const config = require('../configs/config');
 
+const getFilmsByTitle = async (sTitle) => {
+    const titulo = sTitle.toLowerCase().charAt(0).toUpperCase();
+    const aMovies = await Movie.find({ title: { $regex: titulo } });
+    return aMovies;
+}
+
 const getMovieById = async (id) => {
     const oId = new ObjectId(id);
     const movie = await Movie.findById({ _id: oId });
@@ -42,8 +48,10 @@ const getFavs = async (token) => {
         let mongoMovie;
         for (const movieID of mongoIDs) {
             mongoMovie = await Movie.find({ _id: movieID });
+            console.log("mongo movie: ", mongoMovie);
             mongoMovies.push(mongoMovie);
         }
+        console.log("mongo movies ", mongoMovies);
         return [mongoMovies, sqlIDs]
     }
     catch (err) {
@@ -112,6 +120,7 @@ const deleteMovie = async (id) => {
 
 
 const movieAPI = {
+    getFilmsByTitle,
     getMovieById,
     getAllMovies,
     getFavs,
