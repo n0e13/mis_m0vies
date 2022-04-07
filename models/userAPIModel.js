@@ -51,8 +51,8 @@ const loginUser = async () => {
 //-------------------------Esta función trae todos los usuarios de la bbdd---------------------//
 const getUsers = async () => {
     let client, result;
+    client = await pool.connect();
     try {
-        client = await pool.connect();
         const data = await client.query((queries.getUsersQuery));
         result = data.rows;
     }
