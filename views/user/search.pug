@@ -3,7 +3,7 @@ include ../head.pug
 
 header
         nav(class='navbar')
-                                a(href="/dashboard", class="nav-branding") MovieApp
+                                img(src="../../img/movies.svg", alt="logo" href="/dashboard", class="nav-branding")
                                 ul(class="nav-menu")
                                         li(class="nav-item")
                                                 a(href="/dashboard", class="nav-link") Dashboard
@@ -16,13 +16,16 @@ header
                                         span(class="bar")
                                         span(class="bar")
 
-h3 ¡Search a movie! 
-form(action="/search", method="post", class="searchForm") 
-                        label(for="films") Type de title of a movie
-                        br
-                        br
-                        input(type="text" name="films" placeholder="Title...")
-                        button(type="submit") Search
+div(id="div-search")
+                h3 Search a movie! 
+                form(action="/search", method="post", class="searchForm")
+                                div(class="search-div")
+
+                                        //-label(for="films") Type the title of a movie
+                                        input(type="text" name="films" placeholder="Type the title of a movie...")
+
+                                        button(type="submit" id="search-btn")
+                                                img(src="../../img/search.svg", alt="search")
 div(class="lds-roller")
         div
         div
