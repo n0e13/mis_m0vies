@@ -6,46 +6,6 @@ const regex = require('../utils/regex');
 const bcrypt = require('bcrypt'); //bcrypt --> encript password
 const config = require('../configs/config');
 
-// esta función no hace absolutamente nada
-/*
-const loginUser = async () => {
-    let data;
-    try {
-        const { email, password } = user
-        data = await client.query(queries.getUsersQuery)
-        result = data.rows
-
-        if (!data) {
-            res.status(400).json({ msg: 'Incorrect user or password' });
-        } else {
-            const match = await bcrypt.compare(password, data.hashPassword);
-            if (match) {
-                const email = data;
-                const userForToken = {
-                    email: email
-                };
-                const token = jwt.sign(userForToken, { expiresIn: '20m' });
-                res
-                    .status(200)
-                    .json({
-                        msg: 'Correct authentication',
-                        token: token
-                    });
-            } else {
-                res.status(400).json({ msg: 'Incorrect user or password' });
-            }
-        }
-    } catch (error) {
-        console.log('Error:', error);
-    } finally {
-        client.release();
-    }
-
-    return result
-
-}
- */
-
 
 
 //-------------------------Esta función trae todos los usuarios de la bbdd---------------------//
@@ -68,9 +28,7 @@ const getUsers = async () => {
 
 
 const signUpUser = async (user, res) => {
-
     const { name, surname, email, pass, pass2 } = user;
-    console.log(user);
     const hashPassword = await bcrypt.hash(pass, 10);
     let client, result;
     client = await pool.connect(); // Espera a abrir conexion
@@ -110,7 +68,6 @@ const getUserByEmail = async(email)=>{
 
 
 const userAPI = {
-    //loginUser,
     signUpUser,
     getUsers,
     getUserByEmail
