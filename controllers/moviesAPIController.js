@@ -19,7 +19,6 @@ const getFilms = async (req, res) => {
     if (req.params.title) {
         const film = await search.getFilmsByTitle(req.params.title);//Devuelve 1
         const f = film.results
-        console.log(f);
         res.render("user/searchTitle", { "films": f });//Pinta datos en el pug. Aquí hemos metido data en un objeto para  que con la plantilla del pug lo coja.
     }
 }
@@ -40,14 +39,11 @@ const showFilm = async (req, res) => {
         const info = await search.getFilmInfo(req.params.id);//Devuelve detalles de 1 peli a través de su ID
         const reviewS = await scrap_sensacine(req.params.title);  //Devuelve detalles de 1 peli a través de su titulo
         const reviewF = await scrap_filmaffinity(req.params.title);
-        /*      console.log("console log de reviewF: ", reviewF);
-             console.log("console log de reviewS: ", reviewS); */
         if (reviewF == undefined) {
             const filmInfo = {
                 info,
                 reviewS
             }
-            console.log(filmInfo);
             res.render("user/searchMovieTitle", { "film": filmInfo });
         } else {
             const filmInfo = {
@@ -55,7 +51,6 @@ const showFilm = async (req, res) => {
                 reviewS,
                 reviewF
             }
-            console.log(filmInfo);
             res.render("user/searchMovieTitle", { "film": filmInfo });
         }
 
