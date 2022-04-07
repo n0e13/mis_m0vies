@@ -9,9 +9,15 @@ const validatePassword = (password) => {
     return regexPassword.test(password);
 };
 
+const validateName = (name) => {
+    const regexName = /^[A-Za-z]+$/;
+    return regexName.test(name)
+}
+
 const regex = {
     validateEmail,
-    validatePassword
+    validatePassword,
+    validateName
 };
 
 module.exports = regex;
