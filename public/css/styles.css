@@ -10,6 +10,10 @@
     font-family: 'Montserrat', sans-serif
 }
 
+a, button{
+cursor: pointer;
+}
+
 /*************************************************************************+
 
 
@@ -161,7 +165,6 @@
     border-style: none;
     border-radius: 4px;
     margin-top: 2em;
-    cursor: pointer;
 }
 
 #recoverpass-submit, #gotologin-submit:hover{
@@ -271,7 +274,6 @@ __________________________________________________________*/
     padding: 6px 10px;
     font-size: 17px;
     border: none;
-    cursor: pointer;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -405,7 +407,6 @@ a {
 
 .hamburger {
     display: none;
-    cursor: pointer;
 }
 
 .bar {
