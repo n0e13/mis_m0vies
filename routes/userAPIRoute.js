@@ -15,7 +15,7 @@ routes.get('/recoverpassword/', userAPI.recoverPassView);
 routes.post('/recoverpassword/', userAPI.recoverPass);
 routes.get('/restorepassword/:recoverToken', userAPI.restorePassView);
 routes.post('/restorepassword/:recoverToken', userAPI.restorePass);
-routes.post('/emailsent',userAPI.emailSent)
+
 
 routes.get('/google', userAPI.google);
 routes.get('/auth/google', userAPI.googleAuth)  ;

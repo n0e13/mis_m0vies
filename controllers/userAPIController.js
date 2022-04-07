@@ -5,7 +5,7 @@ const jwt_secret = process.env.ULTRA_SECRET_KEY;
 const config = require('../configs/config');
 const express = require('express');
 const db = require('../models/userAPIModel');
-const transporter = require('../configs/nodemailer'); 7
+const transporter = require('../configs/nodemailer'); 
 const pool = require('../utils/dbconfig-pg.js');
 const auth = require("../configs/auth");
 const passport = require('passport');
@@ -36,7 +36,6 @@ const loginUser = async (req, res) => {
         const user = users.find(u => { return u.email === email });
         if (user) {
             const match = await bcrypt.compare(pass, user.password);
-            console.log(user);
             if (match && user.admin == false) {
                 const payload = {
                     email: user.email,
@@ -79,7 +78,7 @@ const loginUser = async (req, res) => {
 const signUpUser = async (req, res) => {
     try {
         const newUser = req.body; // {} nuevo user a guardar
-        const response = await db.signUpUser(newUser);
+        const response = await db.signUpUser(newUser, res);
         res.status(201).redirect(`${process.env.URL_BASE}/login`);
     } catch (error) {
         console.log('Error:', error);
@@ -115,13 +114,12 @@ const restorePassView = (req, res) => {
 }
 
 const restorePass = async (req, res) => {
-    console.log("hola");
+
     try {
         let client;
         const users = await db.getUsers();
         const recoverToken = req.params.recoverToken;
         const payload = jwt.verify(recoverToken, config.llaveRecover);
-        console.log(payload.email);
         const pass = req.body.pass1
         const pass2 = req.body.pass2
         const user = users.find(u => { return payload.email === u.email });
@@ -150,9 +148,6 @@ const restorePass = async (req, res) => {
     }
 }
 
-const emailSent = async (req,res) =>{
-    res.render("auth/emailsent")
-}
 
 const logoutUser = async (req, res) => {
     // req.logout();
@@ -177,7 +172,8 @@ const googleToken = async (req,res)=>{
     const user = users.find(u => { return req.user.emails[0].value === u.email });
     if (user) {
         const name = req.user.name.givenName;
-        // console.log(req.user);
+        const img = req.user.photos[0].value;
+        console.log(req.user);
         
         const payload = {
             email: user.email,
@@ -189,7 +185,7 @@ const googleToken = async (req,res)=>{
         res.cookie("access-token", token, {
             httpOnly: true,
             sameSite: "strict",
-        }).send(`Bienvenid@ ${name}. Te has logueado con éxito, haz click para ir a la web: <a href='/dashboard'>MovieApp</a>`);
+        }).render("auth/welcomeGoogle",{name:name, img:img});
     }
     else {
         const passRandom = "A$"+uuidv4();
@@ -211,7 +207,7 @@ const googleToken = async (req,res)=>{
         res.cookie("access-token", token, {
             httpOnly: true,
             sameSite: "strict",
-        }).status(201).redirect(`${process.env.URL_BASE}/dashboard`);
+        }).status(201).render("auth/welcomeGoogle");
     }
 }
 
@@ -227,7 +223,6 @@ const user = {
     recoverPass,
     restorePassView,
     restorePass,
-    emailSent,
     logoutUser,
 
     google,
