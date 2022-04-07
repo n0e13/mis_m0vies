@@ -29,6 +29,8 @@ const getUsers = async () => {
 
 const signUpUser = async (user, res) => {
     const { name, surname, email, pass, pass2 } = user;
+    if (!email) return res.status(200).send({ success: false, error: "email not provided" });
+    if (!pass) return res.status(200).send({ success: false, error: "password not provided" }); 
     const hashPassword = await bcrypt.hash(pass, 10);
     let client, result;
 

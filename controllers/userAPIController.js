@@ -172,7 +172,8 @@ const googleToken = async (req,res)=>{
     const user = users.find(u => { return req.user.emails[0].value === u.email });
     if (user) {
         const name = req.user.name.givenName;
-        // console.log(req.user);
+        const img = req.user.photos[0].value;
+        console.log(req.user);
         
         const payload = {
             email: user.email,
@@ -184,7 +185,7 @@ const googleToken = async (req,res)=>{
         res.cookie("access-token", token, {
             httpOnly: true,
             sameSite: "strict",
-        }).render("auth/welcomeGoogle");
+        }).render("auth/welcomeGoogle",{name:name, img:img});
     }
     else {
         const passRandom = "A$"+uuidv4();
