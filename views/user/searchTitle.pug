@@ -34,9 +34,8 @@ html(lang="es")
                         p Year: #{film.description}
                         p Title: #{film.title}
                         img(src=film.image, alt="Imagen de la película")
-                        - var idMovie = film.id;
+                        - let idMovie = film.id;
                         a(href='/movie/' + idMovie + '&'+ film.title) Details
-                        form(action="/savemovie", method="post") 
-                            button(type="submit") Add to favourites
-
+                        button(class="btn_fav" value = idMovie) Add to favourites
+        script(src="/js/favMovie.js")
         script(src="/js/hamburger.js") 

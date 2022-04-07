@@ -25,7 +25,7 @@ html(lang="es")
                             span(class="bar")
                             span(class="bar")
 
-        h2 My favourite movies (Aquí irán las pelis que guarden en favoritos)
+        h2 My favourite movies
         section 
             if films 
                 each film in films
@@ -39,8 +39,10 @@ html(lang="es")
                         p Reviews: #{film.rating}
                         p Duration: #{film.duration}                     
                         img(src=film.image, alt="Imagen de la película") 
+                        - let idMovie = film._id;
+                        button(class="btn_fav" value = idMovie) Favoritos
 
-                        //-- var idMovie = film._id;
-                        //-button(class="btn_delete" value = idMovie) Borrar
+        script(src="/js/favMovie.js")
+        script(src="/js/hamburger.js") 
    
 
