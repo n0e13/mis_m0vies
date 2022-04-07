@@ -3,6 +3,9 @@ const { ObjectId } = require('mongodb');
 const Movie = require("./movieSchemaModel");
 const queries = require('../utils/queries.js');
 const pool = require('../utils/dbconfig-pg.js');
+const db = require('../models/userAPIModel');
+const jwt = require('jsonwebtoken');
+const config = require('../configs/config');
 
 const getMovieById = async (id) => {
     const oId = new ObjectId(id);
@@ -15,6 +18,38 @@ const getAllMovies = async () => {
     const aMovies = await Movie.find({});
     return aMovies;
 }
+
+const getFavs = async (token) => {
+    
+    const decoded = jwt.verify(token, config.llave)
+    let client,result;
+    client = await pool.connect();
+    try{
+        const data = await client.query(queries.getFavs,[decoded.email]);
+        //console.log(data.rows);
+        const allIDs = data.rows;
+        const mongoIDsObjects = allIDs.filter(function (e) {
+            return e.movie_id.length > 19
+        });
+        const sqlIDsObjects = allIDs.filter(function (e) {
+            return e.movie_id.length < 19
+        });
+        const mongoIDs = mongoIDsObjects.map(function (obj) {
+            return obj.movie_id
+        });
+        const sqlIDs = sqlIDsObjects.map(function (obj) {
+            return obj.movie_id
+        });
+        console.log([mongoIDs, sqlIDs])
+        
+        return [mongoIDs, sqlIDs]
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+}
+
 
 const addFavMovie = async (id) => {
     //TODO: Se meten en SQL 
@@ -72,6 +107,7 @@ const deleteMovie = async (id) => {
 const movieAPI = {
     getMovieById,
     getAllMovies,
+    getFavs,
     addFavMovie,
     createMovie,
     updateMovie,
