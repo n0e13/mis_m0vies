@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { ObjectId } = require('mongodb');
 const Movie = require("./movieSchemaModel");
-const queries = require('../utils/queries.js'); 
+const queries = require('../utils/queries.js');
 const pool = require('../utils/dbconfig-pg.js');
 const db = require('../models/userAPIModel');
 const jwt = require('jsonwebtoken');
@@ -14,6 +14,7 @@ const getMovieById = async (id) => {
 }
 
 const getAllMovies = async () => {
+    //TODO: Comprobar el usuario
     const aMovies = await Movie.find({});
     return aMovies;
 }
@@ -36,6 +37,11 @@ const getFavs = async () => {
     }
 }
 getFavs()
+
+const addFavMovie = async (id) => {
+    //TODO: Se meten en SQL 
+    console.log("peli añadida ", id);
+}
 
 
 const createMovie = async (movie) => {
@@ -65,21 +71,20 @@ const updateMovie = async (movie) => {
 
 
 const deleteMovie = async (id) => {
-    /* console.log(id); */
     await Movie.deleteOne({ _id: id })
 
     //borrar de SQL también
-    let client,result;
+    let client, result;
     client = await pool.connect();
-    try{
-        const data = await client.query(queries.deleteMovieQuery,[id]);
+    try {
+        const data = await client.query(queries.deleteMovieQuery, [id]);
         result = data.rows;
     }
-    catch(err){
+    catch (err) {
         console.log(err);
         throw err;
     }
-    finally{
+    finally {
         client.release();
     }
     return result;
@@ -90,10 +95,11 @@ const movieAPI = {
     getMovieById,
     getAllMovies,
     //getFavs,
+    addFavMovie,
     createMovie,
     updateMovie,
     deleteMovie
-}  
+}
 
 module.exports = movieAPI;
- 
+
