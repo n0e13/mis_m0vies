@@ -6,10 +6,14 @@ html(lang="es")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="/css/styles.css")
         title Your movieApp
-    body 
+    body(id="body-home") 
 
         include   ../head.pug
-
-        img(src="../img/movies.astronauta.svg", alt="astronauta con palomitas")
-        a(href="/login") Login 
-        a(href="/signup") Sign up
+        div(id="container-astronauta-login-signup")
+            div(id="div-astronauta")
+                img(src="../img/astronauta.movies.svg", alt="astronauta con palomitas" id="astronautamovies")
+            section(id="container-login-signup")
+                div(id="div-login")
+                    a(href="/login" id="login-home") LOGIN
+                div(id="div-signup")  
+                    a(href="/signup" id="signup-home") SIGN UP

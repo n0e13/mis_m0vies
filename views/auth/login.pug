@@ -6,22 +6,24 @@ html(lang="es")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet", href="/css/styles.css")
     title Login
-  body 
 
     include ../head.pug
+  body(id="body-login") 
 
-    a(href="/signup") Sign up 
+    header(id="header-login")
+      a(href="/signup") Sign up 
+    div(id="div-login-form")
 
-    h1 MovieApp
-    section
+      section(id="section-login-form")
+        h2(id="h2-login") Login
+        form(action="/login", method="post" id="form-login")
+          label(for='email') Email
+          input(type='text' name='email')
+          label(for='pass') Password
+          input(type='password' name='pass')
+          a(href="/recoverPassword") Forgot the password?
+          button#login LOGIN
 
-      form(action="/login", method="post")
-        label(for='email') Email
-        input(type='text' name='email')
-        label(for='pass') Password
-        input(type='password' name='pass')
-        button#login Log in
-
-        a(href="/recoverPassword") Forgot the password?
-        button#google Google
-
+        div(class="google-btn-div")
+          img(src="https://img.icons8.com/color/48/000000/google-logo.png", alt="google", class="google-logo")
+          button#google Login with Google
