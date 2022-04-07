@@ -209,7 +209,7 @@ const googleToken = async (req,res)=>{
             email: req.user.emails[0].value,
             pass: passRandom,
             pass2: passRandom    
-        }; // {} nuevo user a guardar
+        }; 
         await db.signUpUser(newUser);
         const payload = {
             email: newUser.email,
