@@ -26,7 +26,8 @@ cursor: pointer;
 #body-login,
 #body-signup,
 #body-dashboard,
-#body-search {
+#body-search,
+#body-searchtitle, #body-searchmovietitle {
     background-image: url(../img/bg.svg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -131,6 +132,7 @@ cursor: pointer;
     display: flex;
     justify-content: center;
     margin-top: 3em;
+    
 }
 
 .form-login-signup {
@@ -292,6 +294,18 @@ cursor: pointer;
     
 }
 
+#img-google{
+    width: 100px;
+    height: auto;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border-radius: 50%;
+}
+
+#astronauta-icon{
+    width: 56px;
+    height: auto;
+}
 
 #container-dashboard{
     display: flex;
@@ -377,7 +391,22 @@ cursor: pointer;
 
 
 
+.btn_fav{
+    margin: 0.2em;
+    width: 40%;
+    background-color: rgb(243, 14, 14);
+    color: white;
+    height: 35px;
+    border-style: none;
+    border-radius: 4px;
+    margin-top: 2em;
+    font-weight: bold;
+    transition: all 0.3s ease-out;
+}
 
+#sectionDetail>button:hover{
+    transform: scale(1.10);
+  }
 
 .searchForm{
     
@@ -638,7 +667,13 @@ __________________________________________________________*/
     flex-direction: column;
     align-items: center;
     padding: 1em;
+    background-color: white;
+    margin: 2em;
 
+}
+
+.div-film p{
+    padding: 1em;
 }
 
 
@@ -747,17 +782,33 @@ __________________________________________________________*/
       justify-content: space-between;
       align-items: center;
   }
+
+  #div-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    background-color: white;
+    padding: 45px;
+    margin-top: 2em;
+  }
   #sectionDetail>p,#sectionDetail>button,#sectionDetail>img{
       margin: 20px; 
   }
-  #sectionDetail>img{
+
+  #div-detail p{
+    padding: 12px;
+  }
+
+  #div-detail > img{
     border-radius: 2%;
     transition: all 0.3s ease-out;
   }
-  #sectionDetail>img:hover{
+  #div-detail > img:hover{
     transform: scale(1.10);
   }
-  #sectionDetail>button{
+  #div-detail > button{
     margin: 0.2em;
     width: 30%;
     background-color: rgb(243, 14, 14);
@@ -786,6 +837,7 @@ __________________________________________________________*/
   #imgSensacine{
     display: flex;
   justify-content: space-between;
+  margin-top:2em;
 }
 #imgSensacine>img {
   width: 70px;

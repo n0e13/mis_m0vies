@@ -7,7 +7,7 @@ html(lang="es")
         link(rel="stylesheet", href="/css/styles.css")
         title Movies 
     
-    body
+    body(id="body-searchmovietitle")
 
         header
             nav(class='navbar')
@@ -25,27 +25,28 @@ html(lang="es")
                             span(class="bar")
                             span(class="bar")
                             span(class="bar") 
-        section#sectionDetail 
-            - let idMovie = film.info.id;
-            button(class="btn_fav" value = idMovie) Add to favourites
-            p <b> Year:</b> #{film.info.year}
-            p <b>Duration:</b> #{film.info.runtimeStr}
-            p <b>Genre:</b> #{film.info.genres}
-            p <b>Title:</b> #{film.info.title}
-            p.plot  <b>Plot:</b> #{film.info.plot}
-            img(src=film.info.image, alt="Imagen de la película")
-            if reviewS !== 'undefined'
-                div#imgSensacine
-                    h4  Review
-                    img(src="../../img/sensacine.png", alt="logo filmaffinity", srcset="")
-                p <b>Author:</b> #{film.reviewS.innerUserOfReview} 
-                p.plot  #{film.reviewS.innerTextOfReview}
-            if reviewF !== 'undefined'
-                div#imgFilmafiinity 
-                    h4 Review
-                    img(src="../../img/filmaffinity.png", alt="logo sensacine")
-                p <b>Author:</b> #{film.reviewF.innerUserOfReview} 
-                p.plot  #{film.reviewF.innerTextOfReview}
+        section#sectionDetail
+            div(id="div-detail") 
+                - let idMovie = film.info.id;
+                button(class="btn_fav" value = idMovie) Add to favourites
+                p <b> Year:</b> #{film.info.year}
+                p <b>Duration:</b> #{film.info.runtimeStr}
+                p <b>Genre:</b> #{film.info.genres}
+                p <b>Title:</b> #{film.info.title}
+                p.plot  <b>Plot:</b> #{film.info.plot}
+                img(src=film.info.image, alt="Imagen de la película")
+                if reviewS !== 'undefined'
+                    div#imgSensacine
+                        h4  Review
+                        img(src="../../img/sensacine.png", alt="logo filmaffinity", srcset="")
+                    p <b>Author:</b> #{film.reviewS.innerUserOfReview} 
+                    p.plot  #{film.reviewS.innerTextOfReview}
+                if reviewF !== 'undefined'
+                    div#imgFilmafiinity 
+                        h4 Review
+                        img(src="../../img/filmaffinity.png", alt="logo sensacine")
+                    p <b>Author:</b> #{film.reviewF.innerUserOfReview} 
+                    p.plot  #{film.reviewF.innerTextOfReview}
              
            
         script(src="/js/favMovie.js")
