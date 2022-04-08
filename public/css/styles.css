@@ -24,7 +24,8 @@ cursor: pointer;
 
 #body-home,
 #body-login,
-#body-signup {
+#body-signup,
+#body-dashboard {
     background-image: url(../img/bg.svg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -156,7 +157,7 @@ cursor: pointer;
     align-items: flex-end;
 }
 
-#login, #signUpRegister, #recoverpass-submit, #gotologin-submit {
+#login, #signUpRegister, #recoverpass-submit, #gotologin-submit, #mymovies-submit, #search-submit {
     margin: 0.2em;
     width: 100%;
     background-color: #22172B;
@@ -259,14 +260,77 @@ cursor: pointer;
 
 
 
-/*______________________________________________________
 
 
 
-SEARCH
+/*************************************************************************+
 
 
-__________________________________________________________*/
+    DASHBOARD
+
+
+***************************************************************************/
+
+
+#astronautamovies-dashboard{
+    width: 250px;
+    height: auto;
+}
+
+.welcome{
+    font-size: 40px;
+    color: white;
+}
+
+#container-dashboard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+}
+
+#section-buttons-dashboard{
+
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-weight: 800;
+    font-size: 24px;
+    width: 80%;
+    max-width: 360px;
+}
+
+#div-astronauta-dashboard{
+    display: flex;
+}
+
+#search-submit{
+    background-color: #fece00;
+    color: black;
+}
+
+#mymovies-submit{
+    background-color: white;
+    color: black ;
+}
+
+
+
+
+
+
+
+
+
+/*************************************************************************+
+
+
+    SEARCH
+
+
+***************************************************************************/
+
+
+
 
 
 .searchForm{
@@ -300,6 +364,8 @@ __________________________________________________________*/
     align-items: center;
     align-content: center;
     justify-content: center;
+    margin: 0;
+    height: 3em;
 }
 
 #div-search{
@@ -325,19 +391,9 @@ __________________________________________________________*/
 
 
 
+/*________________________________________MENÚ HAMBURGUESA*/
 
 
-
-
-
-
-
-
-
-
-
-
-/*MENÚ HAMBURGUESA*/
 section {
     display: flex;
     flex-direction: column;
@@ -370,7 +426,7 @@ li {
 }
 
 a {
-    color: rgb(184, 184, 184);
+    color: rgb(0, 0, 0);
     text-decoration: none;
 }
 
@@ -381,20 +437,24 @@ a {
 .navbar {
     min-height: 70px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 24px;
+    width: 100%;
+    background-color: #f7404c;
+    justify-content: space-between;
 }
 
 .nav-menu {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 60px;
+    margin-right: 5em;
 }
 
 .nav-branding {
     font-size: 2rem;
+    width: 8em;
+    position: sticky;
+    height: auto;
 }
 
 .nav-link {
@@ -422,6 +482,7 @@ a {
 @media(max-width:768px) {
     .hamburger {
         display: block;
+        margin-right: 1em;
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -439,10 +500,10 @@ a {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 107px;
         gap: 0;
         flex-direction: column;
-        background-color: rgb(54, 54, 54);
+        background-color:#f5f8fa;
         width: 100%;
         text-align: center;
         transition: 0.3s;
@@ -454,6 +515,14 @@ a {
 
     .nav-menu.active {
         left: 0;
+    }
+
+    .nav-branding {
+        width: 4em;
+    }
+
+    .bar {
+        height: 2px;
     }
 }
 
@@ -553,3 +622,8 @@ __________________________________________________________*/
       transform: rotate(360deg);
     }
   }
+
+
+
+  /* VISTA DETALLE PELÍCULA */
+  

@@ -7,6 +7,12 @@ const db = require('../models/userAPIModel');
 const jwt = require('jsonwebtoken');
 const config = require('../configs/config');
 
+const getFilmsByTitle = async (sTitle) => {
+    const titulo = sTitle.toLowerCase().charAt(0).toUpperCase();
+    const aMovies = await Movie.find({ title: { $regex: titulo } });
+    return aMovies;
+}
+
 const getMovieById = async (id) => {
     const oId = new ObjectId(id);
     const movie = await Movie.findById({ _id: oId });
@@ -14,18 +20,16 @@ const getMovieById = async (id) => {
 }
 
 const getAllMovies = async () => {
-    //TODO: Comprobar el usuario
     const aMovies = await Movie.find({});
     return aMovies;
 }
 
 const getFavs = async (token) => {
-    
     const decoded = jwt.verify(token, config.llave)
-    let client,result;
+    let client, result;
     client = await pool.connect();
-    try{
-        const data = await client.query(queries.getFavs,[decoded.email]);
+    try {
+        const data = await client.query(queries.getFavs, [decoded.email]);
         //console.log(data.rows);
         const allIDs = data.rows;
         const mongoIDsObjects = allIDs.filter(function (e) {
@@ -35,32 +39,36 @@ const getFavs = async (token) => {
             return e.movie_id.length < 19
         });
         const mongoIDs = mongoIDsObjects.map(function (obj) {
-            return obj.movie_id
+            return obj.movie_id;
         });
         const sqlIDs = sqlIDsObjects.map(function (obj) {
             return obj.movie_id
         });
-        console.log([mongoIDs, sqlIDs])
-        
         const mongoMovies = [];
         let mongoMovie;
-        for (const movieID of mongoIDs){
-            mongoMovie = await Movie.find({_id: movieID});
+        for (const movieID of mongoIDs) {
+            mongoMovie = await Movie.find({ _id: movieID });
+            console.log("mongo movie: ", mongoMovie);
             mongoMovies.push(mongoMovie);
         }
-        console.log(mongoMovies)
+        console.log("mongo movies ", mongoMovies);
         return [mongoMovies, sqlIDs]
     }
-    catch(err){
+    catch (err) {
         console.log(err);
         throw err;
     }
 }
 
-
-const addFavMovie = async (id) => {
-    //TODO: Se meten en SQL 
-    console.log("peli añadida ", id);
+const addFavMovie = async (id, user) => {
+    let client;
+    client = await pool.connect();
+    try {
+        await client.query(queries.addFavs, [id, user.user_id]);
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 }
 
 
@@ -112,6 +120,7 @@ const deleteMovie = async (id) => {
 
 
 const movieAPI = {
+    getFilmsByTitle,
     getMovieById,
     getAllMovies,
     getFavs,

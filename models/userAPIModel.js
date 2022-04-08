@@ -29,9 +29,13 @@ const getUsers = async () => {
 
 const signUpUser = async (user, res) => {
     const { name, surname, email, pass, pass2 } = user;
+    if (!email) return res.status(200).send({ success: false, error: "email not provided" });
+    if (!pass) return res.status(200).send({ success: false, error: "password not provided" }); 
     const hashPassword = await bcrypt.hash(pass, 10);
     let client, result;
-    client = await pool.connect(); // Espera a abrir conexion
+
+         // Espera a abrir conexion
+    client = await pool.connect(); 
     try {
         if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2 && regex.validateName(name) && regex.validateName(surname)) {
             const data = await client.query((queries.signUpUserQuery), [name, surname, email, hashPassword])

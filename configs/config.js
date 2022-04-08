@@ -1,6 +1,4 @@
 module.exports = {
-    llave: "nUeStRacLaVeuLtRaSecRetafUllStacker2022",
-    llaveRecover : "EstaEsLaLlaveDeRecover"
+    llave: `${process.env.ULTRA_SECRET_KEY}`,
+    llaveRecover : `${process.env.ULTRA_SECRET_RECOVERY_KEY}`
 }
-
-//TODO: esto al .env?
