@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Alenriquez96/Movies_Intermediate_Project#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cypress": "^9.5.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",

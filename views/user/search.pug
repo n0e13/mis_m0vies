@@ -1,4 +1,11 @@
-include ../head.pug
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/styles.css")
+        title Busca tu movie 
 
 body(id="body-search")
         header
@@ -22,8 +29,10 @@ body(id="body-search")
                                         div(class="search-div")
                                                 input(type="text" name="films" placeholder="Type the title of a movie...")
 
+
                                                 button(type="submit" id="search-btn")
                                                         img(src="../../img/search.svg", alt="search")
+
                 div(class="lds-roller")
                         div
                         div
@@ -35,3 +44,4 @@ body(id="body-search")
                         div
                 script(src="/js/hamburger.js")
                 script(src="/js/spinner.js")
+

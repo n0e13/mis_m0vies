@@ -173,7 +173,6 @@ const googleToken = async (req,res)=>{
     if (user) {
         const name = req.user.name.givenName;
         const img = req.user.photos[0].value;
-        console.log(req.user);
         
         const payload = {
             email: user.email,

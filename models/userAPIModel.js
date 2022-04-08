@@ -33,13 +33,15 @@ const signUpUser = async (user, res) => {
     if (!pass) return res.status(200).send({ success: false, error: "password not provided" }); 
     const hashPassword = await bcrypt.hash(pass, 10);
     let client, result;
-    client = await pool.connect(); // Espera a abrir conexion
+
+         // Espera a abrir conexion
+    client = await pool.connect(); 
     try {
-        if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2 && regex.validateName(name) && regex.validateName(surname)) {
+        if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2) {
             const data = await client.query((queries.signUpUserQuery), [name, surname, email, hashPassword])
             result = data.rowCount;
         } else {
-            res.status(400).json({ msg: 'Incorrect data provided' });
+            res.send({ msg: 'Incorrect data provided' });
         }
     } catch (err) {
         console.log(err);
