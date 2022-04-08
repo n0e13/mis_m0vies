@@ -37,11 +37,11 @@ const signUpUser = async (user, res) => {
          // Espera a abrir conexion
     client = await pool.connect(); 
     try {
-        if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2 && regex.validateName(name) && regex.validateName(surname)) {
+        if (regex.validateEmail(email) && regex.validatePassword(pass) && pass == pass2) {
             const data = await client.query((queries.signUpUserQuery), [name, surname, email, hashPassword])
             result = data.rowCount;
         } else {
-            res.status(400).json({ msg: 'Incorrect data provided' });
+            res.send({ msg: 'Incorrect data provided' });
         }
     } catch (err) {
         console.log(err);

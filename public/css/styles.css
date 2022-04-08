@@ -528,6 +528,7 @@ a {
 
 
 
+
 /*______________________________________________________
 
 
@@ -626,4 +627,54 @@ __________________________________________________________*/
 
 
   /* VISTA DETALLE PELÍCULA */
-  
+
+  #sectionDetail{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+  }
+  #sectionDetail>p,#sectionDetail>button,#sectionDetail>img{
+      margin: 20px; 
+  }
+  #sectionDetail>img{
+    border-radius: 2%;
+    transition: all 0.3s ease-out;
+  }
+  #sectionDetail>img:hover{
+    transform: scale(1.10);
+  }
+  #sectionDetail>button{
+    margin: 0.2em;
+    width: 30%;
+    background-color: rgb(243, 14, 14);
+    color: white;
+    height: 35px;
+    border-style: none;
+    border-radius: 4px;
+    margin-top: 2em;
+    font-weight: bold;
+    transition: all 0.3s ease-out;
+  }
+  #sectionDetail>button:hover{
+    transform: scale(1.10);
+  }
+  .plot{
+      text-align: justify;
+  }
+  #imgFilmafiinity{
+      display: flex;
+    justify-content: space-between;
+  }
+  #imgFilmafiinity>img {
+    width: 70px;
+    height: 25px;
+  }
+  #imgSensacine{
+    display: flex;
+  justify-content: space-between;
+}
+#imgSensacine>img {
+  width: 70px;
+  height: 25px;
+}
