@@ -25,7 +25,8 @@ cursor: pointer;
 #body-home,
 #body-login,
 #body-signup,
-#body-dashboard {
+#body-dashboard,
+#body-search {
     background-image: url(../img/bg.svg);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -157,7 +158,7 @@ cursor: pointer;
     align-items: flex-end;
 }
 
-#login, #signUpRegister, #recoverpass-submit, #gotologin-submit, #mymovies-submit, #search-submit {
+#login, #signUpRegister, #recoverpass-submit, #gotologin-submit {
     margin: 0.2em;
     width: 100%;
     background-color: #22172B;
@@ -282,6 +283,16 @@ cursor: pointer;
     color: white;
 }
 
+#div-google-welcome{
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-bottom: 1em;
+    
+}
+
+
 #container-dashboard{
     display: flex;
     flex-direction: column;
@@ -306,17 +317,52 @@ cursor: pointer;
 #search-submit{
     background-color: #fece00;
     color: black;
+    margin: 0.2em;
+    width: 100%;
+    height: 35px;
+    border-style: none;
+    border-radius: 4px;
+    margin-top: 2em;
+    align-items: center;
+    text-align: center;
+    font-weight: 100;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 #mymovies-submit{
-    background-color: white;
-    color: black ;
+    background-color: #ffffff;
+    color: black;
+    margin: 0.2em;
+    width: 100%;
+    height: 35px;
+    border-style: none;
+    border-radius: 4px;
+    margin-top: 2em;
+    align-items: center;
+    text-align: center;
+    font-weight: 100;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
 }
 
+.div-gotodashboard{
+    background-color: #22172B;
+    width: 100%;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-top: 1em;
+}
 
+.div-gotodashboard a{
+    color: white;
 
-
-
+}
 
 
 
@@ -356,6 +402,10 @@ cursor: pointer;
     width: 35px;
     height: auto;
     display: flex;
+}
+
+#div-search h3{
+    color: white;
 }
 
 #search-btn{
@@ -452,7 +502,7 @@ a {
 
 .nav-branding {
     font-size: 2rem;
-    width: 8em;
+    width: 6em;
     position: sticky;
     height: auto;
 }
@@ -500,7 +550,7 @@ a {
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 107px;
+        top: 80px;
         gap: 0;
         flex-direction: column;
         background-color:#f5f8fa;
@@ -518,13 +568,82 @@ a {
     }
 
     .nav-branding {
-        width: 4em;
+        width: 6em;
     }
 
     .bar {
         height: 2px;
     }
 }
+
+
+
+/*************************************************************************+
+
+
+   MY  MOVIES
+
+
+***************************************************************************/
+
+
+
+.mymovies{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.myfavmovie{
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.myfavmovie img{
+   width: 0;
+   width: 0;
+}
+
+.myfavmovie p{
+    padding: 1em;
+}
+
+.myfavsmovies-section{
+    background-color: #F5F8FA;
+    width: 80%;
+    border-radius: 10px;
+    max-width: 25em;
+    margin-bottom: 3em;
+    display: flex;
+}
+
+
+
+/*______________________________________________________
+
+
+
+SEARCH TITLE
+
+
+__________________________________________________________*/
+
+
+
+.div-film{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+
+}
+
+
+
+
+
 
 
 

@@ -1,30 +1,38 @@
-include  ../head.pug
-
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/styles.css")
+        title Busca tu movie
     body 
+
+        include  ../head.pug
+
         header
             nav(class='navbar')
-                            img(src="../../img/movies.svg", alt="logo" href="/dashboard", class="nav-branding")
-                            ul(class="nav-menu")
-                                    li(class="nav-item")
-                                            a(href="/dashboard", class="nav-link") Dashboard
-                                    li(class="nav-item")
-                                            a(href="/search", class="nav-link") Search
-                                    li(class="nav-item")
-                                            a(href="/movies", class="nav-link") My movies
-                                    li(class="nav-item")
-                                            a(href="/logout", class="nav-link") Logout
-                            div(class="hamburger")
-                                    span(class="bar")
-                                    span(class="bar")
-                                    span(class="bar")
+                img(src="../../img/movies.svg", alt="logo" href="/dashboard", class="nav-branding")
+                ul(class="nav-menu")
+                    li(class="nav-item")
+                        a(href="/dashboard", class="nav-link") Dashboard
+                    li(class="nav-item")
+                        a(href="/search", class="nav-link") Search
+                    li(class="nav-item")
+                        a(href="/movies", class="nav-link") My movies
+                    li(class="nav-item")
+                        a(href="/logout", class="nav-link") Logout
+                div(class="hamburger")
+                        span(class="bar")
+                        span(class="bar")
+                        span(class="bar")
 
         section  
-            ul
                 each film in films
-                    div  
-                        p Year: #{film.description}
-                        p Title: #{film.title}
+                    div(class="div-film")  
                         img(src=film.image, alt="Imagen de la película")
+                        p Title: #{film.title}
+                        p Year: #{film.description}
                         - let idMovie = film.id;
                         a(href='/movie/' + idMovie + '&'+ film.title, class="toDetails") Details
                         div(class="lds-roller")

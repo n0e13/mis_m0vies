@@ -1,7 +1,12 @@
-include   ../head.pug
-body 
-    h2(class="h2-login-signup") Bienvenid@ #{name}
-    img(src=img, alt="google picture")
-    p Te has logueado con éxito, haz click para ir a la web:
-    a(href="/dashboard") MovieApp 
-    img(src="../../img/astronauta.svg", alt="astronauta", id="astornauta-recoverpass")
+include ../head.pug
+
+body(id="body-recoverpass")
+    div(class="div-form")
+        section(class="section-login-signup-form")
+            div(id="div-google-welcome")
+                h2(class="h2-login-signup") Welcome #{name}
+                img(src="../../img/astronauta.svg", alt="astronauta", id="astornauta-recoverpass")
+            p You have been succesfully logged into Google!
+            
+            div(class="div-gotodashboard")
+                a(href="/dashboard") GO TO DASHBOARD 
