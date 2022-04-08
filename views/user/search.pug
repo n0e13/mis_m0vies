@@ -7,7 +7,7 @@ html(lang="es")
         link(rel="stylesheet", href="/css/styles.css")
         title Busca tu movie 
 
-body
+body(id="body-search")
         header
                 nav(class='navbar')
                                 img(src="../../img/movies.svg", alt="logo" href="/dashboard", class="nav-branding")
@@ -27,22 +27,21 @@ body
                         h3 Search a movie! 
                         form(action="/search", method="post", class="searchForm")
                                         div(class="search-div")
-
-                                                //-label(for="films") Type the title of a movie
                                                 input(type="text" name="films" placeholder="Type the title of a movie...")
 
 
                                                 button(type="submit" id="search-btn")
                                                         img(src="../../img/search.svg", alt="search")
-        div(class="lds-roller")
-                div
-                div
-                div
-                div
-                div
-                div
-                div
-                div
-        script(src="/js/hamburger.js")
-        script(src="/js/spinner.js")
+
+                div(class="lds-roller")
+                        div
+                        div
+                        div
+                        div
+                        div
+                        div
+                        div
+                        div
+                script(src="/js/hamburger.js")
+                script(src="/js/spinner.js")
 
